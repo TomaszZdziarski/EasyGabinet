@@ -1,0 +1,37 @@
+{% extends 'main.html'%}
+
+
+{% block title%}Patient's main page{% endblock %}
+{% block page %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal Pacjenta</title>
+</head>
+<body>
+
+Welcome patient, set a new account pls or login.
+
+<div class="jumbotron">
+    {% if user.is_authenticated %}
+    <h1 class="display-4"> Witaj {{ user.username }}</h1>
+
+
+    <form action="{% url 'logout' %}" method="post">  <!-- Don't use get method, no a href but a form with token,otherwise error405 -->
+        {% csrf_token %}
+        <button type="submit">Logout <i class="fas fa-sign-out-alt"></i></button>
+    </form>
+
+
+    {% else %}
+    <a href="{% url 'login' %}" class="btn btn-success">Login <i class="fas fa-sign-in-alt"></i></a>
+    <a href="{% url 'register' %}" class="btn btn-success">Sign up <i class="fas fa-sign-in-alt"></i></a>
+    {% endif %}
+</div>
+
+</body>
+</html>
+
+{% endblock %}
