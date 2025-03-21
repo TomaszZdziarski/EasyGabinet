@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LOGGED PATIENT</title>
+</head>
+<body>
+PATIENT AFTER LOGGING IN
+
+<br>
+
+<form action="{% url 'logout' %}" method="post">  <!-- Don't use get method, no a href but a form with token,otherwise error405 -->
+    {% csrf_token %}
+    <button type="submit">Logout <i class="fas fa-sign-out-alt"></i></button>
+</form>
+
+</body>
+</html>

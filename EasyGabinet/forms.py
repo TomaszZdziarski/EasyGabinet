@@ -6,4 +6,5 @@ from .models import NewPatient
 class Patient_Form(forms.ModelForm):
     class Meta:
         model = NewPatient
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ['name','surname','username','password',] # ta kolejność MEGA ważna! żeby się zgadzało z formularzem wyświetlanym

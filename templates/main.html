@@ -1,0 +1,55 @@
+{% load static %}
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <!-- Icon - IconMonster -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
+    <!-- Mumble UI -->
+    <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
+    <!-- Dev Search UI -->
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
+
+    <title>--- EasyGabinet 1.0 ---</title>
+
+</head>
+
+
+<body>
+
+
+{% include 'navbar.html' %}
+
+{% if messages %}
+
+    {% for message in messages %}
+
+<!-- Dismiss bootstrap -->
+
+<div style = "padding-left: 700px;", class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="alert alert-primary" role="alert">
+    This is a primary alert—check it out!
+</div>
+
+{% endfor %}
+{% endif %}
+
+{% block content %}
+
+{% endblock content %}
+
+
+</body>
+</html>
