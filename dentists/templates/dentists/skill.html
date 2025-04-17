@@ -1,0 +1,54 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    <!-- Main Section -->
+    <main class="singleProject my-md">
+        <div class="container">
+            <div class="layout">
+
+
+                <div class="column column--1of3">
+
+                    <img class="singleProject__preview" src="{% if skill.skill_image %}  {{ skill.skill_image.url }} {% else %} {% static '/media/default.jpg' %}{% endif %}" alt="portfolio thumbnail" />
+
+                    </div>
+
+
+
+                <div class="column column--2of3">
+
+
+                    <h2 class="singleProject__title">{{ skill.name }}</h2>
+                    <h3 class="singleProject__subtitle">What is the {{ skill.name }} all about?</h3>
+                    <div class="singleProject__info">
+                        {{ skill.description }}
+
+ffffffffffffff
+                        {% for project in projects_all %}
+                            <span class="tag tag--pill tag--sub tag--lg">
+                  <small>{{ project.name }}</small>
+                </span>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+
+        </div>
+        </div>
+
+
+
+
+    </main>
+
+    {% for project in all_profile_projects %}
+        <span class="tag tag--pill tag--sub tag--lg">
+                  <small>{{ project.name }}</small>
+                </span>
+    {% endfor %}
+
+{% endblock %}

@@ -48,7 +48,7 @@ img {
 }
 
 .header__logo > img {
-  height: 3.8rem;
+  height: 70px;
 }
 
 .header__nav > ul {
@@ -520,6 +520,11 @@ img {
   object-fit: cover;
   object-position: top center;
 }
+.project__thumbnail__small {
+  height: 100px;
+  object-fit: cover;
+  object-position: left;
+}
 
 .project__title {
   font-size: 2rem;
@@ -665,7 +670,7 @@ img {
   left: 0;
   bottom: 0;
   right: 0;
-  background: url(../images/pattern.jpg);
+  background: url(../media/pattern.jpg);
 }
 
 .auth > .card {

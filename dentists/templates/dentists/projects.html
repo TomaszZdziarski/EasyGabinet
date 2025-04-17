@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+    <section class="projectsList">
+        <div class="container">
+            <div class="grid grid--three">
+    {% for project in projects %}
+
+
+    <div class="column">
+        <div class="card project">
+            <a href="{% url 'single-project' project.id %}" class="project">
+                <img class="project__thumbnail" src="{% if project.project_image %}  {{ project.project_image.url }} {% else %} {% static 'media/default.jpg' %}{% endif %}" alt="project thumbnail" />
+                <div class="card__body">
+                    <h3 class="project__title">{{project.name}}</h3>
+                    <p>
+                        <a class="project__author" href="{% url 'single-profile' project.owner.id %} ">By
+                        {{project.owner.name}}</a>
+
+
+                    </p>
+                    <p class="project--rating">
+                        <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
+                        Feedback ({{project.vote_total}}) Vote{{project.vote_total|pluralize:"s"}}
+                    </p>
+                    <div class="project__tags">
+                        Patient's problems solved >>> <br><br>
+                        {% for tag in project.tags.all %}
+                            <span class="tag tag--pill tag--main">
+                                        <small>{{tag}}</small>
+                                    </span>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+            </div></div></section>
+
+
+
+{% endblock %}

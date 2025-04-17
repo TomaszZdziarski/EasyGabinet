@@ -4,7 +4,7 @@
 <header class="header">
     <div class="container container--narrow">
         <a href="{% url 'main' %}" class="header__logo">
-            <img src="{% static 'images/logo.svg' %}" alt="DevSearch Logo" />
+            <img src="{% static 'media/logo.jpg' %}"  alt="Dental Clinic Logo" />
         </a>
         <nav class="header__nav">
             <input type="checkbox" id="responsive-menu" />
@@ -13,12 +13,13 @@
                 <div class="toggle-menu__lines"></div>
             </label>
             <ul class="header__menu">
-                <li class="header__menuItem"><a href="">Doctors</a></li>
-                <li class="header__menuItem"><a href="{% url 'profiles' %}">Patients</a></li>
+                <li class="header__menuItem"><a href="{% url 'profiles' %}">Doctors</a></li>
+                <li class="header__menuItem"><a href="">Patients</a></li>
+                <li class="header__menuItem"><a href="{% url 'all-projects' %}">Projects</a></li>
                 <li class="header__menuItem"><a href="">Inbox</a></li>
                 <li class="header__menuItem"><a href="">My Account</a></li>
-                <li class="header__menuItem"><a href="{% url 'register' %}" class="btn btn--sub">Register in clinic</a></li>
-                <li class="header__menuItem"><a href="" class="btn btn--sub">Login/Sign Up</a></li>
+                <li class="header__menuItem"><a href="{% url 'register' %}" class="btn btn--sub">Register as patient</a></li>
+                <li class="header__menuItem"><a href="" class="btn btn--sub">Login</a></li>
             </ul>
         </nav>
     </div>

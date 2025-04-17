@@ -1,0 +1,91 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+<title> New TITLE </title>
+{% endblock title %}
+
+
+{% include "navbar.html" %}
+
+{% block content %}
+
+
+<!-- Main Section -->
+
+<main class="projects">
+  <section class="hero-section text-center">
+    <div class="container container--narrow">
+      <div class="hero-section__box">
+        <h2>Search for a <span>Specialist</span></h2>
+      </div>
+
+      <div class="hero-section__search">
+        <form class="form" action="#" method="get">
+          <div class="form__field">
+            <label for="formInput#search">Search By Projects </label>
+            <input class="input input--text" id="formInput#search" type="text" name="text"
+                   placeholder="Search for your doctor" />
+          </div>
+
+          <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="devlist">
+    <div class="container">
+      <div class="grid grid--three">
+
+
+        {% for profile in profiles %}
+        <div class="column card">
+          <div class="dev">
+            <a href="{% url 'single-profile' profile.id %}" class="card__body">
+              <div class="dev__profile">
+                <img class="avatar avatar--md" src=" {% if profile.photo %}  {{ profile.photo.url }} {% else %} {% static 'media/user-default.png' %}{% endif %} " alt="image" />
+                <div class="dev__meta">
+                  <h3>{{ profile.name }}</h3>
+                  <h5>Clinic's owner</h5>
+                </div>
+              </div>
+            </a>
+              <p class="dev__info" style="text-align: justify; padding-left: 30px; padding-right: 30px;">
+
+                  {{ profile.description|slice:'360' }}
+
+              <div class="dev__meta" style="padding-left: 30px; padding-right: 30px;padding-bottom: 30px;">
+
+                  <h5>Doctor's skills >>></h5>
+              </div>
+
+              </p>
+
+              <div class="dev__skills" style="padding-left: 30px; padding-right: 30px;padding-bottom: 30px;">
+              {% for skill in profile.d_skill.all|slice:"5" %} <!-- 5 skills only, name of parent model=Profile,
+                                                                 name of child model=skill but not capital letter -->
+
+                  <span class="tag tag--pill tag--sub tag--lg">
+                  <small><a href="{% url 'single-skill' skill.id %}">{{ skill.name }}</a></small>
+                </span>
+                          {% endfor %}
+
+              </div>
+
+          </div>
+        </div>
+                    {% endfor %}
+
+
+
+
+      </div>
+    </div>
+  </section>
+</main>
+
+
+{% endblock content %}
+</body>
+</html>

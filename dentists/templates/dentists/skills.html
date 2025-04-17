@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+<!-- Main Section -->
+
+<main class="projects">
+    <section class="hero-section text-center">
+        <div class="container container--narrow">
+            <div class="hero-section__box">
+                <h2>Search for a <span>Specialist</span></h2>
+            </div>
+
+            <div class="hero-section__search">
+                <form class="form" action="#" method="get">
+                    <div class="form__field">
+                        <label for="formInput#search">Search By Projects </label>
+                        <input class="input input--text" id="formInput#search" type="text" name="text"
+                               placeholder="Search for your doctor" />
+                    </div>
+
+                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="devlist">
+        <div class="container">
+            <div class="grid grid--three">
+
+
+                {% for s in skills %}
+
+                <div class="column card">
+                    <div class="dev">
+                        <span class="card__body">
+                            <div class="dev__profile" style="text-align: justify; padding-left: 30px; padding-right: 30px;">
+   <!-- WAŻNE! 3 dni frustracji: sprawdzenie czy jest foto lub default: if object.attribute czyli obiekt s ze skills a atrybutem jest pole z models -->
+                                <img class="avatar avatar--md" src=" {% if s.skill_image %}  {{ s.skill_image.url }} {% else %} {% static '/media/default.jpg' %}{% endif %}  " alt="image"/>
+                                           <!-- skills to context lub nazwa funkcji z views-->
+
+                                <div class="dev__meta">
+                                    <h3>{{ s.name }}</h3>
+                                    <h5>Created on: {{ s.created}}</h5>
+                                </div>
+                            </div>
+                            <p class="dev__info" style="text-align: justify; padding-left: 30px; padding-right: 30px;">{{s.description|slice:'190'}}
+                                <a class="header__menuItem" class="header__menuItem" style="text-align: justify; padding-left: 30px; padding-right: 30px;padding-top: 10px;"
+                                   href="{% url 'single-skill' s.id %}"> click for more info's  about this skill >>> </a></p>
+                            <div class="dev__skills">
+                  <span class="tag tag--pill tag--main">
+                    <small><a class="btn btn--sub btn--lg" href="{% url 'profiles' %}">Find a {{ s }} specialist</a></small>
+                  </span>
+
+                            </div>
+                        </span>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+            </div>
+        </div>
+    </section>
+</main>
+
+
+{% endblock content %}

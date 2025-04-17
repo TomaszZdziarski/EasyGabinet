@@ -5,102 +5,369 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa1ed8b8-443f-4b56-b052-5e3241511f5a" name="Changes" comment="New Form, New Patient Register">
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/account.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/forgetpassword.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/form-template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/DevSearch Projects.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/Devsearch Home.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/Devsearch Inbox.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/Devsearch Profile.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/icon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/pattern.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/project-a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/project-b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/images/project-c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/inbox.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/message.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/projects.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/signup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/single-project.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/styles/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_alert.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_animation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_author-box.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_avatar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_button.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_card.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_layout.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_loading.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_tag-input.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_tag.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_typography.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_utilities.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_variables.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/uikit.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/styles/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_alert.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_animation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_author-box.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_avatar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_button.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_card.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_grid.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_layout.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_loading.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_tag-input.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_tag.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_typography.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_utilities.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/modules/_variables.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/uikit/styles/uikit.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/patient_registered.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/profiles.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/Procfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/api/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/api/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/api/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/devsearch/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/devsearch/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/devsearch/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/devsearch/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/frontend/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/frontend/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/frontend/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/frontend/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/frontend/projects-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0002_auto_20210615_1139.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0003_project_featured_image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0004_project_owner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0005_auto_20210622_0911.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0006_alter_project_options.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/0007_alter_project_owner.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/templates/projects/project_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/templates/projects/projects.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/templates/projects/single-project.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/projects/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/codesniper.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/default.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/mumble.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/portfolio.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/cody.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/dennis.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/mehdi.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/praveen.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/shuvo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/sulamita.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/profile-pics/user-default.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/unicrorn_fee.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/resources/images/yogavive.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/codesniper.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/default.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/django-react-course.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/mumble.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/portfolio.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/portfolio_K4Wem06.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/2021-06-27_16_29_50-Window.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/22437186.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/b3wSZKj4_400x400.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/dennis.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/dennis_Hepsy19.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/dennis_ee5zj3F.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/user-default.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/profiles/user-default_YS9Vr6e.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/images/yogavive.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/styles/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/static/uikit/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/migrations/0002_profile_username.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/migrations/0003_auto_20210617_1510.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/migrations/0004_message.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/migrations/0005_alter_profile_options_alter_profile_short_intro_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/signals.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/inbox.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/login_register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/message.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/message_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/profile_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/profiles.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/skill_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/templates/users/user-profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Django-Course/users/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Project/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/templates/dentists/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/templates/dentists/profiles.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/templates/dentists/project.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/templates/dentists/projects.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/templates/dentists/skill.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/templates/dentists/skills.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dentists/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/default.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/pattern.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/media/user-default.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/EasyGabinet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EasyGabinet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EasyGabinet/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/EasyGabinet/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EasyGabinet/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/EasyGabinet/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EasyGabinet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/EasyGabinet/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gabinet_templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gabinet_templates/patient_main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/patient_main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gabinet_templates/register_patient.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register_patient.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_static/my.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/my.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/account.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/delete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/forgetpassword.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/form-template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/DevSearch Projects.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/Devsearch Home.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/resources/images/Devsearch Home.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/Devsearch Inbox.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/Devsearch Profile.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/resources/images/icon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/pattern.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/images/pattern.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/project-a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/project-b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/images/project-c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/inbox.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/message.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/projects.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/signup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/single-project.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/styles/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_alert.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_alert.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_animation.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_animation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_author-box.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_author-box.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_avatar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_avatar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_base.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_button.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_button.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_card.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_card.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_loading.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_loading.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_tag-input.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_tag-input.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_tag.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_tag.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_typography.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_typography.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_utilities.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_utilities.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/modules/_variables.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_variables.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DevSearch-Theme/uikit/styles/uikit.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/uikit.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EasyGabinet/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/autocomplete.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/changelists.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/dark_mode.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/dashboard.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/forms.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/nav_sidebar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/responsive.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/responsive_rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/rtl.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/unusable_password_field.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/vendor/select2/LICENSE-SELECT2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/vendor/select2/select2.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/vendor/select2/select2.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/css/widgets.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/README.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/calendar-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/gis/move_vertex_off.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/gis/move_vertex_on.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-addlink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-alert.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-calendar.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-changelink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-clock.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-deletelink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-hidelink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-no.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown-alt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-unknown.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-viewlink.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/icon-yes.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/inline-delete.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/search.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/selector-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/sorting-icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-add.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/img/tooltag-arrowright.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/SelectBox.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/SelectFilter2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/admin/DateTimeShortcuts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/admin/RelatedObjectLookups.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/autocomplete.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/calendar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/cancel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/change_form.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/filters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/inlines.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/jquery.init.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/nav_sidebar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/popup_response.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/prepopulate_init.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/theme.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/unusable_password_field.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/urlify.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/jquery/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/af.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/az.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/bg.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/bn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/bs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ca.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/cs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/da.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/de.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/dsb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/el.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/es.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/et.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/eu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/fa.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/fi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/fr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/gl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/he.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/hi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/hr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/hsb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/hu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/hy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/id.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/is.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/it.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ja.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ka.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/km.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ko.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/lt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/lv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/mk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/nb.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ne.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/nl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/pl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/pt-BR.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/pt.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/ru.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/sk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/sl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/sq.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/sr-Cyrl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/sr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/sv.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/th.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/tk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/tr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/uk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/vi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/zh-CN.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/i18n/zh-TW.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/select2.full.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/select2/select2.full.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/admin/js/vendor/xregexp/xregexp.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/styles/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/styles/my.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_alert.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_animation.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_author-box.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_avatar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_button.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_card.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_form.css" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/static/uikit/styles/modules/_form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_layout.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_loading.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_tag-input.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_tag.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_typography.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_utilities.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/modules/_variables.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/staticfiles/uikit/styles/uikit.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/devsearch/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/dentists/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/dentists/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/projects/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/dentists/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profiles.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django-Course/projects/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dentists/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dentists/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;TomaszZdziarski&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TomaszZdziarski/EasyGabinet.git&quot;,
+    &quot;accountId&quot;: &quot;752d409f-eb3e-429a-87a4-0bd367544055&quot;
+  }
+}</component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="EasyGabinet/invalid/Django" />
+    </ignored-facets>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -119,30 +386,35 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.manage runserver.executor&quot;: &quot;Run&quot;,
     &quot;Python.manage.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/TOMULENIEK/PycharmProjects/DjangoProject/templates&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/TOMULENIEK/PycharmProjects/DjangoProject1/django_app/models.py&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.inline.completion&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\templates" />
-      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\static\styles" />
-      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\static" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\dentists\templates\dentists" />
       <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject" />
-      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\gabinet_templates" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\static\media" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\static\images" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\static\styles" />
-      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\templates" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\dentists\templates\dentists" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\dentists\templates" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\static\images" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject\images" />
+      <recent name="C:\Users\TOMULENIEK\PycharmProjects\DjangoProject" />
     </key>
   </component>
   <component name="RunManager">
@@ -178,8 +450,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
-        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
       </set>
     </attachedChunks>
   </component>
@@ -208,6 +479,23 @@
       <workItem from="1742551309902" duration="14118000" />
       <workItem from="1742574640131" duration="236000" />
       <workItem from="1742575934671" duration="4073000" />
+      <workItem from="1742591487278" duration="501000" />
+      <workItem from="1742901009159" duration="90000" />
+      <workItem from="1742996372594" duration="11098000" />
+      <workItem from="1743010025912" duration="2959000" />
+      <workItem from="1743246326247" duration="2440000" />
+      <workItem from="1743249159008" duration="2945000" />
+      <workItem from="1743331539496" duration="4758000" />
+      <workItem from="1743358102499" duration="3385000" />
+      <workItem from="1743425225648" duration="5605000" />
+      <workItem from="1743442798175" duration="661000" />
+      <workItem from="1743452316616" duration="3300000" />
+      <workItem from="1743590727791" duration="12694000" />
+      <workItem from="1743843800240" duration="15331000" />
+      <workItem from="1743869209706" duration="2129000" />
+      <workItem from="1743873056687" duration="1312000" />
+      <workItem from="1743929542845" duration="13520000" />
+      <workItem from="1744023413038" duration="7037000" />
     </task>
     <task id="LOCAL-00001" summary="New Form, New Patient Register">
       <option name="closed" value="true" />
@@ -217,7 +505,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741803351875</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="New Form, New Patient Register">
+      <option name="closed" value="true" />
+      <created>1742591734118</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742591734118</updated>
+    </task>
+    <task id="LOCAL-00003" summary="New Form, New Patient Register">
+      <option name="closed" value="true" />
+      <created>1742591775844</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742591775844</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,9 +542,20 @@
     <MESSAGE value="New Form, New Patient Register" />
     <option name="LAST_COMMIT_MESSAGE" value="New Form, New Patient Register" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Project/settings.py</url>
+          <line>45</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/DjangoProject$manage.coverage" NAME="manage Coverage Results" MODIFIED="1741365384348" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/DjangoProject$manage_runserver.coverage" NAME="manage runserver Coverage Results" MODIFIED="1741372759988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/EasyGabinet$manage_runserver.coverage" NAME="manage runserver Coverage Results" MODIFIED="1742578103844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/EasyGabinet$manage_runserver.coverage" NAME="manage runserver Coverage Results" MODIFIED="1744023413144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
