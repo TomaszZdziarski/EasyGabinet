@@ -1,0 +1,237 @@
+/*=======================
+  BOOKING - Schedule
+========================*/
+
+#schedule {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.schedule-day {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-light);
+}
+
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: left;
+}
+
+.slot {
+  flex: 0 1 calc(10% - 20px);
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+/*=======================
+  BOOKING - Slot Statuses
+========================*/
+
+.available {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.booked {
+  background-color: var(--color-main-light);
+  color: var(--color-main);
+}
+
+.passed {
+  background-color: var(--color-white-light);
+  color: var(--color-gray);
+}
+
+.completed {
+  background-color: var(--color-sub-lighter);
+  color: var(--color-sub);
+}
+
+.cancelled {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.did_not_occur {
+  background-color: var(--color-sub);
+  color: var(--color-white);
+}
+
+/*=======================
+  BOOKING - Calendar Container
+========================*/
+
+.calendar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.calendar-item.card {
+  margin: 0;  /* overrides .card margin: 0.5rem from main.css */
+  flex: 0 1 calc(33.333% - 0.6rem);
+  min-width: 195px;
+  box-sizing: border-box;
+}
+
+.calendar-item .card__body {
+  padding: 0.8rem;  /* put it here instead */
+}
+
+/*=======================
+  BOOKING - Calendar Header
+========================*/
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-sub-lighter);
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-sub);
+}
+
+/*=======================
+  BOOKING - Calendar Grid
+========================*/
+
+.calendar-days,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day-name {
+  text-align: center;
+  padding: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-sub-light);
+  border: 1px solid var(--color-light);
+}
+
+.day {
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 1px solid var(--color-light);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.day:hover {
+  background-color: var(--color-main-light);
+}
+
+/*=======================
+  BOOKING - Calendar Table
+========================*/
+
+.calendar-item table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 1.2rem;
+}
+
+.calendar-item th,
+.calendar-item td {
+  width: calc(100% / 7);
+  padding: 0.25rem;
+  text-align: center;
+  font-size: 1.2rem;  /* smaller font so shortcuts fit */
+  overflow: hidden;
+  white-space: nowrap;  /* prevents wrapping to next line */
+  border: 1px solid var(--color-light);
+}
+
+.calendar-item th {
+  background-color: var(--color-sub-lighter);
+  color: var(--color-sub);
+  font-weight: 500;
+}
+
+.calendar-item tr:nth-child(even) {
+  background-color: var(--color-bg);
+}
+
+/*=======================
+  BOOKING - Calendar Table Status Colors
+========================*/
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid var(--color-light);
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.calendar-table th {
+  background-color: var(--color-sub-lighter);
+  color: var(--color-sub);
+  font-weight: 500;
+}
+
+.calendar-table tr:nth-child(even) {
+  background-color: var(--color-bg);
+}
+
+.calendar-table td.available {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.calendar-table td.passed {
+  background-color: var(--color-white-light);
+  color: var(--color-gray);
+}
+
+.calendar-table td.booked {
+  background-color: var(--color-main-light);
+  color: var(--color-main);
+}
+
+.calendar-table td.completed {
+  background-color: var(--color-sub-lighter);
+  color: var(--color-sub);
+}
+
+.calendar-table td.cancelled {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+.calendar-table td.did_not_occur {
+  background-color: var(--color-sub);
+  color: var(--color-white);
+}
