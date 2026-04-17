@@ -1,0 +1,39 @@
+<!-- we created this file to use it dynamically,check projects.html and patient_site.html-->
+<!-- if we want to use this page in context 'projects' then in projects.html 'include pagination.html with
+queryset=projects, where queryset is variable from here,pagination.html-->
+<!-- if we show 1000queryset and there is nothing to paginate then do not show buttons for numbered pages -->
+
+{% if queryset.has_other_pages %}
+
+<div class="pagination">
+    <ul class="container">
+
+        {% if queryset.has_previous %}   <!-- queryset to nazwa 'queryset' z contextu z f.queryset,odnosi sie do all_queryset
+                                                      idea za tym: bedac na drugiej str ma sie wyswietlic link '<--- Prev Page'-->
+        <li><a href="?page={{queryset.previous_page_number}}" class="btn page-link"
+               data-page="{{queryset.previous_page_number}}">&#10094; Prev</a></li>
+        {% endif%}
+
+        {% for page in custom_range %}  <!-- documentation of paginator,.page_range is a method of paginator class-->
+        <!-- custom_range to zmienna z views,chcemy aby przy liczbie stron projektów >10 nie wyswietlalo pozostałych 20 stron-->
+
+        <!-- wybrana strona na której jesteśmy ma mieć inną klasę,ma być podświetlona -->
+        {% if page == queryset.number %}
+        <li><a href="?page={{page}}" class="btn page-link btn--sub" data-page="{{page}}">{{page}}</a></li>
+        {% else %} <!-- inne strony niepodświetlone -->
+        <li><a href="?page={{page}}" class="btn page-link" data-page="{{page}}">{{page}}</a></li>
+
+        {% endif %}
+        {% endfor %}
+
+        {% if queryset.has_next %}   <!-- bedac na pierw str ma sie wyswietlic link '<--- Next Page'-->
+        <li><a href="?page={{queryset.next_page_number}}" class="btn page-link"
+               data-page="{{queryset.next_page_number}}">Next &#10095;</a></li>
+        {% endif%}
+    </ul>
+</div>
+
+{% endif %}
+
+
+

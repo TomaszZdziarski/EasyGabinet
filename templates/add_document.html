@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="auth">
+    <div class="card">
+        <div class="auth__header text-center">
+<form method="POST" action="{% url 'add-document' patient.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Render the form fields -->
+    <button type="submit">Add Documents</button>
+
+</form>
+
+        </div></div></div>
+
+
+{% endblock %}

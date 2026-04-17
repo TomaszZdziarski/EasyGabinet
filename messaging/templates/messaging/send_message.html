@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div style="display:flex; justify-content:center; padding:2rem;">
+    <div class="card" style="max-width:650px; width:100%;">
+
+        <div class="card__header" style="padding:1.5rem 2rem; border-bottom:1.5px solid var(--color-light);">
+            <h4 class="card__headerTitle" style="color:var(--color-sub);">Send a Message</h4>
+            {% if dentist %}
+            <p style="text-align:center; color:var(--color-gray); font-size:1.3rem; margin-top:0.5rem;">
+                To: <strong style="color:var(--color-sub);">{{ dentist }}</strong>
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="card__body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form__field" style="margin-bottom:1.5rem;">
+                    <label style="font-size:1.4rem; font-weight:500; color:var(--color-sub-light); margin-bottom:0.5rem;">Your Message</label>
+                    <textarea
+                            name="body"
+                            rows="6"
+                            placeholder="Write your message here..."
+                            style="width:100%; padding:1rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.4rem; color:var(--color-text); resize:vertical; outline:none; box-sizing:border-box;"
+                    ></textarea>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <a href="{% url 'patient-site' %}" class="btn btn--sub--outline">← Back</a>
+                    <button type="submit" class="btn btn--main">Send Message</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

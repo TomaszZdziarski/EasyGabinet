@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div style="display:flex; justify-content:center; align-items:center; min-height:60vh;">
+    <div class="card" style="max-width:500px; width:100%; text-align:center; padding:3rem 2rem;">
+        <div style="font-size:4rem; margin-bottom:1rem;">ℹ️</div>
+        <h2 style="color:var(--color-main); margin-bottom:1rem;">Already Confirmed</h2>
+        <p style="color:var(--color-gray); margin-bottom:2rem;">
+            This appointment has already been confirmed. We look forward to seeing you!
+            If you need to cancel, please contact us directly.
+        </p>
+        <a href="{% url 'patient-site' %}" class="btn btn--main">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

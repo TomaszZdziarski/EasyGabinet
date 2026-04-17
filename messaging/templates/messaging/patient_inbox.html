@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div style="display:flex; justify-content:center; padding:2rem;">
+    <div class="card" style="max-width:700px; width:100%;">
+
+        <div class="card__header" style="padding:1.5rem 2rem; border-bottom:1.5px solid var(--color-light);">
+            <div style="position:relative; display:flex; align-items:center; justify-content:center; width:100%;">
+                <h4 style="color:var(--color-sub); margin:0;">
+                    Conversation with Dr. {{ dentist }}
+                </h4>
+            </div>
+        </div>
+
+        <!-- messages thread -->
+        <div class="card__body" style="display:flex; flex-direction:column; gap:1.5rem; max-height:60vh; overflow-y:auto;">
+            {% if thread %}
+            {% for message in thread %}
+            <div style="display:flex; flex-direction:column; align-items:{% if message.sender == 'patient' %}flex-end{% else %}flex-start{% endif %};">
+                <div style="
+                        max-width:75%;
+                        padding:1rem 1.5rem;
+                        border-radius:1rem;
+                        background:{% if message.sender == 'patient' %}var(--color-main-light){% else %}var(--color-sub-lighter){% endif %};
+                        border:1.5px solid {% if message.sender == 'patient' %}var(--color-main){% else %}var(--color-light){% endif %};
+                    ">
+                    <p style="margin:0; color:var(--color-text);">{{ message.body }}</p>
+                </div>
+                <p style="font-size:1.1rem; color:var(--color-gray); margin:0.3rem 0.5rem;">
+                    {{ message.sent_at|date:"F j – H:i" }} · {{ message.sender|capfirst }}
+                </p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div style="text-align:center; padding:3rem;">
+                <p style="color:var(--color-gray);">No messages yet. Send the first one!</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- reply form -->
+        <div style="padding:1.5rem 2rem; border-top:1.5px solid var(--color-light);">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form__field" style="margin-bottom:1rem;">
+                    <textarea
+                            name="body"
+                            rows="3"
+                            placeholder="Write a message..."
+                            style="width:100%; padding:1rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.4rem; color:var(--color-text); resize:vertical; outline:none; box-sizing:border-box;"
+                    ></textarea>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <a href="{% url 'patient-site' %}" class="btn btn--sub--outline">← Back</a>
+                    <button type="submit" class="btn btn--main">Send Message</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

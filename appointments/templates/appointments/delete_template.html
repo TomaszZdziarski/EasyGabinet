@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="auth">
+        <div class="card">
+            <div class="card__body">
+
+                <div class="auth__header text-center" style="margin-bottom: 1.5rem;">
+                    <h3>Delete Appointment</h3>
+                    <p>This action cannot be undone.</p>
+                </div>
+
+                <form method="POST" action="" class="auth__form">
+                    {% csrf_token %}
+
+                    <div class="form__field">
+                        <p>Are you sure you want to delete <strong>{{ appointment }}</strong>?</p>
+                    </div>
+
+                    <div class="auth__actions" style="gap: 1rem;">
+                        <a href="{{ request.GET.next }}" class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1rem;">Go Back</a>
+                        <input class="btn btn--main btn--md" type="submit" value="Confirm Delete" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

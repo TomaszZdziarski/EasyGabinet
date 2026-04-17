@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div style="display:flex; justify-content:center; align-items:center; min-height:60vh;">
+    <div class="card" style="max-width:500px; width:100%; text-align:center; padding:3rem 2rem;">
+        <div style="font-size:4rem; margin-bottom:1rem;">⚠️</div>
+        <h2 style="color:var(--color-error); margin-bottom:1rem;">Already Cancelled</h2>
+        <p style="color:var(--color-gray); margin-bottom:2rem;">
+            This appointment has already been cancelled and cannot be confirmed.
+            If you'd like to schedule a new visit, use the button below.
+        </p>
+        <a href="{% url 'calendar_no_dentist' %}" class="btn btn--sub--outline">Book a New Appointment</a>
+    </div>
+</div>
+{% endblock %}

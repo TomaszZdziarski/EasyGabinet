@@ -1,75 +1,76 @@
 {% extends 'main.html' %}
 {% load static %}
 
-
 {% block content %}
 
-
-
-<!-- Main Section -->
-
-<main class="projects">
-    <section class="hero-section text-center">
-        <div class="container container--narrow">
-            <div class="hero-section__box">
-                <h2>Search for a <span>Specialist</span></h2>
-            </div>
-
-            <div class="hero-section__search">
-                <form class="form" action="#" method="get">
-                    <div class="form__field">
-                        <label for="formInput#search">Search By Projects </label>
-                        <input class="input input--text" id="formInput#search" type="text" name="text"
-                               placeholder="Search for your doctor" />
+<div class="main-section" style="height:auto; padding: 3rem 2rem;">
+    <div class="container container--narrow">
+        <div class="main-section__box" style="margin-bottom:0;">
+            <h3>Search for a skill</h3>
+            <div class="main-section__search">
+                <form class="form" action="{% url 'main' %}" method="get">
+                    <div class="form__field" style="padding-bottom:1rem;">
+                        <label for="formInput#search">Search by skill name, description, dentist name or tag</label>
+                        <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                               value="{{ search_query }}"
+                               placeholder="e.g. orthodontics, implants, John Smith..." />
                     </div>
-
-                    <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+                    <input class="btn btn--sub btn--md" type="submit" value="Search" />
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section class="devlist">
-        <div class="container">
-            <div class="grid grid--three">
+<section style="padding: 3rem 0;">
+    <div class="container">
+        <div class="layout" style="justify-content:center; gap:1rem;">
 
+            {% for skill in skills %}
+            <div class="column" style="flex: 0 1 280px; max-width:280px; margin:0.5rem;">
+                <div class="card" style="height:100%;">
+                    <div class="card__body" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.8rem;">
 
-                {% for s in skills %}
+                        <a href="{% url 'single-skill' skill.id %}">
+                            <img class="profile_image profile_image--md"
+                                 src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                                 alt="skill image" />
+                        </a>
 
-                <div class="column card">
-                    <div class="dev">
-                        <span class="card__body">
-                            <div class="dev__profile" style="text-align: justify; padding-left: 30px; padding-right: 30px;">
-   <!-- WAŻNE! 3 dni frustracji: sprawdzenie czy jest foto lub default: if object.attribute czyli obiekt s ze skills a atrybutem jest pole z models -->
-                                <img class="avatar avatar--md" src=" {% if s.skill_image %}  {{ s.skill_image.url }} {% else %} {% static '/media/default.jpg' %}{% endif %}  " alt="image"/>
-                                           <!-- skills to context lub nazwa funkcji z views-->
+                        <div>
+                            <a href="{% url 'single-skill' skill.id %}" style="text-decoration:none;">
+                                <h3 style="font-size:1.8rem; font-weight:700; color:var(--color-sub); margin:0.3rem 0;">
+                                    {{ skill.name }}
+                                </h3>
+                            </a>
+                            <p style="font-size:1.1rem; color:var(--color-gray); margin:0.2rem 0;">
+                                Created: {{ skill.created }}
+                            </p>
+                        </div>
 
-                                <div class="dev__meta">
-                                    <h3>{{ s.name }}</h3>
-                                    <h5>Created on: {{ s.created}}</h5>
-                                </div>
-                            </div>
-                            <p class="dev__info" style="text-align: justify; padding-left: 30px; padding-right: 30px;">{{s.description|slice:'190'}}
-                                <a class="header__menuItem" class="header__menuItem" style="text-align: justify; padding-left: 30px; padding-right: 30px;padding-top: 10px;"
-                                   href="{% url 'single-skill' s.id %}"> click for more info's  about this skill >>> </a></p>
-                            <div class="dev__skills">
-                  <span class="tag tag--pill tag--main">
-                    <small><a class="btn btn--sub btn--lg" href="{% url 'profiles' %}">Find a {{ s }} specialist</a></small>
-                  </span>
+                        <p class="card__clamp" style="font-size:1.2rem; color:var(--color-text); text-align:center;">
+                            {{ skill.description }}
+                        </p>
 
-                            </div>
-                        </span>
+                        <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--link" style="font-size:1.2rem;">
+                            More info →
+                        </a>
+
+                        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem;">
+                            {% for tag in skill.tags.all %}
+                            <span class="btn btn--sm btn--sub--outline" style="margin-right:0; cursor:default;">
+                {{ tag }}
+              </span>
+                            {% endfor %}
+                        </div>
 
                     </div>
                 </div>
-                {% endfor %}
-
-
-
             </div>
-        </div>
-    </section>
-</main>
+            {% endfor %}
 
+        </div>
+    </div>
+</section>
 
 {% endblock content %}

@@ -1,0 +1,37 @@
+# Environment variables
+.env
+
+# Database
+db.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+staticfiles/
+images/
+media/
+
+# PyCharm
+.idea/
+
+# Virtual environment
+venv/
+env/
+
+
+__pycache__/
+*.pyc
+venv/
+.vs/
+.idea/
+staticfiles/
+images/
+media/
+Django-Course/
+"price changer working"
+kwargs.py
+fonts/

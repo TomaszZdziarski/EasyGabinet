@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content%}
+
+<h1>{{ patient.user.get_full_name }}'s History</h1>
+
+<ul>
+    {% for appointment in appointments %}
+
+<li>{{ appointment.date }} - {{ appointment.status }}</li>
+
+{% endfor %}
+
+</ul>
+
+{% endblock %}

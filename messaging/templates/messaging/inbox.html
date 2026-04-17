@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="layout" style="padding: 2rem;">
+    <div class="column column--2of3">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+
+
+            <div style="position:relative; display:flex; align-items:center; justify-content:center; margin-bottom:2rem; width:100%;">
+                <h3 style="color:var(--color-sub);">Inbox
+                    <span style="font-size:1.4rem; font-weight:400; color:var(--color-gray); margin-left:0.8rem;">{{ inbox.count }} message(s)</span>
+                </h3>
+                <a href="{% url 'send-message' %}" class="btn btn--main" style="position:absolute; right:0;">+ New Message</a>
+            </div>
+
+        </div>
+
+        {% if inbox %}
+        {% for message in inbox %}
+
+        <div class="card" style="margin-bottom:1rem;">
+            <div class="card__header" style="padding:1.5rem 2rem; display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:1rem;">
+                    <img
+                            src="{% if message.patient.photo %}{{ message.patient.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                            alt="{{ message.patient }}"
+                            class="profile_image profile_image--sm"
+                    >
+                    <div>
+                        <p style="font-weight:500; color:var(--color-sub); margin:0;">{{ message.patient }}</p>
+                        <p style="font-size:1.2rem; color:var(--color-gray); margin:0;">{{ message.sent_at|date:"F j, Y – H:i" }}</p>
+                    </div>
+                </div>
+                {% if not message.is_read %}
+                <span style="background:var(--color-main); color:var(--color-white); font-size:1.1rem; padding:0.3rem 0.8rem; border-radius:2rem;">New</span>
+                {% endif %}
+            </div>
+            <div class="card__body">
+                <p style="color:var(--color-text);">{{ message.body }}</p>
+            </div>
+            <div style="padding:1rem 2rem; border-top:1.5px solid var(--color-light); display:flex; justify-content:flex-end; gap:1rem;">
+                <a href="{% url 'conversation' message.patient.id %}" class="btn btn--main">Open Conversation</a>
+                <a href="{% url 'message-delete' message.id %}" class="btn" style="color:var(--color-error); border:2px solid var(--color-error);">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="card">
+            <div class="card__body" style="text-align:center; padding:4rem;">
+                <p style="color:var(--color-gray); font-size:1.6rem;">No messages yet.</p>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

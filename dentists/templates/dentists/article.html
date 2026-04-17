@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="main-section" style="height:auto; padding: 4rem 2rem;">
+    <div class="main-section__box" style="margin-bottom:0;">
+        <h2 style="text-align:center;">{{ article.title }}</h2>
+        <div class="article-meta" style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-top:1.5rem;">
+            <span style="color:var(--color-light); font-size:1.4rem;">
+                Author: <strong style="color:var(--color-main);">{{ article.author }}</strong>
+            </span>
+            <span style="color:var(--color-sub-light);">•</span>
+            <span style="color:var(--color-light); font-size:1.4rem;">
+                Date of publ.: <strong style="color:var(--color-main);">{{ article.publication_date|date:"N j, Y" }}</strong>
+            </span>
+            <span style="color:var(--color-light); font-size:1.4rem;">
+                Min. to read this: <strong style="color:var(--color-main);">{{ minutes_to_read }} min read</strong>
+            </span>
+        </div>
+    </div>
+</div>
+
+<section style="padding: 4rem 0;">
+    <div class="container">
+        <div class="container--narrow" style="max-width:800px; width:100%;">
+
+            <a href="{% url 'patient-site' %}" class="btn btn--sub--link" style="align-self:flex-start; margin-bottom:2rem;">
+                ← Back to articles
+            </a>
+
+            <div class="card">
+
+                <div class="card__header" style="display:flex; align-items:center; gap:1.5rem;padding:1.5rem 2rem;">
+                    <img
+                            src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                            alt="{{ article.author }}"
+                            class="profile_image profile_image--sm"
+                    >
+                    <div>
+                        <p style="font-size:1.2rem; color:var(--color-gray); margin:0;">Author:</p>
+                        <p style="color:var(--color-sub); font-weight:500; margin:0 0 0.5rem;">{{ article.author }}</p>
+                        <p style="font-size:1.2rem; color:var(--color-gray); margin:0;">Date of publication:</p>
+                        <p style="font-size:1.2rem; margin:0;">{{ article.publication_date|date:"F j, Y" }}</p>
+                    </div>
+                </div>
+
+                <div class="card__body">
+                    <div class="profileInfo__about">
+                        {{ article.content|linebreaks }}
+                    </div>
+                </div>
+
+                <div style="padding:1.5rem 2rem; border-top:1.5px solid var(--color-light); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                    <a href="{% url 'patient-site' %}" class="btn btn--sub--outline">← All articles</a>
+                    {% if request.user.is_authenticated and request.user == article.user %}
+                    <div style="display:flex; gap:1rem;">
+                        <a href="{% url 'update-article' article.id %}" class="btn btn--main">Edit</a>
+                        <a href="{% url 'delete-article' article.id %}" class="btn" style="color:var(--color-error); border:2px solid var(--color-error);">Delete</a>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

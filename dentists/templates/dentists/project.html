@@ -1,106 +1,123 @@
 {% extends 'main.html' %}
-
 {% load static %}
-
 
 {% block content %}
 
+<section style="padding: 3rem 0;">
+    <div class="container">
+        <div class="layout">
 
-    <main class="singleProject my-md">
-        <div class="container">
-            <div class="layout">
-                <div class="column column--1of3">
-                    <h3 class="singleProject__subtitle">About the project</h3>
-                    <div class="singleProject__toolStack">
-                        During this project I worked on several skills i've obtained from Coursera: <br><br>
-                        {% for skill in project.skill_used.all %} <!-- project to context z views z pojedynczego project który zawiera id-->
-
-                            <span class="tag tag--pill tag--sub tag--lg">
-                  <small><a href="{% url 'single-skill' skill.id %}">{{ skill.name }}</a></small>
-                </span>
-
-                        {% endfor %}
-
+            <!-- LEFT COLUMN -->
+            <div class="column column--1of3">
+                <div class="card">
+                    <div class="card__header">
+                        <h5 class="card__headerTitle">About the project</h5>
                     </div>
+                    <div class="card__body" style="display:flex; flex-direction:column; gap:1rem;">
 
-                    {% if project.source_link %}
-                        <a class="singleProject__liveLink" href="{{project.source_link}}" target="_blank"><i
-                                class="im im-external-link"></i>Source
-                            Code
+                        <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+                            {% for skill in project.skill_used.all %}
+                            <a href="{% url 'single-skill' skill.id %}"
+                               class="btn btn--main--outline btn--sm"
+                               style="margin-right:0;">{{ skill.name }}</a>
+                            {% endfor %}
+                        </div>
+
+                        {% if project.source_link %}
+                        <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                            <i class="im im-external-link"></i> Source Code
                         </a>
-                    {% endif %}
-
-                    {% if project.demo_link %}
-                        <a class="singleProject__liveLink" href="{{project.source_link}}" target="_blank"><i
-                                class="im im-external-link"></i>Live Demo
-
-                        </a>
-                    {% endif %}
-
-                </div>
-                <div class="column column--2of3">
-                    <img class="singleProject__preview" src="{% if project.project_image %} {{ project.project_image.url }} {% else %} {% static 'media/default.jpg' %}{% endif %}" alt="portfolio thumbnail" />
-                    <a href="{% url 'single-profile' project.owner.id  %}"
-                       class="singleProject__developer">{{project.owner.name}}</a>
-
-                    <h2 class="singleProject__title">{{project.title}}</h2>
-                    <h3 class="singleProject__subtitle">About the Project</h3>
-                    <div class="singleProject__info">
-                        {{project.description}}
-                    </div>
-                    <div class="comments">
-                        <h3 class="singleProject__subtitle">Feedback</h3>
-                        <h5 class="project--rating">
-                            {{project.vote_ratio}}% Positive Feedback ({{project.vote_total}}
-                            Vote{{project.vote_total|pluralize:"s"}})
-                        </h5>
-
-                        {% if request.user.profile.id in project.reviewers %}
-                            <p>You have already submitted your review for this project</p>
-
-                        {% elif request.user.profile == project.owner %}
-                            <p>You cannot review your own work</p>
-
-                        {% elif request.user.is_authenticated %}
-                            <form class="form" action="{% url 'single-project' project.id %}" method="POST">
-                                {% csrf_token %}
-                                {% for field in form %}
-                                    <div class="form__field">
-                                        <label>{{field.label}}</label>
-                                        {{field}}
-                                    </div>
-                                {% endfor %}
-                                <input class="btn btn--sub btn--lg" type="submit" value="Add Review" />
-                            </form>
-                        {% else %}
-                            <a href="{% url 'login' %}?next={{request.path}}">Please login to leave a review</a>
                         {% endif %}
 
-                        <div class="commentList">
-                            {% for review in project.review_set.all %}
-                                {% if review.body %}
-                                    <div class="comment">
-                                        <a href="{% url 'single-profile' review.owner.id  %}">
-                                            <img class="avatar avatar--md" src="{% if review.owner.photo %}{{review.owner.photo.url}} {% else %} {% static 'media/default.jpg' %}{% endif %} " alt="user" />
-                                        </a>
+                        {% if project.demo_link %}
+                        <a href="{{ project.demo_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                            <i class="im im-external-link"></i> Live Demo
+                        </a>
+                        {% endif %}
 
-
-                                        <div class="comment__details">
-                                            <a href="{% url 'single-profile' review.owner.id  %}"
-                                               class="comment__author">{{review.owner.name}}</a>
-                                            <p class="comment__info">{{review.body|linebreaksbr}}</p>
-                                        </div>
-
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-
-                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="column column--2of3">
+                <div class="card">
+
+                    <img class="project__thumbnail"
+                         src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                         alt="Project thumbnail" />
+
+                    <div class="card__body">
+
+                        <p style="font-size:1.2rem; color:var(--color-gray); margin:0;">Project creator:</p>
+                        <a href="{% url 'single-profile' project.owner.id %}"
+                           style="font-size:1.4rem; font-weight:500;">{{ project.owner.name }}</a>
+
+                        <h2 style="font-size:2.4rem; font-weight:700; color:var(--color-sub); margin:1rem 0 0.5rem;">
+                            {{ project.name }}
+                        </h2>
+
+                        <h5 class="account__title" style="margin-bottom:1rem;">About the Project</h5>
+                        <p class="profileInfo__about" style="padding:0;">{{ project.description }}</p>
+
+                    </div>
+
+                    <!-- Feedback -->
+                    <div class="card__header" style="border-top:1.5px solid var(--color-light); border-bottom:none; padding:1rem 1.5rem;">
+                        <h5 class="card__headerTitle" style="text-align:left;">Feedback</h5>
+                        <p style="font-size:1.2rem; margin:0.3rem 0;">
+                            {{ project.vote_ratio }}% Positive ({{ project.vote_total }} Vote{{ project.vote_total|pluralize:"s" }})
+                        </p>
+                    </div>
+
+                    <div class="card__body">
+                        {% if request.user.dentistProfile.id in project.reviewers %}
+                        <p>You have already submitted your review for this project.</p>
+                        {% elif request.user.dentistProfile == project.owner %}
+                        <p>You cannot review your own work.</p>
+                        {% elif request.user.is_authenticated %}
+                        <form action="{% url 'single-project' project.id %}" method="POST">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="form__field">
+                                <label>{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                            {% endfor %}
+                            <button class="btn btn--main btn--md" type="submit" style="margin-top:1rem;">Add Review</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login-dentist' %}?next={{ request.path }}" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                            Login to leave a review
+                        </a>
+                        {% endif %}
+
+                        <!-- Comments -->
+                        <div style="margin-top:2rem; display:flex; flex-direction:column; gap:1rem;">
+                            {% for review in project.review_set.all %}
+                            {% if review.body %}
+                            <div style="display:flex; align-items:flex-start; gap:1rem; padding:1rem; border-radius:0.5rem; border:1.5px solid var(--color-light);">
+                                <a href="{% url 'single-profile' review.owner.id %}" style="flex-shrink: 0;">
+                                    <img class="profile_image profile_image--sm"
+                                         src="{% if review.owner.photo %}{{ review.owner.photo.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                                         alt="{{ review.owner.name }}" />
+                                </a>
+                                <div>
+                                    <a href="{% url 'single-profile' review.owner.id %}"
+                                       style="font-size:1.3rem; font-weight:500; color:var(--color-sub);">{{ review.owner.name }}</a>
+                                    <p style="margin-top:0.3rem;">{{ review.body|linebreaksbr }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-        </div>
-    </main>
+    </div>
+</section>
 
 {% endblock %}

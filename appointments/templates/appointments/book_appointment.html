@@ -1,0 +1,153 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="auth">
+        <div class="card">
+            <div class="card__body">
+
+                <div class="auth__header text-center">
+                    <a href="/">
+                        <img src="{% static 'media/icon.svg' %}" alt="icon" />
+                    </a>
+                    <h3>Book Appointment</h3>
+                </div>
+
+                <form method="post" action="{% url 'create-appointment' dentist.id date %}" class="auth__form">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="form__field">
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p style="color:red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="form__field">
+                        <label>Price</label>
+                        <p id="price-display" style="margin: 0; font-size: 1rem;">Not available</p>
+                        <p style="margin: 0.4rem 0 0; font-size: 0.875rem;">
+                            <a href="#" id="convert-to-usd">PLN → USD</a> &nbsp;|&nbsp;
+                            <a href="#" id="convert-to-eur">PLN → EUR</a> &nbsp;|&nbsp;
+                            <a href="#" id="convert-to-uah">PLN → UAH</a>
+                        </p>
+                    </div>
+
+                    <input type="hidden" name="converted_price" id="converted-price" />
+                    <input type="hidden" name="currency" id="currency" />
+
+                    <div id="schedule-error" style="display:none; color:red; font-size:0.875rem; margin-top: 0.5rem;">
+                        An error occurred while fetching the schedule.
+                    </div>
+
+                    <br>
+
+                    <div class="auth__actions">
+                        <input class="btn btn--sub btn--lg" type="submit" id="submit-button" value="Book / Update Appointment" />
+                    </div>
+
+                </form>
+
+                {% if form.errors %}
+                <div class="error" style="margin-top: 1rem;">
+                    {% for error in form.non_field_errors %}
+                    <p style="color:red;">{{ error }}</p>
+                    <p>If unsure, please call our clinic's reception: 42 22 222222.</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const purposeSelect = document.querySelector('select[name="purpose"]');
+        const priceDisplay = document.getElementById('price-display');
+        const purposes = {
+            {% for purpose in purposes %}
+            "{{ purpose.id }}": {{ purpose.price_PLN }},
+            {% endfor %}
+        };
+        const conversionRates = { USD: 0.25, EUR: 0.22, UAH: 11.55 };
+
+        if (purposeSelect) {
+            purposeSelect.addEventListener('change', updatePriceDisplay);
+        }
+
+        document.getElementById('convert-to-usd').addEventListener('click', function (e) { e.preventDefault(); convertPrice('USD'); });
+        document.getElementById('convert-to-eur').addEventListener('click', function (e) { e.preventDefault(); convertPrice('EUR'); });
+        document.getElementById('convert-to-uah').addEventListener('click', function (e) { e.preventDefault(); convertPrice('UAH'); });
+
+        function updatePriceDisplay() {
+            const selectedPrice = purposes[purposeSelect.value];
+            priceDisplay.textContent = selectedPrice !== undefined
+                ? selectedPrice.toFixed(2) + ' PLN'
+                : 'Established personally in clinic';
+        }
+
+        function convertPrice(currency) {
+            const selectedPrice = purposes[purposeSelect.value];
+            if (selectedPrice !== undefined) {
+                const converted = (selectedPrice * conversionRates[currency]).toFixed(2);
+                priceDisplay.textContent = converted + ' ' + currency;
+                document.getElementById('converted-price').value = converted;
+                document.getElementById('currency').value = currency;
+            }
+        }
+
+        updatePriceDisplay();
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const dateField = document.querySelector('#id_date');
+        const startTimeField = document.querySelector('#id_start_time');
+        const errorField = document.querySelector('#schedule-error');
+        const submitButton = document.querySelector('#submit-button');
+
+        const fetchAvailableTimes = function (date) {
+            const dentistId = "{{ dentist_id }}";
+            const url = `/appointments/get-available-times/?date=${date}&dentist_id=${dentistId}`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    if (startTimeField) {
+                        startTimeField.innerHTML = '';
+                        data.times.forEach(time => {
+                            let option = document.createElement('option');
+                            option.value = time;
+                            option.textContent = time;
+                            startTimeField.appendChild(option);
+                        });
+                    }
+                    if (errorField) errorField.style.display = 'none';
+                    if (submitButton) submitButton.disabled = data.times.length === 0;
+                })
+                .catch(error => {
+                    console.error('Error fetching available times:', error);
+                    if (errorField) { errorField.textContent = 'An error occurred while fetching the schedule.'; errorField.style.display = 'block'; }
+                    if (submitButton) submitButton.disabled = true;
+                });
+        };
+
+        fetchAvailableTimes(dateField.value);
+        if (dateField) {
+            dateField.addEventListener('change', function () { fetchAvailableTimes(this.value); });
+        }
+    });
+</script>
+
+{% endblock %}

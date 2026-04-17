@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content%}
+
+<h1>Patients</h1>
+
+<ul>    {% for patient in patients %}
+
+    <li>
+        <a href="{% url 'patient-history' patient.id %}">{{ patient.user.get_full_name }}</a>, dob:  {{patient.date_of_birth}}
+    </li>
+
+    {% endfor %}
+</ul>
+
+{% endblock %}

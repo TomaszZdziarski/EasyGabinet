@@ -1,0 +1,25 @@
+<!DOCTYPE html>   <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Treatment History</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .treatment-history { list-style-type: none; padding: 0; }
+        .treatment-history__item { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<h3>Treatment History for {{ patient.user.get_full_name }}</h3>
+<ul class="treatment-history">
+    {% for appointment in appointments_to_pdf  %}
+
+    <li class="treatment-history__item">
+        <strong>Appointment:</strong> {{ appointment.date }} at {{ appointment.start_time }} with {{ appointment.dentist.user.get_full_name }}<br>
+        <strong>Diagnosis:</strong> {{ appointment.diagnosis }}<br>
+        <strong>Treatment:</strong> {{ appointment.description }}
+    </li>
+
+    {% endfor %}
+</ul>
+</body>
+</html>

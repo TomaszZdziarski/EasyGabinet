@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content%}
+
+<div class="container">
+    <div class="auth">
+        <div class="card">
+            <div class="card__body">
+
+                <div class="auth__header text-center" style="margin-bottom: 1.5rem;">
+                    <a href="/">
+                        <img src="{% static 'media/icon.svg' %}" alt="icon" />
+                    </a>
+                    <h3>Patient's Login</h3>
+
+                </div>
+
+                <form action="{% url 'patient-login' %}" method="POST" class="form auth__form">
+                    {% csrf_token %}
+
+                    <div class="form__field">
+                        <label for="formInput#text">E-mail:</label>
+                        <input class="input input--text" id="formInput#text" type="text" name="email"
+                               placeholder="Enter your e-mail" />
+                    </div>
+
+                    <div class="form__field">
+                        <label for="formInput#password">Password:</label>
+                        <input class="input input--password" id="formInput#password" type="password" name="password"
+                               placeholder="••••••••" />
+                    </div>
+
+
+
+                    <div class="auth__actions">
+                        <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
+                        <a href="{% url 'patients-password-reset' %}">Forget Password?</a>
+                    </div>
+                </form>
+
+                <div class="auth__alternative" style="margin-top: 2rem; text-align: center; padding-bottom: 1rem;">
+                    <p style="color: var(--color-gray); font-size: 1rem; margin-bottom: 0.5rem;">Don't have an Account?</p>
+                    <a href="{% url 'patient-register' %}" class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1rem;">Sign Up</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

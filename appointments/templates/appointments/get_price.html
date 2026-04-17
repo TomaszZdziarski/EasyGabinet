@@ -1,0 +1,20 @@
+{% if error %}
+<p>{{ error }}</p>
+{% else %}
+
+<form method="get">
+    <label for="id_currency">Currency:</label>
+    <select id="id_currency" name="currency" onchange="this.form.submit()">
+        <option value="PLN" {% if selected_currency == "PLN" %}selected{% endif %}>PLN</option>
+        <option value="EUR" {% if selected_currency == "EUR" %}selected{% endif %}>EUR</option>
+        <option value="USD" {% if selected_currency == "USD" %}selected{% endif %}>USD</option>
+        <option value="UAH" {% if selected_currency == "UAH" %}selected{% endif %}>UAH</option>
+    </select>
+</form>
+
+<div>
+    <p>Selected Purpose: {{ purpose.purpose }}</p>
+    <p>Price: {{ prices[selected_currency]|floatformat:2 }} {{ selected_currency }}</p>
+</div>
+
+{% endif %}

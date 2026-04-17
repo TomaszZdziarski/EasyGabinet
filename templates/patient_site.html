@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+<title>New TITLE</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="container container--narrow" style="padding-bottom:3rem;">
+    {% if user.is_authenticated and user.patientProfile %}
+
+    <h3>Welcome {{ user.first_name }} </h3>
+
+
+    {% else %}
+    <div style="text-align: center;">
+        <h3>Welcome on our site, please login to see your medical file</h3>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <a href="{% url 'patient-login' %}" class="btn btn--sub btn--lg" style="margin: 10px;">
+            Login <i class="fas fa-sign-in-alt"></i>
+        </a>
+        <a href="{% url 'patient-register' %}" class="btn btn--sub btn--lg" style="margin: 10px;">
+            Register as patient
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="container" style="flex-direction: column; ">
+    <h5 style="text-align: center; color: var(--color-sub); margin-bottom: 1.5rem;">Our Articles</h5>
+
+    {% for article in articles %}
+    <div class="card" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; width: 100%;">
+        <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+            <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+                <img style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%;"
+                     src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                     alt="author photo" />
+                <p style="font-size: 0.9rem; margin: 0.2rem 0 0; color: var(--color-gray); text-align: center;">{{ article.author }}</p>
+                <p style="font-size: 0.9rem; margin: 0; color: var(--color-gray);">{{ article.publication_date|date:"d M Y" }}</p>
+            </div>
+            <div style="flex:1;">
+                <a href="{% url 'single-article' article.id %}" style="text-decoration:none;">
+                    <h5 class="project__title" style="color: var(--color-sub);">{{ article.title }}</h5>
+                </a>
+                <p style="font-size: 1.0rem; margin: 0.1rem 0;">{{ article.content|slice:'180' }}...</p>
+                <a href="{% url 'single-article' article.id %}" class="btn btn--main--link" style="font-size:1.2rem; margin-top:0.5rem;">
+                    Read more →
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

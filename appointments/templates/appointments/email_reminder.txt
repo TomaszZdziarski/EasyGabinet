@@ -1,0 +1,14 @@
+Hello {{ patient_name }},
+
+This is a reminder that you have a dental visit scheduled for tomorrow.
+
+Date: {{ date }}
+Time: {{ start_time }}
+Dentist: {{ dentist }}
+Purpose: {{ purpose }}
+
+Please confirm or cancel your visit:
+Confirm: {{ confirm_url }}
+Cancel: {{ cancel_url }}
+
+See you tomorrow!

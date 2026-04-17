@@ -1,0 +1,73 @@
+I. REGISTER USER/PATIENT
+
+ - login/logout system
+ - separate registration form for a patient and dentist users (credentials are blocked when filled in crossed login forms)
+ - created user gets a profile via signals
+ - patient is obligated to fill DOB and PESEL (pesel number must have 11 digits)
+ - PESEL and e-mail are unique in DB
+ - phone number can be redundant in DB to let a parent register a child
+ - submit pdf/image files
+ - edit an account,add profile photo
+ - appointment view: editable/deletable when a booking's status = completed,cancelled,booked.
+                     when status did_not_occur a booking is not editable/deletable and it counts as 1 of 3 possible bookings,
+                     patient can cancel a booking before time of the booking.
+ - treatment history (bookings with a status completed land in this section)
+ - exporting treatment to pdf (excluding bookings with the status 'booked' - they are still to happen)
+ - checking inbox - messages/emails from a dentist/practice
+
+
+II. REGISTER USER/DENTIST
+
+ - login/logout system
+ - edit an account,add profile photo
+ - created user gets a profile via signals
+ - skills panel (adding new skills,editing,deletion)
+ - projects panel (adding new skills,editing,deletion), adding participation in other projects,
+   feedback system(counting votes,positive votes)
+ - articles panel (adding new skills,editing,deletion)
+ - fields: bio,description, University and social media
+ - schedule
+ - messages/email system
+
+III. APPOINTMENTS
+
+A) bookings
+
+ - patient/dentist (user) can book appointment by a chosen doctor.
+ - Patient is restricted to establish up to 3 bookings which can last between 30min-1hour,to avoid malicious actions
+ - a user is obligated to choose purpose of visit from drop-down list or fill the custom purpose field
+ - a user cannot book a visit in the past
+ - during booking overlapping is being checked to avoid double bookings for same day/hour,also crosschecking
+   between patient users and dentist users
+ - bookings can be made only during clinic's working time,between: 8:00 and 20:30
+ - a user can cancel a booking, it gets "cancelled" status and patient user cannot further delete/edit this booking
+ - booking is editable for a patient only before booking's start (time,date,reason and chosen dentist can be modified)
+
+B) booking's status
+
+ - Only dentists can change booking's status (function to change statuses) but only in own schedule(status "passed" is excluded from status options)
+ - all possible time slots become "available" as default and get green color
+ - when time of slot passes by and booking is not made, it becomes "passed" and it's greyed out of schedule
+ - when booking is made(by patient or by dentist) a slot gets "booked" status and yellow color
+ - patient can make up to 3 appointments(we count booking's statuses: "booked","did_not_occur","cancelled" as one used appointment)
+ - when time of the booking passes, status of booking changes to "completed",gets blue color (this booking is considered
+   to be successfully, so it doesn't count for max.3 bookings per patient)
+ - to free patient's booking's pool all statuses can be cleared/changed by logged dentist/manager
+ - when status of booking is being changed to "available", instance of appointment is being deleted from db,to free space and avoid double bookings
+
+IV. CHECKING SCHEDULE (dentist site)
+
+ - view availability for bookings using date/time widget,with special attention to time zones
+ - exporting schedule to pdf
+ - logged dentist has link ""
+
+V. EXPORT SCHEDULE TO PDF
+
+ - exporting: date,time,patient's name and surname,reason of the booking and status
+ - showing information about count of visits and time of work ending
+
+VI. PROJECTS,SKILLS,ARTICLES
+
+ - showing projects of our dentists,dentist skills (to make choosing of a specialist easier),
+   articles written by our dentists
+

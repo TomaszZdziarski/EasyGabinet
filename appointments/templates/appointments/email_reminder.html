@@ -1,0 +1,13 @@
+
+<!-- appointments/templates/appointments/email_reminder.html -->
+<p>Hello {{ patient_name }},</p>
+<p>This is a reminder that you have a visit scheduled for <strong>{{ scheduled_at }}</strong>
+    with <strong>{{ doctor }}</strong> at {{ location }}.</p>
+
+<p>
+    <a href="{{ confirm_url }}">✅ Confirm my visit</a> &nbsp;|&nbsp;
+    <a href="{{ cancel_url }}">❌ Cancel my visit</a>
+</p>
+
+<!-- 1x1 tracking pixel -->
+<img src="{{ tracking_url }}" width="1" height="1" style="display:none" />

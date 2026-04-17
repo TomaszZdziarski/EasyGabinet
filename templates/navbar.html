@@ -1,10 +1,9 @@
 {% load static %}
 
-<!-- Header Section -->
-<header class="header">
-    <div class="container container--narrow">
-        <a href="{% url 'main' %}" class="header__logo">
-            <img src="{% static 'media/logo.jpg' %}"  alt="Dental Clinic Logo" />
+<header class="header" style="margin-top: 0; border-top: none;">
+    <div class="container container">
+        <a href="{% url 'main' %}" class="header__logo" style="margin-right: 20px;">
+            <img src="{% static 'media/logo.jpg' %}" alt="Dental Clinic Logo" />
         </a>
         <nav class="header__nav">
             <input type="checkbox" id="responsive-menu" />
@@ -14,12 +13,46 @@
             </label>
             <ul class="header__menu">
                 <li class="header__menuItem"><a href="{% url 'profiles' %}">Doctors</a></li>
-                <li class="header__menuItem"><a href="">Patients</a></li>
-                <li class="header__menuItem"><a href="{% url 'all-projects' %}">Projects</a></li>
+                <li class="header__menuItem"><a href="{% url 'patient-site' %}">Patients</a></li>
+                <li class="header__menuItem"><a href="{% url 'projects' %}">Projects</a></li>
+                <li class="header__menuItem"><a href="{% if dentist %}{% url 'calendar' dentist.id %}{% else %}{% url 'calendar_no_dentist' %}{% endif %}">Calendar</a></li>
+
+                {% if request.user.is_authenticated %}
+
+                {% if request.user.user_type == 'dentist' %}
+                <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox</a></li>
+                <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
+                {% if matching_patients.exists %}
+                <li class="header__menuItem"><a href="{% url 'patient-account' patient.id %}">My Patient account</a></li>
+                {% endif %}
+                <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">
+                    Welcome, {{ user }}
+                </li>
+
+                {% elif request.user.user_type == 'patient' %}
+                <li class="header__menuItem"><a href="{% url 'patient-inbox' %}">Inbox</a></li>
+                <li class="header__menuItem"><a href="{% url 'patient-account' patient.id %}">Patient's account</a></li>
+                <li class="header__menuItem"><a href="{% url 'patient-logout' %}">Logout</a></li>
+                <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">
+                    Welcome, {{ user }}
+                </li>
+
+                {% else %}
                 <li class="header__menuItem"><a href="">Inbox</a></li>
-                <li class="header__menuItem"><a href="">My Account</a></li>
-                <li class="header__menuItem"><a href="{% url 'register' %}" class="btn btn--sub">Register as patient</a></li>
-                <li class="header__menuItem"><a href="" class="btn btn--sub">Login</a></li>
+                <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
+                <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">
+                    Welcome, {{ user }}
+                </li>
+
+                {% endif %}
+
+                {% else %}
+                <li class="header__menuItem"><a href="{% url 'patient-register' %}">Register as patient</a></li>
+                <li class="header__menuItem"><a href="{% url 'register-user' %}">Login/Sign up for dentists</a></li>
+                {% endif %}
+
             </ul>
         </nav>
     </div>

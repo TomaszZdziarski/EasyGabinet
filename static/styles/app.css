@@ -2,11 +2,25 @@
   --color-sub: #2d2d39;
 }
 
+/*=======================
+  Fixed Position Alerts Wrapper
+========================*/
+
+
+
 .alert-error {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+.alert {
+  position: fixed;
+  left: 50%;
+  top: 120px;
+  margin-top: 100px;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
 
 .btn--sub {
   background-color: var(--color-sub-light);
@@ -294,10 +308,13 @@ img {
 }
 
 .devlist .dev .dev__info {
-  margin: 1.5rem 0;
-  font-size: 1.35rem;
-  line-height: 1.4;
   text-align: justify;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow-wrap: break-word; /* Ensures long words wrap */
+    word-wrap: break-word; /* For older browser compatibility */
+    width: 100%; /* Ensure the paragraph takes the full width of its container */
+    box-sizing: border-box; /* Include padding in the element's total width */
 }
 
 /*=======================
@@ -328,6 +345,7 @@ img {
 /*=======================
   Profile
 ========================*/
+
 
 .profile .card > .dev {
   padding: 4rem;
@@ -366,9 +384,18 @@ img {
 
 .devInfo {
   margin-bottom: 3rem;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-.devInfo__title,
+.devInfo__title {
+font-size: 4.0rem;
+  font-weight: 700;
+  color: var(--color-sub);
+  text-align: center;
+  padding-bottom: 100px;
+
+}
 .devInfo__subtitle {
   font-size: 2.6rem;
   color: var(--color-sub);
@@ -382,7 +409,17 @@ img {
   color: var(--color-sub-light);
 }
 
-.devInfo__about,
+.devInfo__about {
+text-align: justify;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    box-sizing: border-box;
+     overflow-wrap: break-word; /* Ensures long words wrap */
+     word-wrap: break-word; /* For older browser compatibility */
+
+
+}
 .devSkill__info {
   font-size: 1.45rem;
   line-height: 1.7;
@@ -652,7 +689,6 @@ img {
 .auth {
   width: 100%;
   position: relative;
-  z-index: 1;
   background: transparent;
   height: 99vh;
   display: flex;
@@ -856,3 +892,6 @@ img {
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
+
+
+

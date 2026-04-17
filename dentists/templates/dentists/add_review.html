@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="auth">
+        <div class="column card">
+            <div class="card__body">
+
+                <div class="auth__header text-center" style="margin-bottom: 1.5rem;">
+                    <a href="/">
+                        <img src="{% static 'media/icon.svg' %}" alt="icon" />
+                    </a>
+                    <h3>Add Review to project</h3>
+                </div>
+
+                <form method="POST" action="{% url 'register-user' %}" class="auth__form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form__field">
+                        <label for="formInput#text">{{ field.label }}</label>
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p style="color:red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+
+                    <div class="auth__actions">
+                        <input class="btn btn--sub btn--lg" type="submit" value="Sign In" />
+                    </div>
+                </form>
+
+                <div class="auth__alternative" style="margin-top: 2rem; text-align: center; padding-bottom: 1rem;">
+                    <p style="color: var(--color-gray); font-size: 1rem; margin-bottom: 0.5rem;">Already have an Account?</p>
+                    <a href="{% url 'login-dentist' %}" class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1rem;">Log In as Dentist/Manager</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

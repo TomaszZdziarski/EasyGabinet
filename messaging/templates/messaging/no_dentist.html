@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div style="display:flex; justify-content:center; align-items:center; min-height:60vh;">
+    <div class="card" style="max-width:500px; width:100%; text-align:center; padding:3rem 2rem;">
+        <div style="font-size:4rem; margin-bottom:1rem;">⚠️</div>
+        <h4 style="color:var(--color-sub); margin-bottom:1rem;">No Dentist Assigned</h4>
+        <p style="color:var(--color-gray); margin-bottom:2rem;">
+            You don't have a dentist assigned to your account yet.
+            Please contact the clinic to get set up.
+        </p>
+        <a href="{% url 'patient-site' %}" class="btn btn--main">← Back to Home</a>
+    </div>
+</div>
+
+{% endblock %}
