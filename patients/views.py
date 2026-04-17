@@ -15,15 +15,14 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from appointments.utils import update_appointments_status
 from django.utils import timezone
-from django.contrib.auth import get_user_model
-from django.db import transaction, IntegrityError
 from django.contrib import messages
 from .forms import CustomPatientCreationForm
-
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
-from django.http import HttpResponseRedirect
+import os
+from django.conf import settings
+
 
 
 # Get the custom user model
@@ -207,7 +206,7 @@ def edit_patient_account(request,patient_id):
 
 
 # Register the font
-pdfmetrics.registerFont(TTFont('TimesNewRoman', 'fonts/times.ttf'))
+pdfmetrics.registerFont(TTFont('TimesNewRoman', os.path.join(settings.BASE_DIR, 'fonts', 'times.ttf')))
 
 @login_required(login_url='patient-login')
 def export_treatment_history_pdf(request, patient_id):

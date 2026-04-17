@@ -22,16 +22,6 @@ media/
 venv/
 env/
 
-
-__pycache__/
-*.pyc
-venv/
+# Other
 .vs/
-.idea/
-staticfiles/
-images/
-media/
 Django-Course/
-"price changer working"
-kwargs.py
-fonts/

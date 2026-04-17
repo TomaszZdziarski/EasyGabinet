@@ -76,7 +76,7 @@ class dentistProfile(models.Model):
     university = models.CharField(max_length=64, null=True, blank=True,default=str)
     docs = models.FileField(upload_to='documents/', null=True, blank=True,default=str)
     function_choices = {"dentist":"Dentist","manager":"Manager","owner":"Owner"}
-    function = models.CharField(choices=function_choices,null=True, blank=True,default="dentist")
+    function = models.CharField(max_length=200,choices=function_choices,null=True, blank=True,default="dentist")
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
     social_website = models.CharField(max_length=2000, null=True, blank=True)
