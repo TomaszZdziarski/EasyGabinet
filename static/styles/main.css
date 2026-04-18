@@ -24,7 +24,15 @@
   --generic-transition: all 0.3s ease-in-out;
 }
 
-body { margin: 0; padding: 0; }
+html {
+  background-color: var(--color-sub);  /* #3f4156 - matches navbar */
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
 
 /*=======================
   FONT/PARAGRAPH Styles
@@ -127,10 +135,10 @@ a {
 
 .header {
   position: sticky;
-  top: 0;
   z-index: 111;
   background-color: var(--color-sub);
   padding: 1.5rem 0;
+  border-bottom: 2px solid #e8eaf0; /* slightly darker than --color-bg */
 }
 
 .header > .container {
@@ -141,7 +149,8 @@ a {
 
 .header__logo > img {
   height: 70px;
-  display: block;
+  display: block;  /* ← already have this? if not, add it */
+  vertical-align: bottom;  /* ← add this */
 }
 
 .header__nav > ul {
