@@ -87,7 +87,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+AUTHENTICATION_BACKENDS = [
+    'dentists.backends.EmailBackend',
+]
+
+
 AUTH_USER_MODEL = 'dentists.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
