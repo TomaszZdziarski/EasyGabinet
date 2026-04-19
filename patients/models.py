@@ -37,7 +37,7 @@ class PatientProfile(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=15)
-    photo = models.ImageField(upload_to='', null=True, blank=True,default=str)
+    photo = models.ImageField(upload_to='media/', null=True, blank=True,default=str)
     id = models.UUIDField(default=uuid4, unique=True, primary_key=True, editable=False)
 
     linked_dentist = models.ForeignKey(dentistProfile, null=True, blank=True, on_delete=models.SET_NULL)
