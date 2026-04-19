@@ -645,3 +645,16 @@ def mark_appointments(html_calendar, day_status,dentist_id, year, month):
         except ValueError:            # Skip cells that are not day numbers
             continue
     return str(soup)
+
+# Add temporarily to your views.py
+from django.http import HttpResponse
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
+def test_s3(request):
+    try:
+        path = default_storage.save('media/test_from_railway.txt', ContentFile(b'hello'))
+        url = default_storage.url(path)
+        return HttpResponse(f"SUCCESS! Path: {path} URL: {url}")
+    except Exception as e:
+        return HttpResponse(f"FAILED: {str(e)}")

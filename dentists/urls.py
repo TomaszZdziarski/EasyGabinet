@@ -57,4 +57,6 @@ urlpatterns = [
 
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='dentists/password_reset_complete.html'), name='password_reset_complete'),
+    # Add to urls.py temporarily
+    path('test-s3/', views.test_s3, name='test-s3'),
     ]
