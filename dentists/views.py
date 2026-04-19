@@ -278,17 +278,21 @@ def userAccount(request):
 @login_required(login_url='login-dentist')
 def editAccount(request):
     profile = request.user.dentistProfile
-
     form = ProfileForm(instance=profile)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
+        print(f"FILES received: {request.FILES}")  # ADD
         if form.is_valid():
             try:
-                form.save()
-                print(f"Profile saved. Photo: {profile.photo}")
-                print(f"Photo URL: {profile.photo.url if profile.photo else 'No photo'}")
+                instance = form.save(commit=False)
+                print(f"Photo before save: {instance.photo}")  # ADD
+                instance.save()
+                print(f"Photo after save: {instance.photo}")   # ADD
+                print(f"Photo name: {instance.photo.name}")    # ADD
             except Exception as e:
-                print(f"Error saving profile: {e}")
+                import traceback
+                print(f"SAVE ERROR: {e}")
+                print(traceback.format_exc())                  # ADD
             return redirect('account')
         else:
             print(f"Form errors: {form.errors}")
