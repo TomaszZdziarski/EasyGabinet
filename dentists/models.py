@@ -113,7 +113,7 @@ class Skill(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
-    skill_image = models.ImageField(upload_to='media/', null=True, blank=True,default=str)
+    skill_image = models.ImageField(upload_to='', null=True, blank=True,default=str)
 
     def __str__(self):
         return str(self.name)
@@ -123,7 +123,7 @@ class Project(models.Model):
 
     owner = models.ForeignKey(dentistProfile, null=True, blank=True,on_delete=models.CASCADE)
     skill_used = models.ManyToManyField(Skill, blank=True)
-    project_image = models.ImageField(upload_to='media/',null=True, blank=True)
+    project_image = models.ImageField(upload_to='',null=True, blank=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     tags = models.ManyToManyField('Tag',blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)
