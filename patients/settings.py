@@ -122,10 +122,13 @@ if DEBUG:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    print("LOCAL storage enabled")
 else:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    print(f"S3 storage enabled. Bucket: {AWS_STORAGE_BUCKET_NAME} Region: {AWS_S3_REGION_NAME}")
 
 
 # EMAIL

@@ -13,7 +13,8 @@ __pycache__/
 # Django
 images/
 media/
-!static/images/    # ADD THIS — allow static design assets
+!static/images/
+!static/media/
 
 # PyCharm
 .idea/
