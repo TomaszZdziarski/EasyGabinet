@@ -61,6 +61,7 @@
 
                 <form action="{% url 'login-dentist' %}" method="POST" class="form auth__form">
                     {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">  {# ADD THIS #}
 
                     <div class="form__field">
                         <label for="formInput#text">E-mail:</label>
@@ -73,8 +74,6 @@
                         <input class="input input--password" id="formInput#password" type="password" name="password"
                                placeholder="••••••••" />
                     </div>
-
-
 
                     <div class="auth__actions">
                         <input class="btn btn--sub btn--lg" type="submit" value="Log In" />

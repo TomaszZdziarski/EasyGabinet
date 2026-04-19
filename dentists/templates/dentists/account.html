@@ -9,7 +9,7 @@
         <div class="column column--1of3">
             <div class="card text-center">
                 <div class="card__body profile">
-                    <a class="tag tag--pill tag--main account__btn" href="{% url 'edit-account' %}"><i class="im im-edit"></i> Edit</a>
+                    <a class="btn btn--main btn--sm" href="{% url 'edit-account' %}">Edit</a>
                     <img class="profile_image profile_image--lg" src="{% if profile.photo %}{{profile.photo.url}}{% else %}{% static 'media/user-default.png' %}{% endif %}" />
                     <h2 class="profile__name">{{ user.first_name }} {{ user.last_name }}</h2>
                     <p class="profile__title">{{ profile.short_intro }}</p>
@@ -37,10 +37,24 @@
 
             <!-- About -->
             <div class="profileInfo">
-                <h1 class="profileInfo__title">{{ profile.get_full_name }} dentist account</h1>
-                <h3 class="account__title">About Me</h3>
-                <p class="profileInfo__about">{{ profile.bio|slice:'360' }}</p>
+                <h1 class="profileInfo__title">{{ profile.get_full_name }}</h1>
+                <p class="profileInfo__subtitle">dentist account</p>
+
             </div>
+
+            <!-- About me -->
+            <div class="account">
+            <h3 class="account__title">About Me</h3>
+
+            </div>
+
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; width: 100%; min-width: 0;">
+                <div class="card__body" style="display: flex; align-items: center; width: 100%; min-width: 0;">
+                    <p class="profileInfo__about">{{ profile.bio|slice:'360' }}</p>
+
+                </div>
+            </div>
+
 
             <!-- Skills -->
             <div class="account">

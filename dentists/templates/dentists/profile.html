@@ -3,135 +3,149 @@
 
 {% block content %}
 
+<div class="layout">
 
-    <!-- Main Section -->
+    <!-- LEFT COLUMN -->
+    <div class="column column--1of3">
+        <div class="card text-center">
+            <div class="card__body profile">
+                <img class="profile_image profile_image--lg"
+                     src="{% if profile.photo %}{{profile.photo.url}}{% else %}{% static 'media/user-default.png' %}{% endif %}" />
+                <h2 class="profile__name">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+                <p class="profile__title">My role: {{profile.function}} in "MyDentist",<br><br>{{ profile.short_intro|slice:"50" }}</p>
+                <p class="profile__location">I graduated {{ profile.university }}</p>
+                <ul class="profile__social">
+                    <li><a title="Github" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a title="Stackoverflow" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a title="Twitter" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a title="LinkedIn" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                    <li><a title="Personal Website" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-globe"></i></a></li>
+                </ul>
+                <a href="{% url 'inbox' %}" class="btn btn--sub btn--lg">Messages</a><br><br>
+                <a href="{% url 'available-appointments' profile.id current_year current_month %}" class="btn btn--sub btn--lg">View Schedule</a>
+            </div>
+        </div>
+    </div>
 
+    <!-- RIGHT COLUMN -->
+    <div class="column column--2of3">
 
-            <div class="layout">
-                <div class="column column--1of3">
-                    <div class="card text-center">
-                        <div class="card__body profile">
-                            <img class="profile_image profile_image--lg" src="{% if profile.photo %} {{profile.photo.url}} {% else %} {% static 'media/user-default.png' %} {% endif %}" />
-                            <h2 class="profile__name">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
-                            <p class="profile__title">My role: {{profile.function}} in "MyDentist", <br><br> {{ profile.short_intro|slice:"50" }}</p>
-                            <p class="profile__location">I graduated {{ profile.university }}</p>
-                            <ul class="profile__social">
-                                <li>
-                                    <a title="Github" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-github"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Stackoverflow" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Twitter" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a title="LinkedIn" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                                </li>
-                                <li>
-                                    <a title="Personal Website" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-globe"></i></a>
-                                </li>
-                            </ul>
-                            <a href="#" class="btn btn--sub btn--lg">Send Message </a> <br><br>
+        <!-- About Me -->
+        <div class="profileInfo">
+            <h3 class="profileInfo__title">About Me</h3>
+            <p class="profileInfo__about">
+                I work in "MyDentist" as {{ profile.function }}.
+                {{ profile.bio }}
+            </p>
+        </div>
 
+        <!-- Skills -->
+        <div class="profileInfo">
+            <h3 class="profileInfo__title">Skills</h3>
 
-                            <a href="{% url 'available-appointments' profile.id current_year current_month %}" class="btn btn--sub btn--lg">View Schedule </a>
-                            <!-- # dentist is a field from Appointment model,passed as context to available-appointments: 'dentist':profile-->
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="column column--2of3">
-                    <div class="profileInfo">
-                        <h3 class="profileInfo__title">About Me</h3>
-                        <p class="profileInfo__about">
-                            I work in "MyDentist" as {{ profile.function }}.
-                            {{ profile.bio }}
-                        </p>
-                    </div>
-                    <div class="profileInfo">
-                        <h3 class="profileInfo__title">Skills</h3>
-                        <div class="profileInfo__skills">
-
-                            {% for skill in topSkills.all %}
-
-                                <span class="tag tag--pill tag--sub tag--lg">
-                  <small><a href="{% url 'single-skill' skill.id %}">{{ skill.name }}</a></small>
-                </span>
-                            {% endfor %}
-
-
-                            <h3 class="profileInfo__subtitle">Other Skills</h3>
-                            <div class="profileInfo__otherSkills">
-
-                                {% for skill in otherSkills %}
-                                    <span class="tag tag--pill tag--sub tag--lg">
-                  <small><a href="{% url 'single-skill' skill.id %}">{{ skill.name }}</a></small>
-                </span>
-                                {% endfor %}
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div class="profileInfo">
-                        <h3 class="profileInfo__title">Projects</h3>
-                        <p class="profile__title">I'm an author of these projects :</p>
-
-
-                                <div class="projects__grid">
-
-                                    {% for project in projects %}
-
-
-                                            <div class="card project">
-                                                <a href="{% url 'single-project' project.id %}" class="project">
-                                                    <img class="project__thumbnail" src="{% if project.project_image %}  {{ project.project_image.url }} {% else %} {% static 'media/default.jpg' %}{% endif %}" alt="project thumbnail" />
-                                                    <div class="card__body">
-                                                        <h5 class="project__title">{{project.name}}</h5>
-                                                        <p><a class="project__author" href="{% url 'single-profile' project.owner.id %}">Author :
-                                                            {{project.owner.name}}</a>
-                                                        </p>
-                                                        <p class="project--rating">
-                                                            <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
-                                                            Feedback ({{project.vote_total}}) Vote{{project.vote_total|pluralize:"s"}}
-                                                        </p>
-
-
-                                                            <div class="project__tags">
-                                                                Patient's problems solved >>> <br><br>
-                                                                {% for tag in project.tags.all %}
-                                                                <span class="tag tag--pill tag--main">
-                                        <small>{{tag}}</small>
-                                    </span>
-                                                                {% endfor %}
-
-                                                            </div>
-
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        
-                                    {% endfor %}
-                                </div>
-
-
-
-
-
-
+            {% for skill in topSkills.all %}
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                    <img style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;"
+                         src="{% if skill.skill_image %}{{skill.skill_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                    <div>
+                        <h4 class="project__title">{{ skill.name }}</h4>
+                        <p>{{ skill.description|slice:"100" }}...</p>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+
+            {% if otherSkills %}
+            <h3 class="profileInfo__subtitle">Other Skills</h3>
+            {% for skill in otherSkills %}
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                    <img style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;"
+                         src="{% if skill.skill_image %}{{skill.skill_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                    <div>
+                        <h4 class="project__title">{{ skill.name }}</h4>
+                        <p>{{ skill.description|slice:"100" }}...</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <!-- Projects -->
+        <div class="profileInfo">
+            <h3 class="profileInfo__title">Projects</h3>
+            <p class="profile__title">I'm an author of these projects:</p>
+
+            <div class="projects__grid">
+                {% for project in projects %}
+                <div class="card project">
+                    <a href="{% url 'single-project' project.id %}" class="project">
+                        <img class="project__thumbnail"
+                             src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                             alt="project thumbnail" />
+                        <div class="card__body">
+                            <h5 class="project__title">{{project.name}}</h5>
+                            <p>
+                                <a class="project__author" href="{% url 'single-profile' project.owner.id %}">
+                                    Author: {{project.owner.name}}
+                                </a>
+                            </p>
+                            <p class="project--rating">
+                                <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
+                                Feedback ({{project.vote_total}}) Vote{{project.vote_total|pluralize:"s"}}
+                            </p>
+                            <div class="project__tags">
+                                Patient's problems solved >>><br><br>
+                                {% for tag in project.tags.all %}
+                                <span class="tag tag--pill tag--main"><small>{{tag}}</small></span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
 
 
+        <!-- Articles -->
+        <div class="profileInfo">
+            <h3 class="profileInfo__title">Articles</h3>
 
+            {% for article in articles %}
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                    <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 6rem;">
+                        <img style="width: 4rem; height: 4rem; object-fit: cover; border-radius: 50%;"
+                             src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                             alt="author photo" />
+                        <p style="font-size: 0.9rem; margin: 0.2rem 0 0; color: var(--color-gray); text-align: center;">{{ article.author }}</p>
+                        <p style="font-size: 0.9rem; margin: 0; color: var(--color-gray);">{{ article.publication_date|date:"d M Y" }}</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <a href="{% url 'single-article' article.id %}">
+                            <h5 class="project__title">{{ article.title }}</h5>
+                        </a>
+                        <p style="font-size: 1.0rem; margin: 0.1rem 0;">{{ article.content|slice:'180' }}...</p>
+                        <a href="{% url 'single-article' article.id %}" class="btn btn--main--link" style="font-size: 1.2rem; margin-top: 0.5rem;">
+                            Read more →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="profileInfo__about">No articles yet.</p>
+            {% endfor %}
 
+        </div>
+
+    </div>
+    <!-- END RIGHT COLUMN -->
+
+</div>
 
 {% endblock %}

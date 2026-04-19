@@ -71,11 +71,29 @@
                     </div>
 
                     <div class="card__body">
-                        {% if request.user.dentistProfile.id in project.reviewers %}
+
+                        {% if not request.user.is_authenticated %}
+                        <a href="{% url 'login-dentist' %}?next={{ request.path }}"
+                           class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                            Login as dentist to leave a review
+                        </a>
+
+                        {% elif request.user.user_type != 'dentist' %}
+                        <p style="color: var(--color-gray); font-size: 1.4rem;">
+                            Only dentists can leave reviews on projects.
+                        </p>
+                        <a href="{% url 'switch-to-dentist' request.path %}"
+                           class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                            Switch to dentist account
+                        </a>
+
+                        {% elif request.user.dentistProfile.id in project.reviewers %}
                         <p>You have already submitted your review for this project.</p>
+
                         {% elif request.user.dentistProfile == project.owner %}
                         <p>You cannot review your own work.</p>
-                        {% elif request.user.is_authenticated %}
+
+                        {% else %}
                         <form action="{% url 'single-project' project.id %}" method="POST">
                             {% csrf_token %}
                             {% for field in form %}
@@ -84,12 +102,10 @@
                                 {{ field }}
                             </div>
                             {% endfor %}
-                            <button class="btn btn--main btn--md" type="submit" style="margin-top:1rem;">Add Review</button>
+                            <button class="btn btn--main btn--md" type="submit" style="margin-top:1rem;">
+                                Add Review
+                            </button>
                         </form>
-                        {% else %}
-                        <a href="{% url 'login-dentist' %}?next={{ request.path }}" class="btn btn--sub--outline btn--md" style="margin-right:0;">
-                            Login to leave a review
-                        </a>
                         {% endif %}
 
                         <!-- Comments -->
@@ -97,14 +113,16 @@
                             {% for review in project.review_set.all %}
                             {% if review.body %}
                             <div style="display:flex; align-items:flex-start; gap:1rem; padding:1rem; border-radius:0.5rem; border:1.5px solid var(--color-light);">
-                                <a href="{% url 'single-profile' review.owner.id %}" style="flex-shrink: 0;">
+                                <a href="{% url 'single-profile' review.owner.id %}" style="flex-shrink:0;">
                                     <img class="profile_image profile_image--sm"
                                          src="{% if review.owner.photo %}{{ review.owner.photo.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
                                          alt="{{ review.owner.name }}" />
                                 </a>
                                 <div>
                                     <a href="{% url 'single-profile' review.owner.id %}"
-                                       style="font-size:1.3rem; font-weight:500; color:var(--color-sub);">{{ review.owner.name }}</a>
+                                       style="font-size:1.3rem; font-weight:500; color:var(--color-sub);">
+                                        {{ review.owner.name }}
+                                    </a>
                                     <p style="margin-top:0.3rem;">{{ review.body|linebreaksbr }}</p>
                                 </div>
                             </div>

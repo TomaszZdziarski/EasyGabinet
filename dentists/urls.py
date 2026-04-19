@@ -19,6 +19,7 @@ urlpatterns = [
     path('login/', views.loginUser, name="login-dentist"),
     path('logout/', views.logoutUser, name="logout"),
     path('account/', views.userAccount, name='account'),
+    path('switch-to-dentist/<path:next_url>/', views.switch_to_dentist, name='switch-to-dentist'),
 
     path('create-skill/',views.createSkill,name='create-skill'),
     path('update-skill/<str:pk>',views.updateSkill,name='update-skill'),

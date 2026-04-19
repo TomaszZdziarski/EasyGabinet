@@ -48,6 +48,7 @@ def profile(request, pk):
     otherSkills = profile.skill_set.filter(description="") # skills without admin description, shown as OTHER
     # SKILLS in template
     dentistProjects = profile.particip_project.all()
+    articles = profile.articles.all()  # not article_set
     projects = profile.project_set.all()
     current_date = date.today()
     context = {'profile': profile,
@@ -58,6 +59,7 @@ def profile(request, pk):
                'current_year': today.year,
                'current_month': today.month,
                'projects':projects,
+               'articles': articles,
                }
 
     return render(request, 'dentists/profile.html',context)
@@ -90,7 +92,15 @@ def project(request, pk):
         if form.is_valid():
             review = form.save(commit=False)
             review.project = project
-            review.owner = request.user.dentistProfile
+
+            if hasattr(request.user, 'dentistProfile'):
+                review.owner = request.user.dentistProfile
+            elif hasattr(request.user, 'patientProfile'):
+                review.owner = request.user.patientProfile
+            else:
+                messages.error(request, 'You need a profile to leave a review.')
+                return redirect('single-project', pk=project.id)
+
             review.save()
             project.getVoteCount()
             return redirect('single-project', pk=project.id)
@@ -206,6 +216,9 @@ def loginUser(request):
         if user is not None:
             if user.user_type == 'dentist':
                 login(request,user) # it will create a session for this user in DB
+                next_url = request.POST.get('next') or request.GET.get('next')  # check both
+                if next_url:                         # ADD THIS
+                    return redirect(next_url)        # ADD THIS
                 return redirect('account')
             else:
                 messages.error(request, 'You are not authorized to log in as a patient here. Use Patient tab to log in please')
@@ -218,6 +231,10 @@ def logoutUser(request):
     logout(request) # deletes the session
     messages.success(request,'User dentist successfully logged out!')
     return redirect('profiles')
+
+def switch_to_dentist(request, next_url):
+    logout(request)
+    return redirect(f"/login/?next={next_url}")
 
 
 def registerUser(request):

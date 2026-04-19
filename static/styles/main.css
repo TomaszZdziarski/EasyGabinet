@@ -25,7 +25,7 @@
 }
 
 html {
-  background-color: var(--color-sub);  /* #3f4156 - matches navbar */
+  background-color: var(--color-sub);
 }
 body {
   margin: 0;
@@ -138,7 +138,7 @@ a {
   z-index: 111;
   background-color: var(--color-sub);
   padding: 1.5rem 0;
-  border-bottom: 2px solid #e8eaf0; /* slightly darker than --color-bg */
+  border-bottom: 2px solid #e8eaf0;
 }
 
 .header > .container {
@@ -149,8 +149,8 @@ a {
 
 .header__logo > img {
   height: 70px;
-  display: block;  /* ← already have this? if not, add it */
-  vertical-align: bottom;  /* ← add this */
+  display: block;
+  vertical-align: bottom;
 }
 
 .header__nav > ul {
@@ -288,17 +288,6 @@ a {
 }
 
 /*=======================
-  column
-========================*/
-
-.column {
-  flex: 1 1 auto;
-  margin-bottom: 3rem;
-  box-sizing: border-box;
-  max-width: 400px;
-}
-
-/*=======================
   layout
 ========================*/
 
@@ -307,27 +296,52 @@ a {
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: flex-start;
+  width: 100%;
 }
 
-.layout > .column {
+/*=======================
+  column
+========================*/
+
+.column {
   margin-bottom: 3rem;
   box-sizing: border-box;
+  min-width: 0;        /* prevents flex children from overflowing */
 }
 
 .layout > .column.column--1of3 {
-  padding-top: 2rem;
-  flex-basis: 30%;
+  flex: 0 0 30%;
   max-width: 350px;
+  padding-top: 2rem;
+  padding-right: 2rem;
 }
 
 .layout > .column.column--2of3 {
-  flex-basis: 64%;
+  flex: 0 0 64%;
   max-width: 64%;
+  padding-left: 2rem;
+  min-width: 0;
 }
 
+/* left column button styles */
+.column--1of3 .card__body {
+  padding: 1.5rem;
+}
+
+.column--1of3 .btn--lg {
+  width: 100%;
+  box-sizing: border-box;
+  margin-right: 0;
+}
+
+/* stack columns on small screens */
 @media screen and (max-width: 1080px) {
-  .layout > .column {
-    flex-basis: 100% !important;
+  .layout > .column.column--1of3,
+  .layout > .column.column--2of3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -339,11 +353,21 @@ a {
   border-radius: 1rem;
   background-color: var(--color-white);
   border: 1.5px solid var(--color-light);
-  width: 100%;
-  max-width: 100%;
-  margin: 0.5rem;
-  overflow: hidden;
   box-shadow: var(--generic-shadow);
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;           /* fill parent, never overflow */
+}
+
+/* cards inside right column get left indent */
+.column--2of3 .card {
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+  width: calc(100% - 1.5rem);  /* compensate for left margin */
+}
+
+.card__body {
+  padding: 1.5rem;
 }
 
 .card__clamp {
@@ -354,15 +378,11 @@ a {
 }
 
 .card__link {
-  transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in-out;
 }
 
 .card__link:hover {
   text-decoration: none;
-}
-
-.card__body {
-  padding: 1.5rem;
 }
 
 .card__header {
@@ -386,6 +406,18 @@ a {
 .card.card--dark {
   background-color: var(--color-light);
   box-shadow: var(--generic-shadow);
+}
+
+/*=======================
+  HOME PAGE
+========================*/
+
+.home__auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
 }
 
 /*=======================
@@ -447,6 +479,14 @@ a {
   font-weight: 700;
   margin: 1rem 0 0.5rem;
 }
+.profile__data-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-sub-light);
+  margin-top: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 .profile__data {
   font-size: 1.6rem;
@@ -468,6 +508,7 @@ a {
 
 .profileInfo {
   margin-bottom: 3rem;
+  margin-top: 4rem;    /* ADD THIS */
   width: 100%;
   flex-wrap: wrap;
 }
@@ -477,12 +518,14 @@ a {
   font-weight: 700;
   color: var(--color-sub);
   text-align: center;
+  margin-top: 2rem;
   padding-bottom: 10px;
 }
 
 .profileInfo__subtitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--color-sub-light);
+  text-align: center;
 }
 
 .profileInfo__about {
@@ -492,7 +535,12 @@ a {
   width: 100%;
   box-sizing: border-box;
   overflow-wrap: break-word;
-  word-wrap: break-word;
+  word-break: break-word;  /* replace word-wrap with this */
+}
+
+.profileInfo .account__title {
+  margin-top: 4rem;
+  padding-left: 30px;
 }
 
 .profileSkill__info {
@@ -615,7 +663,7 @@ a {
 
 .btn--sm {
   font-size: 0.9rem;
-  padding: 0.4rem;
+  padding: 0.4rem 0.8rem;
   margin-bottom: 10px;
 }
 
@@ -843,13 +891,22 @@ button[disabled] {
   align-items: center;
   justify-content: center;
   height: 40vh;
-  background-color: var(--color-bg);  /* changed from var(--color-sub) */
+  background-color: var(--color-bg);
   text-align: center;
+}
+
+.main-section--search {
+  height: auto;
+  padding: 3rem 2rem;
 }
 
 .main-section__box {
   margin-bottom: 8rem;
   text-align: center;
+}
+
+.main-section__box--search {
+  margin-bottom: 0;
 }
 
 .main-section__box > h2,
@@ -921,6 +978,10 @@ button[disabled] {
   border-color: var(--color-main);
 }
 
+.form__field--search {
+  padding-bottom: 1rem;
+}
+
 @media screen and (max-width: 700px) {
   .main-section__search > .form {
     display: flex;
@@ -980,14 +1041,12 @@ button[disabled] {
 }
 
 .auth > .card {
-
   width: 95%;
   max-width: 28rem;
 }
 
 @media screen and (min-width: 650px) {
   .auth > .card {
-    
     width: 95%;
     max-width: 38rem;
   }
@@ -1036,7 +1095,6 @@ button[disabled] {
   justify-content: space-between;
   align-items: center;
   margin: 2.5rem 0;
-
   width: 100%;
   box-sizing: border-box;
 }
@@ -1058,4 +1116,161 @@ button[disabled] {
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;
+}
+/*=======================
+  ARTICLES
+========================*/
+
+.articles-section {
+  padding: 3rem 0;
+}
+
+.articles-section__title {
+  text-align: center;
+  color: var(--color-sub);
+  margin-bottom: 1.5rem;
+}
+
+.articles-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.articles-card__body {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.articles-card__author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 6rem;
+}
+
+.articles-card__author-img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.articles-card__author-name,
+.articles-card__author-date {
+  font-size: 0.9rem;
+  margin: 0.2rem 0 0;
+  color: var(--color-gray);
+  text-align: center;
+}
+
+.articles-card__content {
+  flex: 1;
+}
+
+.articles-card__excerpt {
+  font-size: 1.0rem;
+  margin: 0.1rem 0;
+}
+
+.articles-card__link {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/*=======================
+  PROFILES GRID
+========================*/
+
+.profiles-section {
+  padding: 3rem 0;
+}
+
+.profiles-grid {
+  justify-content: center;
+  gap: 1rem;
+}
+
+.profiles-grid__column {
+  flex: 0 1 280px;
+  max-width: 280px;
+  margin: 0.5rem;
+}
+
+.profiles-grid__card {
+  height: 100%;
+}
+
+.profiles-grid__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.profiles-grid__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.profiles-grid__name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-sub);
+  margin: 0.3rem 0;
+}
+
+.profiles-grid__function {
+  font-size: 1.2rem;
+  color: #755985;
+  margin: 0;
+}
+
+.profiles-grid__intro {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.profiles-grid__bio {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;  /* ADD THIS */
+  width: 100%;             /* ADD THIS */
+}
+
+.profiles-grid__skills {
+  width: 100%;
+}
+
+.profiles-grid__skills-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-sub);
+  margin-bottom: 0.5rem;
+}
+
+.profiles-grid__skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.btn--skill {
+  margin-right: 0;
 }

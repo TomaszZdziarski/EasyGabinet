@@ -9,20 +9,20 @@
         <div class="column column--1of3">
             <div class="card appointment__card">
                 <div class="card__body profile">
-                    <a class="btn btn--main btn--sm" href="{% url 'patient-account-edit' patient_id=patient.id %}"><i class="im im-edit"></i> Edit</a>
+                    <a class="btn btn--main btn--sm" href="{% url 'patient-account-edit' patient_id=patient.id %}">Edit</a>
 
                     <img class="profile_image profile_image--lg" src="{% if profile.photo %}{{profile.photo.url}}{% else %}{% static 'media/user-default.png' %}{% endif %}" alt="Profile image" />
 
-                    <h2 class="profile__label">Name</h2>
+                    <p class="profile__data-label">Name</p>
                     <p class="profile__data">{{patient.user.first_name}}</p>
 
-                    <h2 class="profile__label">Surname</h2>
+                    <p class="profile__data-label">Surname</p>
                     <p class="profile__data">{{patient.user.last_name}}</p>
 
-                    <p class="profile__label">DOB</p>
+                    <p class="profile__data-label">DOB</p>
                     <p class="profile__data">{{profile.date_of_birth}}</p>
 
-                    <p class="profile__label">PESEL</p>
+                    <p class="profile__data-label">PESEL</p>
                     <p class="profile__data">{{ user.pesel }}</p>
 
                     <a href="{% url 'patient-inbox' %}" class="btn btn--sub btn--lg">Messages</a><br><br>

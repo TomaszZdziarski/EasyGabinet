@@ -11,7 +11,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-dev-key')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 
-ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')]
+# settings.py
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'web-production-38e35.up.railway.app',  # keep your Railway domain
+]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_TRUSTED_ORIGINS = [h.strip() for h in os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost').split(',')]

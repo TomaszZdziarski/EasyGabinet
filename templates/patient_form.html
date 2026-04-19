@@ -3,32 +3,32 @@
 {% block content %}
 
 <div class="container">
-        <div class="auth">
-            <div class="card">
-                <div class="card__body">
+    <div class="auth">
+        <div class="column card">
+            <div class="card__body">
 
-                        <a class="backButton" href="{% url 'patient-account' patient_id=patient.id %}"><i class="im im-angle-left"></i></a>
-                        <br>
+                <a class="backButton" href="{% url 'patient-account' patient_id=patient.id %}">
+                    <i class="im im-angle-left"></i>
+                </a>
+                <br>
 
-                        <form class="form" method="POST" action="{% url 'patient-account-edit' patient_id=patient.id %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.as_p }}
+                <form class="form" method="POST" action="{% url 'patient-account-edit' patient_id=patient.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form__field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p style="color: var(--color-error);">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                    <input class="btn btn--sub btn--lg" type="submit" value="Submit" />
+                </form>
 
-                            <!-- Input:Text -->
-                            <div class="form__field">
-
-                                {{ field.label_tag }}
-                                {{ field }}
-
-                            </div>
-
-
-                            <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
-                        </form>
-
-                </div>
             </div>
         </div>
+    </div>
 </div>
 
 {% endblock %}

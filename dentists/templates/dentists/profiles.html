@@ -3,13 +3,13 @@
 
 {% block content %}
 
-<div class="main-section" style="height:auto; padding: 3rem 2rem;">
+<div class="main-section main-section--search">
     <div class="container container--narrow">
-        <div class="main-section__box" style="margin-bottom:0;">
+        <div class="main-section__box main-section__box--search">
             <h3>Search for a Dentist</h3>
             <div class="main-section__search">
                 <form class="form" action="{% url 'profiles' %}" method="get">
-                    <div class="form__field" style="padding-bottom:1rem;">
+                    <div class="form__field form__field--search">
                         <label for="formInput#search">Search by dentist name, skill, project name or description</label>
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
@@ -22,14 +22,13 @@
     </div>
 </div>
 
-<section style="padding: 3rem 0;">
+<section class="profiles-section">
     <div class="container">
-        <div class="layout" style="justify-content:center; gap:1rem;">
-
+        <div class="layout profiles-grid">
             {% for profile in profiles %}
-            <div class="column" style="flex: 0 1 280px; max-width:280px; margin:0.5rem;">
-                <div class="card" style="height:100%;">
-                    <div class="card__body" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.8rem;">
+            <div class="column profiles-grid__column">
+                <div class="card profiles-grid__card">
+                    <div class="card__body profiles-grid__body">
 
                         <a href="{% url 'single-profile' profile.id %}">
                             <img class="profile_image profile_image--md"
@@ -37,23 +36,21 @@
                                  alt="profile image" />
                         </a>
 
-                        <div>
-                            <h3 style="font-size:1.8rem; font-weight:700; color:var(--color-sub); margin:0.3rem 0;">
+                        <div class="profiles-grid__info">
+                            <h3 class="profiles-grid__name">
                                 {{ profile.user.first_name }} {{ profile.user.last_name }}
                             </h3>
-                            <p style="font-size:1.2rem; color:#755985; margin:0.2rem 0;">{{ profile.function }}</p>
-                            <p style="font-size:1.2rem; color:var(--color-text); margin:0.2rem 0;">{{ profile.short_intro }}</p>
+                            <p class="profiles-grid__function">{{ profile.function }}</p>
+                            <p class="profiles-grid__intro">{{ profile.short_intro }}</p>
                         </div>
 
-                        <p style="font-size:1.2rem; color:var(--color-text); text-align:center;">
-                            {{ profile.bio|slice:'190' }}...
-                        </p>
+                        <p class="profiles-grid__bio">{{ profile.bio|slice:'190' }}...</p>
 
-                        <div style="width:100%;">
-                            <p style="font-size:1.2rem; font-weight:500; color:var(--color-sub); margin-bottom:0.5rem;">My skills:</p>
-                            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem;">
+                        <div class="profiles-grid__skills">
+                            <p class="profiles-grid__skills-label">My skills:</p>
+                            <div class="profiles-grid__skills-list">
                                 {% for skill in profile.skill_set.all|slice:"5" %}
-                                <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm" style="margin-right:0;">{{ skill.name }}</a>
+                                <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm btn--skill">{{ skill.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -62,7 +59,6 @@
                 </div>
             </div>
             {% endfor %}
-
         </div>
     </div>
 </section>
