@@ -277,17 +277,24 @@ def userAccount(request):
 
 @login_required(login_url='login-dentist')
 def editAccount(request):
-    profile = request.user.dentistProfile # related name from models/dentistProfile/user
+    profile = request.user.dentistProfile
 
-    form = ProfileForm(instance=profile) # all data pre-filled in form
+    form = ProfileForm(instance=profile)
     if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES,instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
+            try:
+                form.save()
+                print(f"Profile saved. Photo: {profile.photo}")
+                print(f"Photo URL: {profile.photo.url if profile.photo else 'No photo'}")
+            except Exception as e:
+                print(f"Error saving profile: {e}")
             return redirect('account')
+        else:
+            print(f"Form errors: {form.errors}")
 
-    context = {'form':form}
-    return render(request,'dentists/profile_form.html',context)
+    context = {'form': form}
+    return render(request, 'dentists/profile_form.html', context)
 
 @login_required(login_url='login')
 def createSkill(request,**kwargs):
