@@ -5,7 +5,7 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
+load_dotenv(override=False)
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-dev-key')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
