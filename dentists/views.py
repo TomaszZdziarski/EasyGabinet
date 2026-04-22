@@ -289,6 +289,11 @@ def editAccount(request):
                 instance.save()
                 print(f"Photo URL: {instance.photo.url}")
                 print(f"Storage class: {instance.photo.storage.__class__.__name__}")
+                from django.core.files.storage import default_storage
+
+                print(f"Storage class: {instance.photo.storage.__class__.__name__}")
+                print(f"Default storage: {default_storage.__class__.__name__}")
+                print(f"Default storage wrapped: {default_storage._wrapped.__class__.__name__}")
             except Exception as e:
                 import traceback
                 print(f"SAVE ERROR: {e}")
