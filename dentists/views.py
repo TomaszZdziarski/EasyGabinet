@@ -287,8 +287,8 @@ def editAccount(request):
                 instance = form.save(commit=False)
                 print(f"Photo before save: {instance.photo}")  # ADD
                 instance.save()
-                print(f"Photo after save: {instance.photo}")   # ADD
-                print(f"Photo name: {instance.photo.name}")    # ADD
+                print(f"Photo URL: {instance.photo.url}")
+                print(f"Storage class: {instance.photo.storage.__class__.__name__}")
             except Exception as e:
                 import traceback
                 print(f"SAVE ERROR: {e}")
