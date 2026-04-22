@@ -3,6 +3,9 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(override=False)
@@ -120,6 +123,10 @@ AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
 #AWS_LOCATION = 'media'
 
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+print(f"DEBUG VALUE IS: {DEBUG}")
+print(f"DEBUG ENV VAR RAW: {os.environ.get('DEBUG', 'not set')}")
+
 if DEBUG:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     MEDIA_URL = '/media/'
@@ -127,8 +134,6 @@ if DEBUG:
 else:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/'
-    # added /media/ at the end
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
