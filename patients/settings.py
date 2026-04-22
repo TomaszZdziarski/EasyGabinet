@@ -3,8 +3,6 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
-import logging
-logging.basicConfig(level=logging.DEBUG)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
