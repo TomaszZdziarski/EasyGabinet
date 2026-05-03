@@ -21,7 +21,9 @@
                     <li><a title="LinkedIn" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
                     <li><a title="Personal Website" href="https://github.com/TomaszZdziarski" target="_blank"><i class="fa-brands fa-globe"></i></a></li>
                 </ul>
+                {% if request.user.is_authenticated and request.user.dentistProfile == profile %}
                 <a href="{% url 'inbox' %}" class="btn btn--sub btn--lg">Messages</a><br><br>
+                {% endif %}
                 <a href="{% url 'available-appointments' profile.id current_year current_month %}" class="btn btn--sub btn--lg">View Schedule</a>
             </div>
         </div>
