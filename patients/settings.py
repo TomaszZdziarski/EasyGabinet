@@ -11,12 +11,10 @@ load_dotenv(override=False)
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-dev-key')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-
-# settings.py
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    'web-production-38e35.up.railway.app',  # keep your Railway domain
+    'web-production-38e35.up.railway.app',
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -25,8 +23,6 @@ CSRF_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SECURE = not DEBUG
 
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -34,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',  # ← ADD THIS
+    'storages',
     'patients.apps.NewAppNameConfig',
     'dentists.apps.UsersConfig',
     'django_extensions',
@@ -67,7 +63,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'patients.context_processors.patient_context',
-                'messaging.context_processors.unread_messages',  # add this
+                'messaging.context_processors.unread_messages',
             ],
         },
     },
@@ -98,7 +94,6 @@ AUTHENTICATION_BACKENDS = [
     'dentists.backends.EmailBackend',
 ]
 
-
 AUTH_USER_MODEL = 'dentists.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
@@ -111,7 +106,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
 # MEDIA / S3
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -120,8 +114,6 @@ AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME', 'eu-north-1')
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False
-
-
 
 STORAGES = {
     "default": {
@@ -135,19 +127,10 @@ STORAGES = {
 MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-
 # EMAIL
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 BASE_URL = os.environ.get('BASE_URL', 'http://localhost:8000')
 
