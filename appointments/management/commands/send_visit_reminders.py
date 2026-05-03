@@ -19,13 +19,13 @@ class Command(BaseCommand):
         target_date = (now + timedelta(hours=24)).date()
 
         #UNCOMMENT FOR REAL APP
-        #time_min = (now + timedelta(hours=23, minutes=30)).time()
-        #time_max = (now + timedelta(hours=24, minutes=30)).time()
+        time_min = (now + timedelta(hours=23, minutes=30)).time()
+        time_max = (now + timedelta(hours=24, minutes=30)).time()
 
         # TEMPORARY TEST - catches anything in next 7 days
-        target_date = (now + timedelta(days=2)).date()  # pick any date you have an appointment
-        time_min = datetime.strptime("00:00", "%H:%M").time()
-        time_max = datetime.strptime("23:59", "%H:%M").time()
+        #target_date = (now + timedelta(days=2)).date()  # pick any date you have an appointment
+        #time_min = datetime.strptime("00:00", "%H:%M").time()
+        #time_max = datetime.strptime("23:59", "%H:%M").time()
 
         self.stdout.write(f"Now (Warsaw): {now}")
         self.stdout.write(f"Looking for date: {target_date}")
