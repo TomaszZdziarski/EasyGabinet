@@ -54,6 +54,7 @@ class Appointment(models.Model):
 
     # Add a boolean or separate model for cancellation tracking
     is_cancelled = models.BooleanField(default=False)
+    confirmed_at = models.DateTimeField(null=True, blank=True)
 
 
 
