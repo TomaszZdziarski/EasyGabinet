@@ -40,7 +40,8 @@ class PatientProfile(models.Model):
     photo = models.ImageField(upload_to='media/', null=True, blank=True,default=str)
     id = models.UUIDField(default=uuid4, unique=True, primary_key=True, editable=False)
 
-    linked_dentist = models.ForeignKey(dentistProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    # AFTER
+    linked_dentists = models.ManyToManyField(dentistProfile, blank=True, related_name='linked_patients')
 
 
     def __str__(self):

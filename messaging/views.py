@@ -99,18 +99,41 @@ def delete_message(request, pk):
 @login_required
 def patient_inbox(request):
     patient = get_object_or_404(PatientProfile, user=request.user)
-    dentist = patient.linked_dentist
 
-    if not dentist:
-        return render(request, 'messaging/no_dentist.html')
+    dentist_ids = Message.objects.filter(patient=patient) \
+        .values('dentist') \
+        .annotate(latest=Max('sent_at')) \
+        .order_by('-latest')
 
-    from django.db.models import Max
+    inbox = []
+    for item in dentist_ids:
+        latest_message = Message.objects.filter(
+            patient=patient,
+            dentist_id=item['dentist']
+        ).order_by('-sent_at').first()
+        latest_message.unread_count = Message.objects.filter(
+            patient=patient,
+            dentist_id=item['dentist'],
+            sender='dentist',
+            is_read=False
+        ).count()
+        inbox.append(latest_message)
+
+    return render(request, 'messaging/patient_inbox.html', {
+        'inbox': inbox,
+        'patient': patient,
+    })
+
+@login_required
+def patient_conversation(request, dentist_id):
+    patient = get_object_or_404(PatientProfile, user=request.user)
+    dentist = get_object_or_404(dentistProfile, id=dentist_id)
+
     thread = Message.objects.filter(
         patient=patient,
         dentist=dentist
     ).order_by('sent_at')
 
-    # mark dentist messages as read
     thread.filter(sender='dentist', is_read=False).update(is_read=True)
 
     if request.method == 'POST':
@@ -122,13 +145,34 @@ def patient_inbox(request):
             body=body,
             is_read=False
         )
-        return redirect('patient-inbox')
+        return redirect('patient-conversation', dentist_id=dentist_id)
 
-    unread_count = thread.filter(sender='dentist', is_read=False).count()
-
-    return render(request, 'messaging/patient_inbox.html', {
+    return render(request, 'messaging/patient_conversation.html', {
         'thread': thread,
         'dentist': dentist,
         'patient': patient,
-        'unread_count': unread_count,
     })
+
+@login_required
+def patient_new_message(request):
+    patient = get_object_or_404(PatientProfile, user=request.user)
+    dentists = dentistProfile.objects.all()
+
+    if request.method == 'POST':
+        dentist_id = request.POST.get('dentist')
+        body = request.POST.get('body')
+        dentist = get_object_or_404(dentistProfile, id=dentist_id)
+
+        Message.objects.create(
+            patient=patient,
+            dentist=dentist,
+            sender='patient',
+            body=body,
+            is_read=False
+        )
+        # Link this dentist to the patient
+        patient.linked_dentists.add(dentist)
+
+        return redirect('patient-inbox')
+
+    return render(request, 'messaging/patient_new_message.html', {'dentists': dentists})

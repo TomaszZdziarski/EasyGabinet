@@ -25,7 +25,13 @@
                     <p class="profile__data-label">PESEL</p>
                     <p class="profile__data">{{ user.pesel }}</p>
 
-                    <a href="{% url 'patient-inbox' %}" class="btn btn--sub btn--lg">Messages</a><br><br>
+                    <a href="{% url 'patient-inbox' %}" class="btn btn--sub btn--lg" style="position:relative;">Inbox{% if unread_count > 0 %}
+                        <span style="position:absolute; top:-1.2rem; right:-1.2rem; background:white; border-radius:999px; padding:0.2rem; display:flex; align-items:center; justify-content:center;">
+                            <span style="background:red; color:white; border-radius:999px; font-size:1rem; font-weight:700; min-width:1.8rem; height:1.8rem; display:flex; align-items:center; justify-content:center; padding:0 0.4rem;">
+                                {{ unread_count }}
+                            </span>
+                        </span>
+                        {% endif %}  </a><br><br>
 
                     
                 </div>

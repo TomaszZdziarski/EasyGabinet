@@ -5,13 +5,13 @@
         <a href="{% url 'main' %}" class="header__logo" style="margin-right: 20px;">
             <img src="{% static 'images/logo.jpg' %}" alt="Dental Clinic Logo" />
         </a>
-        <nav class="header__nav">
+        <nav class="header__nav"  style="overflow:visible;">
             <input type="checkbox" id="responsive-menu" />
             <label for="responsive-menu" class="toggle-menu">
                 <span>Menu</span>
                 <div class="toggle-menu__lines"></div>
             </label>
-            <ul class="header__menu">
+            <ul class="header__menu"  style="overflow:visible;">
                 <li class="header__menuItem"><a href="{% url 'profiles' %}">Doctors</a></li>
                 <li class="header__menuItem"><a href="{% url 'patient-site' %}">Patients</a></li>
                 <li class="header__menuItem"><a href="{% url 'projects' %}">Projects</a></li>
@@ -20,7 +20,19 @@
                 {% if request.user.is_authenticated %}
 
                 {% if request.user.user_type == 'dentist' %}
-                <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox</a></li>
+                <li class="header__menuItem" style="overflow:visible;">
+
+                    <a href="{% url 'inbox' %}" style="position:relative;">Inbox{% if unread_count > 0 %}
+                        <span style="position:absolute; top:-1.4rem; right:-1.8rem; background:white; border-radius:999px; padding:0.1rem; display:flex; align-items:center; justify-content:center;">
+                            <span style="background:red; color:white; border-radius:999px; font-size:1rem; font-weight:700; min-width:1.4rem; height:1.4rem; display:flex; align-items:center; justify-content:center; padding:0 0.4rem;">
+                                {{ unread_count }}
+                            </span>
+                        </span>
+                        {% endif %}
+                    </a>
+
+                </li>
+
                 <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
                 {% if matching_patients.exists %}
                 <li class="header__menuItem"><a href="{% url 'patient-account' patient.id %}">My Patient account</a></li>
@@ -31,7 +43,18 @@
                 </li>
 
                 {% elif request.user.user_type == 'patient' %}
-                <li class="header__menuItem"><a href="{% url 'patient-inbox' %}">Inbox</a></li>
+                <li class="header__menuItem" style="overflow:visible;">
+
+                    <a href="{% url 'patient-inbox' %}" style="position:relative;">Inbox{% if unread_count > 0 %}
+                        <span style="position:absolute; top:-1.4rem; right:-1.8rem; background:white; border-radius:999px; padding:0.1rem; display:flex; align-items:center; justify-content:center;">
+                            <span style="background:red; color:white; border-radius:999px; font-size:1rem; font-weight:700; min-width:1.4rem; height:1.4rem; display:flex; align-items:center; justify-content:center; padding:0 0.4rem;">
+                                {{ unread_count }}
+                            </span>
+                        </span>
+                        {% endif %}
+                    </a>
+
+                </li>
                 <li class="header__menuItem"><a href="{% url 'patient-account' patient.id %}">Patient's account</a></li>
                 <li class="header__menuItem"><a href="{% url 'patient-logout' %}">Logout</a></li>
                 <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">

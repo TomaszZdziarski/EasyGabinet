@@ -3,59 +3,54 @@
 {% block content %}
 
 <div style="display:flex; justify-content:center; padding:2rem;">
-    <div class="card" style="max-width:700px; width:100%;">
+    <div class="card" style="max-width:650px; width:100%;">
 
-        <div class="card__header" style="padding:1.5rem 2rem; border-bottom:1.5px solid var(--color-light);">
-            <div style="position:relative; display:flex; align-items:center; justify-content:center; width:100%;">
-                <h4 style="color:var(--color-sub); margin:0;">
-                    Conversation with Dr. {{ dentist }}
-                </h4>
-            </div>
+        <div class="card__header" style="padding:1.5rem 2rem; border-bottom:1.5px solid var(--color-light); display:flex; justify-content:space-between; align-items:center;">
+            <h4 class="card__headerTitle" style="color:var(--color-sub);">My Messages</h4>
+            <a href="{% url 'patient-new-message' %}" class="btn btn--main" style="font-size:1.3rem;">+ New Message</a>
         </div>
 
-        <!-- messages thread -->
-        <div class="card__body" style="display:flex; flex-direction:column; gap:1.5rem; max-height:60vh; overflow-y:auto;">
-            {% if thread %}
-            {% for message in thread %}
-            <div style="display:flex; flex-direction:column; align-items:{% if message.sender == 'patient' %}flex-end{% else %}flex-start{% endif %};">
-                <div style="
-                        max-width:75%;
-                        padding:1rem 1.5rem;
-                        border-radius:1rem;
-                        background:{% if message.sender == 'patient' %}var(--color-main-light){% else %}var(--color-sub-lighter){% endif %};
-                        border:1.5px solid {% if message.sender == 'patient' %}var(--color-main){% else %}var(--color-light){% endif %};
-                    ">
-                    <p style="margin:0; color:var(--color-text);">{{ message.body }}</p>
+        <div class="card__body" style="padding:1.5rem 2rem;">
+
+
+            {% for message in inbox %}
+            <a href="{% url 'patient-conversation' message.dentist.id %}" style="text-decoration:none; display:block;">
+                <div style="padding:1.2rem 1.5rem; border:1.5px solid var(--color-light); border-radius:0.75rem; margin-bottom:1rem; background:var(--color-white); display:flex; justify-content:space-between; align-items:center; transition:border-color 0.2s;">
+
+                    <!-- Avatar + text -->
+                    <div style="display:flex; align-items:center; gap:1rem;">
+                        {% if message.dentist.photo %}
+                        <img src="{{ message.dentist.photo.url }}" alt="{{ message.dentist }}"
+                             style="width:4rem; height:4rem; border-radius:50%; object-fit:cover; border:2px solid var(--color-main); flex-shrink:0;">
+                        {% else %}
+                        <img src="{% static 'media/user-default.png' %}" alt="{{ message.dentist }}"
+                             style="width:4rem; height:4rem; border-radius:50%; object-fit:cover; border:2px solid var(--color-light); flex-shrink:0;">
+                        {% endif %}
+                        <div>
+                            <p style="font-size:1.4rem; font-weight:500; color:var(--color-sub); margin-bottom:0.3rem;">
+                                Dr. {{ message.dentist }}
+                            </p>
+                            <p style="font-size:1.3rem; color:var(--color-text);">{{ message.body|truncatechars:60 }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Unread badge -->
+                    {% if message.unread_count > 0 %}
+                    <span style="background:var(--color-main); color:white; border-radius:999px; padding:0.2rem 0.8rem; font-size:1.2rem; font-weight:600; white-space:nowrap; flex-shrink:0;">
+            {{ message.unread_count }} new
+        </span>
+                    {% endif %}
+
                 </div>
-                <p style="font-size:1.1rem; color:var(--color-gray); margin:0.3rem 0.5rem;">
-                    {{ message.sent_at|date:"F j – H:i" }} · {{ message.sender|capfirst }}
-                </p>
+            </a>
+            {% empty %}
+            <div style="text-align:center; padding:3rem 0; color:var(--color-text);">
+                <p style="font-size:1.4rem; margin-bottom:1rem;">No conversations yet.</p>
+                <a href="{% url 'patient-new-message' %}" class="btn btn--sub">Start a conversation</a>
             </div>
             {% endfor %}
-            {% else %}
-            <div style="text-align:center; padding:3rem;">
-                <p style="color:var(--color-gray);">No messages yet. Send the first one!</p>
-            </div>
-            {% endif %}
-        </div>
 
-        <!-- reply form -->
-        <div style="padding:1.5rem 2rem; border-top:1.5px solid var(--color-light);">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form__field" style="margin-bottom:1rem;">
-                    <textarea
-                            name="body"
-                            rows="3"
-                            placeholder="Write a message..."
-                            style="width:100%; padding:1rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.4rem; color:var(--color-text); resize:vertical; outline:none; box-sizing:border-box;"
-                    ></textarea>
-                </div>
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <a href="{% url 'patient-site' %}" class="btn btn--sub--outline">← Back</a>
-                    <button type="submit" class="btn btn--main">Send Message</button>
-                </div>
-            </form>
+
         </div>
 
     </div>

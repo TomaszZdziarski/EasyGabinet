@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div style="display:flex; justify-content:center; padding:2rem;">
+    <div class="card" style="max-width:650px; width:100%;">
+
+        <div class="card__header" style="padding:1.5rem 2rem; border-bottom:1.5px solid var(--color-light);">
+            <h4 class="card__headerTitle" style="color:var(--color-sub);">New Message</h4>
+        </div>
+
+        <div class="card__body">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form__field" style="margin-bottom:1.5rem;">
+                    <label style="font-size:1.4rem; font-weight:500; color:var(--color-sub-light); margin-bottom:0.5rem; display:block;">To (Dentist)</label>
+                    <select
+                            name="dentist"
+                            style="width:100%; padding:1rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.4rem; color:var(--color-text); outline:none; box-sizing:border-box; background:var(--color-white);"
+                    >
+                        <option value="">-- Select a dentist --</option>
+                        {% for d in dentists %}
+                        <option value="{{ d.id }}">Dr. {{ d }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form__field" style="margin-bottom:2rem;">
+                    <label style="font-size:1.4rem; font-weight:500; color:var(--color-sub-light); margin-bottom:0.5rem; display:block;">Message</label>
+                    <textarea
+                            name="body"
+                            rows="6"
+                            placeholder="Write your message here..."
+                            style="width:100%; padding:1rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.4rem; color:var(--color-text); resize:vertical; outline:none; box-sizing:border-box;"
+                    ></textarea>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <a href="{% url 'patient-inbox' %}" class="btn btn--sub--outline">← Back to Inbox</a>
+                    <button type="submit" class="btn btn--main">Send Message</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

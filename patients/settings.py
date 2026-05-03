@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'patients.context_processors.patient_context',
+                'messaging.context_processors.unread_messages',  # add this
             ],
         },
     },
@@ -130,7 +131,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-print(f"DEFAULT_FILE_STORAGE SET TO: {STORAGES}")
+
 MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

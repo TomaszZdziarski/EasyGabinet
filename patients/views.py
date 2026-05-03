@@ -144,7 +144,7 @@ def patient_profile_view(request,patient_id):
     patient = get_object_or_404(PatientProfile, id=patient_id)
 
     # Check if the patient is linked to a dentist profile
-    linked_dentist = profile.linked_dentist
+    linked_dentists = profile.linked_dentists.all()
 
 
     appointments = profile.appointments.all().order_by('-date') # you dont have to use _set.all() cos we have related_name='appointments' in Appointment model,fields: dentist and patient
@@ -180,7 +180,7 @@ def patient_profile_view(request,patient_id):
         'form': form,
         'dentist': dentist,
         'date': today_date.strftime('%Y-%m-%d'),
-        'linked_dentist':linked_dentist,
+        'linked_dentists':linked_dentists,
         'canceled_appointments': canceled_appointments
 
     })
