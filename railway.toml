@@ -1,0 +1,6 @@
+[deploy]
+startCommand = "gunicorn your_project.wsgi"
+
+[[crons]]
+schedule = "0 8 * * *"
+command = "python manage.py send_reminders"
