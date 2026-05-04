@@ -306,10 +306,6 @@ def create_appointment(request,dentist_id=None,date=None):
 
                 appointment.save()
 
-                # link patient to dentist if not already linked - FOR MESSAGING SYSTEM
-                if not patient_profile.linked_dentist:
-                    patient_profile.linked_dentist = dentist
-                    patient_profile.save()
 
                 # Redirect to the confirmation page
                 return redirect(f"{reverse('confirmation-page')}?user_type=patient")
