@@ -114,10 +114,10 @@ def calculate_end_time(appointment):
     start_datetime = timezone.make_aware(datetime.combine(appointment.date, appointment.start_time))
     return start_datetime + appointment.duration
 
-def calculate_appointment_times(date, start_time_str, duration_minutes):
+def calculate_appointment_times(date, start_time_str):
     start_time = datetime.strptime(start_time_str, '%H:%M').time()
     appointment_start = timezone.make_aware(datetime.combine(date, start_time))
-    appointment_end = appointment_start + timedelta(minutes=duration_minutes)
+    appointment_end = appointment_start + timedelta(minutes=30)
     return appointment_start, appointment_end
 
 
@@ -158,10 +158,6 @@ def validate_appointment(appointment,appointment_start, appointment_end,existing
         raise ValidationError("This time slot is already taken.")
 
 
-    for appt in overlap_appointments_query:
-        calculated_end_time = (datetime.combine(appointment.date, appt.start_time) + appt.duration).time()
-
-        # Ensure `duration` is properly handled in your model and logic
 
 def validate_max_appointments(user):
     # Initialize profiles
@@ -245,10 +241,9 @@ def create_appointment(request,dentist_id=None,date=None):
 
     day_of_week = appointment_date.weekday()
     schedules = DentistSchedule.objects.filter(dentist=dentist, day_of_week=day_of_week)
-    if not schedules:        print(f"No schedules found for dentist {dentist} on {appointment_date}")
+
 
     if request.method == 'POST':
-        print("POST data:", request.POST)
 
         form = AppointmentForm(request.POST,user=request.user,schedule=schedules, date=appointment_date,dentist=dentist)
         converted_price = request.POST.get('converted_price')
@@ -263,16 +258,13 @@ def create_appointment(request,dentist_id=None,date=None):
                 # Extract data from form
 
                 start_time_str = form.cleaned_data['start_time']  # This is already a time object
-                duration = form.cleaned_data.get('duration')
                 dentist = form.cleaned_data['dentist']  # Ensure you are getting the dentist from the form
                 date = form.cleaned_data['date']
                 purpose = form.cleaned_data['purpose']
 
-                # Convert duration to minutes if needed
-                duration_minutes = duration.total_seconds() / 60 if isinstance(duration, timedelta) else duration
 
                 # Calculate appointment start and end times
-                appointment_start, appointment_end = calculate_appointment_times(date, start_time_str, duration_minutes)
+                appointment_start, appointment_end = calculate_appointment_times(date, start_time_str)
 
                 # Retrieve the purpose and its price
                 if purpose:
@@ -284,6 +276,7 @@ def create_appointment(request,dentist_id=None,date=None):
                 appointment.user = request.user
                 appointment.status = 'booked'
                 appointment.purpose = purpose
+                appointment.duration = timedelta(minutes=30)
 
                 appointment.original_price_PLN = appointment_price
                 appointment.converted_price = converted_price or appointment_price
@@ -313,15 +306,10 @@ def create_appointment(request,dentist_id=None,date=None):
             except ValidationError as e:    # Capture ALL validation's errors and add it to the form
                 form.add_error(None, e.message)  # Add the error message to the non-field
 
-        else:
-            print("Form is not valid")
-            print(form.errors)  # This will show where the validation fails
-
 
 
     else: # part for 2nd scenario - initialising form with get data
         form = initialize_form_with_get_data(request,dentist_id,date)
-        print("Initial form errors:", form.errors)
 
 
     # Safely handle 'date' retrieval for template context
@@ -367,8 +355,6 @@ def initialize_form_with_get_data(request,dentist_id,date):
 
     # Initialize form
     form = AppointmentForm(initial=initial_data, schedule=schedules, date=appointment_date, dentist=dentist_instance)
-    print("Initialized form data:", form.initial)
-    print("Initialized form errors:", form.errors)
     return form
 
 
@@ -413,13 +399,15 @@ def update_appointment_patient(request,pk):
                 # Extract data from form when user
 
                 start_time_str = form.cleaned_data['start_time']
-                duration = form.cleaned_data.get('duration', timedelta(minutes=30)).total_seconds() / 60
                 dentist = form.cleaned_data['dentist']
                 date = form.cleaned_data['date']
                 purpose = form.cleaned_data['purpose']
 
+
+                appointment.duration = timedelta(minutes=30)
                 # Calculate the start and end times for the appointment
-                appointment_start, appointment_end = calculate_appointment_times(date, start_time_str, duration)
+                appointment_start, appointment_end = calculate_appointment_times(date, start_time_str)
+
 
                 # Validate appointment times
                 validate_appointment(appointment,appointment_start, appointment_end)
@@ -612,9 +600,7 @@ def export_schedule_to_pdf(request):
         except:
             return HttpResponse("Invalid date format. Please use YYYY-MM-DD.", status=400)
 
-    # Debugging: Check what selected_date is and what appointments exist
 
-    all_appointments = Appointment.objects.filter(dentist=request.user.dentistProfile)
 
     dentist = request.user.dentistProfile
     # Get the logged-in dentist's appointments
@@ -704,7 +690,7 @@ def export_schedule_to_pdf(request):
         # Calculate the end time of the last appointmentif last_appointment:
         # Make the start time timezone-aware
         appointment_start = timezone.make_aware(datetime.combine(selected_date, last_appointment.start_time))
-        appointment_end = appointment_start + last_appointment.duration
+        appointment_end = appointment_start + timedelta(minutes=30)
 
 
         summary_text = "Total amount of appointments on {} is: {} ".format(selected_date,dentist_appointments.count())

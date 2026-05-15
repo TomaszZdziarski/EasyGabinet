@@ -1,3 +1,0 @@
-[[crons]]
-schedule = "0 * * * *"
-command = "python manage.py send_visit_reminders"
