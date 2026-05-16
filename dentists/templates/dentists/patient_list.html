@@ -1,16 +1,37 @@
 {% extends 'main.html' %}
 {% load static %}
-{% block content%}
+{% block content %}
 
-<h1>Patients</h1>
+<section style="padding: 3rem 0;">
+    <div class="container container--full" style="flex-direction: column; gap: 1.5rem;">
 
-<ul>    {% for patient in patients %}
+        <!-- Header -->
+        <div class="card" style="width:100%;">
+            <div class="card__header">
+                <h3 class="card__headerTitle">Patients</h3>
+            </div>
+        </div>
 
-    <li>
-        <a href="{% url 'patient-history' patient.id %}">{{ patient.user.get_full_name }}</a>, dob:  {{patient.date_of_birth}}
-    </li>
+        <!-- Patient List -->
+        {% for patient in patients %}
+        <div class="card" style="width:100%;">
+            <div class="card__body" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <p style="font-size: 1.6rem; font-weight: 500; color: var(--color-sub); margin-bottom: 0.3rem;">{{ patient.user.get_full_name }}</p>
+                    <p style="font-size: 1.2rem; color: var(--color-gray);">DOB: {{ patient.date_of_birth }}</p>
+                </div>
+                <a href="{% url 'patient-history' patient.id %}" class="btn btn--main btn--md">View History</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="card" style="width:100%;">
+            <div class="card__body">
+                <p style="text-align: center; color: var(--color-gray);">No patients found.</p>
+            </div>
+        </div>
+        {% endfor %}
 
-    {% endfor %}
-</ul>
+    </div>
+</section>
 
 {% endblock %}

@@ -24,6 +24,10 @@ import os
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.pagesizes import letter
+
 
 
 # Get the custom user model
@@ -220,56 +224,27 @@ def edit_patient_account(request,patient_id):
 # Register the font
 pdfmetrics.registerFont(TTFont('TimesNewRoman', os.path.join(settings.BASE_DIR, 'fonts', 'times.ttf')))
 
-@login_required(login_url='patient-login')
 def export_treatment_history_pdf(request, patient_id):
-
-    # Get the patient profile and appointments
     patient = get_object_or_404(PatientProfile, id=patient_id)
-
-
     appointments = patient.appointments.all().order_by('-date')
-    # Debugging output
-    print(f"Found {appointments.count()} appointments for {patient.user.get_full_name()}")
 
-    # Create a response object for PDF
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{patient.user.get_full_name()}_treatment_history.pdf"'
 
-    # Create a PDF canvas
-    p = canvas.Canvas(response, pagesize=letter)
-    width, height = letter
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    styles = getSampleStyleSheet()
+    story = []
 
-    # Title
-    p.setFont('TimesNewRoman', 16)
-    p.drawString(100, height - 50, f"Treatment History for {patient.user.get_full_name()}")
+    story.append(Paragraph(f"Treatment History for {patient.user.get_full_name()}", styles['Title']))
+    story.append(Spacer(1, 20))
 
-    # Initialize the y position
-    y = height - 100
-
-    # Loop through appointments and add them to the PDF
-    p.setFont('TimesNewRoman', 12)
-
-    appointments_count = appointments.count()
     for appointment in appointments:
+        story.append(Paragraph(f"<b>Appointment:</b> {appointment.date} at {appointment.start_time} with {appointment.dentist.user.get_full_name()}", styles['Normal']))
+        story.append(Paragraph(f"<b>Diagnosis:</b> {appointment.diagnosis}", styles['Normal']))
+        story.append(Paragraph(f"<b>Treatment:</b> {appointment.description}", styles['Normal']))
+        story.append(Spacer(1, 15))
 
-        if y < 100:  # Add a new page if space runs out
-            p.showPage()
-            p.setFont('TimesNewRoman', 12)
-            y = height - 50
-
-
-        p.drawString(60, y, f"Nr: {str(appointments_count)}")
-        p.drawString(100, y, f"Appointment with {appointment.dentist.user.get_full_name()} on {appointment.date} at {appointment.start_time},status: {appointment.status}")
-        y -= 20
-        p.drawString(120, y, f"Diagnosis: {appointment.diagnosis}")
-        y -= 20
-        p.drawString(120, y, f"Treatment: {appointment.description}")
-        y -= 40  # Add extra space between appointments
-
-        appointments_count -=1
-        # Finalize the PDF and return the response
-    p.showPage()
-    p.save()
+    doc.build(story)
     return response
 
 

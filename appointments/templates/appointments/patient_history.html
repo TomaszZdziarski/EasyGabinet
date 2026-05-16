@@ -1,46 +1,74 @@
 {% extends 'main.html' %}
 {% load static %}
-{% block content%}
+{% block content %}
 
-{% if is_patient_profile %}
-<h2>Patient History for {{ profile.user.get_full_name }}</h2>
-{% else %}
-<h2>Dentist Schedule for {{ profile.user.get_full_name }}</h2>
+<section style="padding: 3rem 0;">
+    <div class="container container--full" style="flex-direction: column; gap: 1.5rem;">
 
-{% endif %}
+        <!-- Header -->
+        <div class="card" style="width:100%;">
+            <div class="card__header">
+                <h3 class="card__headerTitle">
+                    {% if is_patient_profile %}
+                    Patient History for {{ profile.user.get_full_name }}
+                    {% else %}
+                    Dentist Schedule for {{ profile.user.get_full_name }}
+                    {% endif %}
+                </h3>
+            </div>
+        </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Patient</th>
-        <th>Dentist</th>
-        <th>Diagnosis</th>
-        <th>Treatment</th>
-        <th>Status</th>
+        <!-- Table -->
+        <div class="card" style="width:100%;">
+            <div class="card__body">
+                <table class="account__table">
+                    <thead>
+                    <tr style="border-bottom: 2px solid var(--color-light); padding: 1rem 0;">
+                        <td style="padding: 1rem 2rem 1rem 0; width: 10%;"><strong>Date</strong></td>
+                        <td style="padding: 1rem 2rem; width: 12%;"><strong>Time</strong></td>
+                        <td style="padding: 1rem 2rem; width: 12%;"><strong>Patient</strong></td>
+                        <td style="padding: 1rem 2rem; width: 12%;"><strong>Dentist</strong></td>
+                        <td style="padding: 1rem 2rem; width: 18%;"><strong>Diagnosis</strong></td>
+                        <td style="padding: 1rem 2rem; width: 25%;"><strong>Treatment</strong></td>
+                        <td style="padding: 1rem 2rem; width: 10%;"><strong>Status</strong></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for appointment in appointments %}
+                    <tr style="border-bottom: 1px solid var(--color-light);">
+                        <td style="padding: 1rem 2rem 1rem 0; width: 10%; word-break: break-word;">{{ appointment.date }}</td>
+                        <td style="padding: 1rem 2rem; width: 12%; word-break: break-word;">{{ appointment.start_time }}</td>
+                        <td style="padding: 1rem 2rem; width: 12%; word-break: break-word;">{{ appointment.patient.user.get_full_name }}</td>
+                        <td style="padding: 1rem 2rem; width: 12%; word-break: break-word;">{{ appointment.dentist.user.get_full_name }}</td>
+                        <td style="padding: 1rem 2rem; width: 18%; word-break: break-word;">{{ appointment.diagnosis }}</td>
+                        <td style="padding: 1rem 2rem; width: 25%; word-break: break-word;">{{ appointment.description }}</td>
+                        <td style="padding: 1rem 2rem; width: 10%;">
+                            <span style="
+                                padding: 0.2rem 0.6rem;
+                                border-radius: 0.4rem;
+                                font-size: 1.1rem;
+                                background-color: {% if appointment.status == 'completed' %}var(--color-success-bg){% elif appointment.status == 'booked' %}var(--color-main-light){% else %}var(--color-error-bg){% endif %};
+                                color: {% if appointment.status == 'completed' %}var(--color-success){% elif appointment.status == 'booked' %}var(--color-main){% else %}var(--color-error){% endif %};">
+                                {{ appointment.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding: 2rem; color: var(--color-gray);">No appointments found.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    </tr>
-    </thead>
-    <tbody>
-    {% for appointment in appointments %}
-    <tr>
-        <td>{{ appointment.date }}</td>
-        <td>{{ appointment.start_time }}</td>
-        <td>{{ appointment.patient.user.get_full_name }}</td>
-        <td>{{ appointment.dentist.user.get_full_name }}</td>
-        <td>{{ appointment.diagnosis }}</td>
-        <td>{{ appointment.description }}</td>
-        <td>{{ appointment.status }}</td>
-    </tr>
-    {% empty %}
-    <tr>        <td colspan="5">No appointments found.</td>    </tr>
+        <!-- Export -->
+        <div style="display: flex; justify-content: flex-end;">
+            <a href="{% url 'export_pdf' profile.id %}" class="btn btn--sub btn--md">Export to PDF</a>
+        </div>
 
-    {% endfor %}
-
-    </tbody>
-</table>
-
-<a href="{% url 'export_pdf' profile.id %}">Export to PDF</a>
+    </div>
+</section>
 
 {% endblock %}

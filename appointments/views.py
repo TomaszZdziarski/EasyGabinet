@@ -552,14 +552,11 @@ def available_appointments(request, pk, date=None, year=None, month=None):
 
 
 
-
 @login_required
 def export_schedule_to_pdf(request):
 
-    # Get the selected date from the request
     selected_date_str = request.GET.get('date')
     selected_date = None
-
 
     if selected_date_str:
         try:
@@ -567,115 +564,71 @@ def export_schedule_to_pdf(request):
         except:
             return HttpResponse("Invalid date format. Please use YYYY-MM-DD.", status=400)
 
-
-
     dentist = request.user.dentistProfile
-    # Get the logged-in dentist's appointments
-    dentist_appointments = Appointment.objects.filter(dentist=dentist,date=selected_date)
+    dentist_appointments = Appointment.objects.filter(dentist=dentist, date=selected_date)
+    appointments_count = dentist_appointments.count()
 
-    # full name without Polish national letters,to avoid them in file's name
     full_name = dentist.user.get_full_name()
     normalized_name = unidecode(full_name)
 
-    # Create a PDF response
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{normalized_name}_{selected_date_str}_schedule.pdf"'
 
-    # Create a canvas for PDF generation
-    p = canvas.Canvas(response, pagesize=letter)
-    width, height = letter
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.lib import colors
 
-    # Title
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    styles = getSampleStyleSheet()
+    story = []
 
-    title_text = "Schedule for {} on: {}".format(request.user.get_full_name(),selected_date)
+    story.append(Paragraph(f"Schedule for {full_name} on: {selected_date}", styles['Title']))
+    story.append(Spacer(1, 20))
 
+    if appointments_count > 0:
+        table_data = [['Nr', 'Date', 'Time', 'Patient', 'Reason', 'Status']]
 
-    title_width = p.stringWidth(title_text, 'TimesNewRoman', 16)
-    title_x_position = (width - title_width) / 2  # Centering the title
-    p.setFont('TimesNewRoman', 16)
-    p.drawString(title_x_position, height - 50, title_text)
-
-
-    # Column headers
-
-    text_width = 560
-    text_height = 20  # Approximate height for the font size used
-
-    p.setFillColor(colors.lightblue)
-    p.rect(10, height - 125, text_width + 10, text_height, fill=True)
-
-    p.setFont('TimesNewRoman', 12)
-    p.setFillColor(colors.black)
-
-    header_height_y = height - 120
-    p.drawString(20, header_height_y, "Nr")
-    p.drawString(50, header_height_y, "Date")
-    p.drawString(120, header_height_y, "Time")
-    p.drawString(170, header_height_y, "Patient")
-    p.drawString(370, header_height_y, "Reason")
-    p.drawString(530, header_height_y, "Status")
-
-    p.setStrokeColor(colors.red)
-    p.line(5, height-135, 600, height-135)
-
-
-    # Adding appointments to the PDF
-    y_position = height - 200
-
-    if dentist_appointments.exists():
-        enumeration_counter = 1
-        for appointment in dentist_appointments:
-
-            p.drawString(20, y_position, str(enumeration_counter))
-            p.drawString(50, y_position, str(appointment.date))
-            p.drawString(120, y_position, str(appointment.start_time))
-
-            patient_user = appointment.user  # This should be the patient user associated with the appointment
-
+        for i, appointment in enumerate(dentist_appointments, start=1):
+            patient_user = appointment.user
             if hasattr(patient_user, 'patientProfile'):
-                first_name = patient_user.first_name
-                last_name = patient_user.last_name
+                patient_name = f"{patient_user.first_name} {patient_user.last_name}"
             else:
-                first_name = dentist.user.first_name
-                last_name = dentist.user.last_name
+                patient_name = f"{dentist.user.first_name} {dentist.user.last_name}"
 
-            p.drawString(170, y_position, f"{first_name} {last_name}") # reffers to Custom user model!
+            purpose_display = appointment.custom_purpose if appointment.custom_purpose else appointment.purpose.purpose
 
-            # Determine the purpose to display
-            if appointment.custom_purpose:
-                purpose_display = appointment.custom_purpose
-            else:
-                purpose_display = appointment.purpose.purpose
-            p.drawString(370, y_position, str(purpose_display))
-            p.drawString(530, y_position, appointment.status)
-            y_position -= 20
-            enumeration_counter +=1
+            table_data.append([
+                str(i),
+                str(appointment.date),
+                str(appointment.start_time),
+                Paragraph(patient_name, styles['Normal']),
+                Paragraph(str(purpose_display), styles['Normal']),
+                appointment.status,
+            ])
 
-        # extract last appointment end time
+        table = Table(table_data, colWidths=[30, 70, 50, 120, 150, 60])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.whitesmoke]),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ]))
+        story.append(table)
+        story.append(Spacer(1, 20))
 
         last_appointment = dentist_appointments.order_by('start_time').last()
-        # Calculate the end time of the last appointmentif last_appointment:
-        # Make the start time timezone-aware
         appointment_start = timezone.make_aware(datetime.combine(selected_date, last_appointment.start_time))
-        appointment_end = appointment_start + timedelta(minutes=30)
+        appointment_end = appointment_start + last_appointment.duration
 
+        story.append(Paragraph(f"Total appointments on {selected_date}: {appointments_count}", styles['Normal']))
+        story.append(Paragraph(f"You will be working until {appointment_end.strftime('%H:%M')}", styles['Normal']))
 
-        summary_text = "Total amount of appointments on {} is: {} ".format(selected_date,dentist_appointments.count())
-        summary_text1 = "You will be working on {} until {}".format(selected_date,appointment_end.strftime('%H:%M'))
-        summary_x_position = (width - title_width) / 2  # Centering the title
-        p.setFont('TimesNewRoman', 12)
-        p.drawString(summary_x_position, height - 650, summary_text)
-        p.drawString(summary_x_position, height - 630, summary_text1)
     else:
-        # Handle the case where there are no appointments for the selected date
-        p.drawString(100, y_position, "No appointments found for this date.")
+        story.append(Paragraph("No appointments found for this date.", styles['Normal']))
 
-
-        # Move down for the next row
-
-    # Finalize the PDF
-    p.showPage()
-    p.save()
+    doc.build(story)
     return response
 
 
