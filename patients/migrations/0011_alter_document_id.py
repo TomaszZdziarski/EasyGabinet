@@ -10,9 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.DeleteModel(
-            name='Document',
-        ),
         migrations.CreateModel(
             name='Document',
             fields=[
