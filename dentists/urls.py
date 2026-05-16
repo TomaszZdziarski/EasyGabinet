@@ -47,7 +47,8 @@ urlpatterns = [
     path('calendar/<uuid:dentist_id>/', views.generate_calendar, name='calendar'),
     path('calendar/', views.generate_calendar, name='calendar_no_dentist'),  # Use the same view when dentist is not chosen and you click calendar on navbar
 
-    path('password-reset/', DentistPasswordResetView.as_view(), name='password-reset'),
+    path('password-reset/', DentistPasswordResetView.as_view(
+        template_name='dentists/password_reset.html'), name='password-reset'),
 
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='dentists/password_reset_done.html'), name='password_reset_done'),
@@ -58,5 +59,5 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='dentists/password_reset_complete.html'), name='password_reset_complete'),
     # Add to urls.py temporarily
-    path('test-s3/', views.test_s3, name='test-s3'),
+
     ]

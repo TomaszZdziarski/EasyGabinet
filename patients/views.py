@@ -42,6 +42,7 @@ def patient_main(request):
 class PatientPasswordResetView(PasswordResetView):
     template_name = 'password_reset.html'
     email_template_name = 'password_reset_email.html'
+    subject_template_name = 'patients/password_reset_subject.txt'
     success_url = reverse_lazy('patients-password_reset_done')
 
     def form_valid(self, form):

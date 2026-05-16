@@ -33,6 +33,9 @@ body {
   background-color: var(--color-bg);
   min-height: 100vh;
 }
+.text-center {
+    text-align: center;
+}
 
 /*=======================
   FONT/PARAGRAPH Styles
@@ -1092,15 +1095,18 @@ button[disabled] {
 
 .auth .auth__actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 2.5rem 0;
   width: 100%;
   box-sizing: border-box;
 }
+.auth .auth__alternative {
+    text-align: center;
+}
 
 .auth .auth__alternative a {
-  font-size: 2rem;
+  font-size: 1.4rem;  /* was 2rem */
   font-weight: 500;
   text-decoration: underline;
 }

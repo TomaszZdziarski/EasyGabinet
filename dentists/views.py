@@ -182,8 +182,10 @@ User = get_user_model()
 
 
 class DentistPasswordResetView(PasswordResetView):
+
     template_name = 'dentists/password_reset.html'
     email_template_name = 'dentists/password_reset_email.html'
+    subject_template_name = 'dentists/password_reset_subject.txt'
     success_url = reverse_lazy('password_reset_done')  # your dentist done URL name
 
     def form_valid(self, form):
@@ -647,16 +649,3 @@ def mark_appointments(html_calendar, day_status,dentist_id, year, month):
         except ValueError:            # Skip cells that are not day numbers
             continue
     return str(soup)
-
-# Add temporarily to your views.py
-from django.http import HttpResponse
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-
-def test_s3(request):
-    try:
-        path = default_storage.save('media/test_from_railway.txt', ContentFile(b'hello'))
-        url = default_storage.url(path)
-        return HttpResponse(f"SUCCESS! Path: {path} URL: {url}")
-    except Exception as e:
-        return HttpResponse(f"FAILED: {str(e)}")

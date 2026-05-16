@@ -128,7 +128,12 @@ MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaw
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # EMAIL
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 

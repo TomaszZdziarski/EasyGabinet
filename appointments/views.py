@@ -160,45 +160,19 @@ def validate_appointment(appointment,appointment_start, appointment_end,existing
 
 
 def validate_max_appointments(user):
-    # Initialize profiles
-    patient_profile = None
-    dentist_profile = None
-
-    # Attempt to retrieve patient profile
+    # Ensure user has a patient profile
     try:
         patient_profile = user.patientProfile
     except PatientProfile.DoesNotExist:
-        patient_profile = None
+        raise ValidationError("No linked PatientProfile found.")
 
+    # Count existing non-completed appointments for the user
+    existing_appointments_count = Appointment.objects.filter(user=user).exclude(
+        Q(status='completed')
+    ).count()
 
-    # Attempt to retrieve dentist profile
-    try:
-        dentist_profile = user.dentistProfile
-    except dentistProfile.DoesNotExist:
-        dentist_profile = None
-
-    # Ensure at least one profile exists
-    if not patient_profile and not dentist_profile:
-        raise ValidationError("No linked PatientProfile or DentistProfile found.")
-
-# ROLE SEPARATION
-
-    # LOGIC FOR DENTIST who wants to book app. for him/herself
-    if dentist_profile:
-        # Check if the dentist is booking for themselves (acting as both dentist and patient)-dentist profile gets patient profile on the fly
-        if patient_profile and user == patient_profile.user:
-
-            existing_appointments_count = Appointment.objects.filter(dentist=dentist_profile).exclude(Q(status='completed')).count()
-            if existing_appointments_count >= 10:
-                raise ValidationError("You have reached your appointment limit. Please manage your schedule.")
-    else:
-
-        # LOGIC FOR PATIENTS ONLY - Count existing appointments for the logged-in user - if more than 3 - error
-        existing_appointments_count = Appointment.objects.filter(user=user).exclude(Q(status='completed')).count()
-
-        if existing_appointments_count >= 3:
-            raise ValidationError("You can only book up to 3 appointments. Please contact reception for more.")
-
+    if existing_appointments_count >= 3:
+        raise ValidationError("You can only book up to 3 appointments. Please contact reception for more.")
 
 
 def handle_validation_error(form, error):
@@ -282,13 +256,6 @@ def create_appointment(request,dentist_id=None,date=None):
                 appointment.converted_price = converted_price or appointment_price
                 appointment.currency = currency or "PLN"
 
-                # Check if converted_price is empty and set a default if needed - when user doesn't need conversion
-                if not appointment.converted_price:
-                    # Fetch the price_PLN from the selected purpose
-                    purpose_id = form.cleaned_data.get('purpose')
-                    if purpose_id:
-                        purpose = get_object_or_404(AppointmentPurpose, id=purpose_id)
-                        appointment.converted_price = purpose.price_PLN
 
                 # Assign profiles
                 appointment.patient = patient_profile
