@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import PatientProfile
+from .models import PatientProfile,Document
 from dentists.models import dentistProfile
 from dentists.models import Article
 from django.contrib.auth import authenticate,login,logout
@@ -22,6 +22,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 import os
 from django.conf import settings
+from django.core.exceptions import PermissionDenied
 
 
 
@@ -186,6 +187,16 @@ def patient_profile_view(request,patient_id):
 
     })
 
+def delete_document(request, document_id):
+    document = get_object_or_404(Document, id=document_id)
+
+    # Make sure only the owner can delete
+    if document.patient.user != request.user:
+        raise PermissionDenied
+
+    document.file.delete()  # deletes from S3/filesystem
+    document.delete()       # deletes from database
+    return redirect('patient-account', patient_id=request.user.patientProfile.id)
 
 # function used to create and edit patient's profile
 

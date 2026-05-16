@@ -107,24 +107,41 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button class="btn btn--main btn--md" type="submit">Add Document</button>
+                        <button class="btn btn--main btn--md" type="submit" style="margin-top: 1rem;">Add Document</button>
                     </form>
                 </div>
             </div>
 
-            {% if patient.documents.all %}
             {% for document in patient.documents.all %}
             <div class="card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <div class="card__body">
-                    <a href="{{ document.file.url }}">{{ document.file.name }}</a>
+                <div class="card__body" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+                    <a href="{{ document.file.url }}" target="_blank">
+
+                        {% if document.icon == 'image.png' %}
+                        <img src="{% static 'media/image.png' %}" style="width:24px; height:24px;">
+                        {% elif document.icon == 'pdf.png' %}
+                        <img src="{% static 'media/pdf.png' %}" style="width:24px; height:24px;">
+                        {% else %}
+                        <img src="{% static 'media/file.png' %}" style="width:24px; height:24px;">
+                        {% endif %}
+
+                        {{ document.filename }}
+
+                    </a>
+
+                    <form method="POST" action="{% url 'delete-document' document.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn--sub--link">
+                            <img src="{% static 'media/trash.png' %}" style="width:24px; height:24px;">
+                        </button>
+                    </form>
+
                 </div>
             </div>
             {% empty %}
             <p>No documents available.</p>
             {% endfor %}
-            {% else %}
-            <p>No documents available.</p>
-            {% endif %}
 
         </div>
     </div>

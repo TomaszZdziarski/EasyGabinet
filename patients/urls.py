@@ -40,6 +40,8 @@ urlpatterns = [
         template_name='password_reset_complete.html',
     ), name='patients-password_reset_complete'),
 
+    path('document/<uuid:document_id>/delete/', views.delete_document, name='delete-document'),
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

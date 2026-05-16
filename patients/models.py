@@ -22,9 +22,23 @@ class Document(models.Model):
     patient = models.ForeignKey('PatientProfile', related_name='documents', on_delete=models.CASCADE)
     file = models.FileField(upload_to=document_upload_path)
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid4, unique=True, primary_key=True, editable=False)
+
+    @property
+    def filename(self):
+        return os.path.basename(self.file.name)
 
     def __str__(self):
         return f"{self.file.name} for {self.patient.user.username}"
+
+    def icon(self):
+        ext = os.path.splitext(self.file.name)[1].lower()
+        if ext in ['.jpg', '.jpeg', '.png']:
+            return 'image.png'
+        elif ext == '.pdf':
+            return 'pdf.png'
+        else:
+            return 'file.png'
 
 
 
