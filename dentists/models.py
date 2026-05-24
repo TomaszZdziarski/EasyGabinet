@@ -132,6 +132,9 @@ class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,primary_key=True,editable=False)
 
+    demo_link = models.URLField(max_length=200, null=True, blank=True)
+    source_link = models.URLField(max_length=200, null=True, blank=True)
+
     def getVoteCount(self):
         reviews = self.review_set.all()
         upVotes = reviews.filter(value='up').count()

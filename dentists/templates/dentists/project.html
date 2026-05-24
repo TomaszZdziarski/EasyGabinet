@@ -11,28 +11,39 @@
             <div class="column column--1of3">
                 <div class="card">
                     <div class="card__header">
-                        <h5 class="card__headerTitle">About the project</h5>
+                        <h5 class="card__headerTitle">Resources</h5>
                     </div>
-                    <div class="card__body" style="display:flex; flex-direction:column; gap:1rem;">
+                    <div class="card__body" style="display:flex; flex-direction:column; gap:1.2rem;">
 
-                        <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-                            {% for skill in project.skill_used.all %}
-                            <a href="{% url 'single-skill' skill.id %}"
-                               class="btn btn--main--outline btn--sm"
-                               style="margin-right:0;">{{ skill.name }}</a>
-                            {% endfor %}
+                        {% if project.skill_used.all %}
+                        <div>
+                            <p style="font-size:0.85rem; font-weight:600; color:var(--color-gray); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">Skills used</p>
+                            <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+                                {% for skill in project.skill_used.all %}
+                                <a href="{% url 'single-skill' skill.id %}"
+                                   class="btn btn--main--outline btn--sm"
+                                   style="margin-right:0;">{{ skill.name }}</a>
+                                {% endfor %}
+                            </div>
                         </div>
-
-                        {% if project.source_link %}
-                        <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
-                            <i class="im im-external-link"></i> Source Code
-                        </a>
                         {% endif %}
 
-                        {% if project.demo_link %}
-                        <a href="{{ project.demo_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
-                            <i class="im im-external-link"></i> Live Demo
-                        </a>
+                        {% if project.source_link or project.demo_link %}
+                        <div>
+                            <p style="font-size:0.85rem; font-weight:600; color:var(--color-gray); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">Links</p>
+                            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                                {% if project.source_link %}
+                                <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                                    <i class="im im-external-link"></i> Examples
+                                </a>
+                                {% endif %}
+                                {% if project.demo_link %}
+                                <a href="{{ project.demo_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                                    <i class="im im-external-link"></i> Literature
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
                         {% endif %}
 
                     </div>
