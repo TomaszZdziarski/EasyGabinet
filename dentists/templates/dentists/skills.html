@@ -27,9 +27,9 @@
         <div class="layout" style="justify-content:center; gap:1rem;">
 
             {% for skill in skills %}
-            <div class="column" style="flex: 0 1 280px; max-width:280px; margin:0.5rem;">
+            <div class="column" style="flex: 0 1 280px; max-width: 280px; margin: 0.5rem; min-width: 0; box-sizing: border-box;">
                 <div class="card" style="height:100%;">
-                    <div class="card__body" style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.8rem;">
+                    <div class="card__body" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; width: 100%; box-sizing: border-box; overflow-wrap: break-word; word-break: break-word; min-width: 0;">
 
                         <a href="{% url 'single-skill' skill.id %}">
                             <img class="profile_image profile_image--md"

@@ -360,6 +360,7 @@ a {
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;           /* fill parent, never overflow */
+  min-width: 0; /* ← add this */
 }
 
 /* cards inside right column get left indent */
@@ -371,6 +372,11 @@ a {
 
 .card__body {
   padding: 1.5rem;
+  box-sizing: border-box; /* ← add this */
+    width: 100%;            /* ← add this */
+    word-wrap: break-word;  /* ← add this */
+    overflow-wrap: break-word; /* ← add this */
+    min-width: 0;           /* ← add this */
 }
 
 .card__clamp {
