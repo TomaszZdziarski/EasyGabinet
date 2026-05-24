@@ -2,7 +2,8 @@ from . import views
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import DentistPasswordResetView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 
@@ -60,4 +61,4 @@ urlpatterns = [
         template_name='dentists/password_reset_complete.html'), name='password_reset_complete'),
     # Add to urls.py temporarily
 
-    ]
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
