@@ -219,7 +219,7 @@ def loginUser(request):
             if user.user_type == 'dentist':
                 login(request,user) # it will create a session for this user in DB
                 next_url = request.POST.get('next') or request.GET.get('next')  # check both
-                if next_url:                         # ADD THIS
+                if next_url and not next_url.startswith('/patient-account/'):                         # ADD THIS
                     return redirect(next_url)        # ADD THIS
                 return redirect('account')
             else:

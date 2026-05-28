@@ -68,85 +68,83 @@
                 <h3 class="account__title">Skills</h3>
                 <a class="btn btn--sub btn--md" href="{% url 'create-skill' %}"><i class="im im-plus"></i> Add Skill</a>
             </div>
-            {% for skill in skills %}
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
-                    <img style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;" src="{% if skill.skill_image %}{{skill.skill_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
-                    <div>
-                        <h4 class="project__title">{{ skill.name }}</h4>
-                        <p>{{ skill.description|slice:"100" }}...</p>
+            <div class="account-grid">
+                {% for skill in skills %}
+                <div class="card">
+                    <div class="card__body account-grid__card">
+                        <img class="account-grid__image" src="{% if skill.skill_image %}{{skill.skill_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        <h4 class="account-grid__title">{{ skill.name }}</h4>
+                        <p class="account-grid__desc">{{ skill.description }}</p>
+                        <div class="account-grid__actions">
+                            <a class="btn btn--main btn--sm" href="{% url 'update-skill' skill.id %}"><i class="im im-edit"></i> Edit</a>
+                            <a class="btn btn--sub btn--sm" href="{% url 'delete-skill' skill.id %}?next=/account"><i class="im im-x-mark-circle-o"></i> Delete</a>
+                        </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem;">
-                    <a class="btn btn--main btn--sm" href="{% url 'update-skill' skill.id %}"><i class="im im-edit"></i> Edit</a>
-                    <a class="btn btn--sub btn--sm" href="{% url 'delete-skill' skill.id %}?next=/account"><i class="im im-x-mark-circle-o"></i> Delete</a>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
 
             <!-- My Projects -->
             <div class="account">
                 <h3 class="account__title">My Projects</h3>
                 <a class="btn btn--sub btn--md" href="{% url 'create-project' %}"><i class="im im-plus"></i> Add Project</a>
             </div>
-            {% for project in projects %}
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
-                    <a href="{% url 'single-project' project.id %}">
-                        <img style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;" src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
-                    </a>
-                    <div>
-                        <a href="{% url 'single-project' project.id %}"><h4 class="project__title">{{ project.name }}</h4></a>
-                        <p>{{ project.description|slice:"100" }}...</p>
+            <div class="account-grid">
+                {% for project in projects %}
+                <div class="card">
+                    <div class="card__body account-grid__card">
+                        <img class="account-grid__image" src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        <h4 class="account-grid__title">{{ project.name }}</h4>
+                        <p class="account-grid__desc">{{ project.description }}</p>
+                        <div class="account-grid__actions">
+                            <a class="btn btn--main btn--sm" href="{% url 'update-project' project.id %}"><i class="im im-edit"></i> Edit</a>
+                            <a class="btn btn--sub btn--sm" href="{% url 'delete-project' project.id %}?next=/account"><i class="im im-x-mark-circle-o"></i> Delete</a>
+                        </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem;">
-                    <a class="btn btn--main btn--sm" href="{% url 'update-project' project.id %}"><i class="im im-edit"></i> Edit</a>
-                    <a class="btn btn--sub btn--sm" href="{% url 'delete-project' project.id %}?next=/account"><i class="im im-x-mark-circle-o"></i> Delete</a>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
 
             <!-- Participated In -->
             <div class="account">
                 <h3 class="account__title">Participated in</h3>
             </div>
-            {% for project in profile.particip_project.all %}
-            <div class="card" style="display: flex; align-items: center; margin-bottom: 1rem;">
-                <div class="card__body" style="display: flex; align-items: center; gap: 1rem;">
-                    <a href="{% url 'single-project' project.id %}">
-                        <img style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;" src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
-                    </a>
-                    <div>
-                        <a href="{% url 'single-project' project.id %}"><h4 class="project__title">{{ project.name }}</h4></a>
-                        <p>{{ project.description|slice:"100" }}...</p>
+            <div class="account-grid">
+                {% for project in profile.particip_project.all %}
+                <div class="card">
+                    <div class="card__body account-grid__card">
+                        <a href="{% url 'single-project' project.id %}">
+                            <img class="account-grid__image" src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        </a>
+                        <h4 class="account-grid__title">
+                            <a href="{% url 'single-project' project.id %}">{{ project.name }}</a>
+                        </h4>
+                        <p class="account-grid__desc">{{ project.description }}</p>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
 
             <!-- My Articles -->
             <div class="account">
                 <h3 class="account__title">My Articles</h3>
                 <a class="btn btn--sub btn--md" href="{% url 'create-article' %}"><i class="im im-plus"></i> Add Article</a>
             </div>
-            {% for article in articles %}
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div class="card__body" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
-                    <a href="{% url 'single-article' article.id %}">
-                        <img style="width: 6rem; height: 6rem; object-fit: cover; border-radius: 0.5rem;" src="{% if article.article_image %}{{article.article_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
-                    </a>
-                    <div>
-                        <a href="{% url 'single-article' article.id %}"><h4 class="project__title">{{ article.title }}</h4></a>
-                        <p>{{ article.content|slice:"100" }}...</p>
+            <div class="account-grid">
+                {% for article in articles %}
+                <div class="card">
+                    <div class="card__body account-grid__card">
+                        <img class="account-grid__image" src="{% if article.article_image %}{{article.article_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        <h4 class="account-grid__title">{{ article.title }}</h4>
+                        <p class="account-grid__desc">{{ article.content }}</p>
+                        <div class="account-grid__actions">
+                            <a class="btn btn--main btn--sm" href="{% url 'update-article' article.id %}"><i class="im im-edit"></i> Edit</a>
+                            <a class="btn btn--sub btn--sm" href="{% url 'delete-article' article.id %}?next=/account"><i class="im im-x-mark-circle-o"></i> Delete</a>
+                        </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem; padding: 1rem;">
-                    <a class="btn btn--main btn--sm" href="{% url 'update-article' article.id %}"><i class="im im-edit"></i> Edit</a>
-                    <a class="btn btn--sub btn--sm" href="{% url 'delete-article' article.id %}?next=/account"><i class="im im-x-mark-circle-o"></i> Delete</a>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
 
         </div>
     </div>

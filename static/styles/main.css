@@ -26,15 +26,16 @@
 
 html {
   background-color: var(--color-sub);
+  overflow-x: hidden;
 }
+
 body {
   margin: 0;
   padding: 0;
   background-color: var(--color-bg);
   min-height: 100vh;
-}
-.text-center {
-    text-align: center;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /*=======================
@@ -88,6 +89,9 @@ strong {
   font-size: 1.6rem;
   color: var(--color-text);
   font-weight: var(--font-regular);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
 }
 
 strong {
@@ -206,14 +210,13 @@ a {
     display: block;
     position: fixed;
     top: 1.5rem;
-    right: 2.75rem;
+    right: 0.5rem;
+    width: 4rem;
+    height: 4rem;
     cursor: pointer;
-    padding: 1rem;
     background: var(--color-sub-light);
-    z-index: 999;
+    z-index: 1000;
     font-size: 0;
-    width: 5rem;
-    height: 5rem;
     border-radius: 50%;
   }
 
@@ -226,21 +229,21 @@ a {
     height: 2px;
     width: 2.5rem;
     position: fixed;
-    top: 4rem;
-    right: 4rem;
-    z-index: 999;
+    top: 3.4rem;      /* circle center (3.5rem) - half line height (1px) */
+    right: 1.25rem;   /* circle center from right (2.5rem) - half line width (1.25rem) */
+    z-index: 1000;
     background: var(--color-light);
     transition: all 0.3s ease-in-out;
   }
 
   .toggle-menu__lines::before {
-    top: 3.4rem;
-    transform-origin: 0 0;
+    top: 3.0rem;
+    transform-origin: center center;
   }
 
   .toggle-menu__lines::after {
-    top: 4.6rem;
-    transform-origin: 0 0;
+    top: 3.8rem;
+    transform-origin: center center;
   }
 
   .header__nav > ul {
@@ -257,6 +260,7 @@ a {
     transition: all 0.5s ease-in-out;
     margin: 0;
     padding: 0;
+    z-index: 998;  /* below the toggle button */
   }
 
   .header__menuItem a {
@@ -278,11 +282,15 @@ a {
 }
 
 #responsive-menu:checked + .toggle-menu > .toggle-menu__lines::before {
-  transform: rotate(45deg) translate(5px, 5px);
+  visibility: visible;
+  top: 3.4rem;  /* move to same position as middle line */
+  transform: rotate(45deg);
 }
 
 #responsive-menu:checked + .toggle-menu > .toggle-menu__lines::after {
-  transform: rotate(-45deg) translate(5px, -5px);
+  visibility: visible;
+  top: 3.4rem;  /* move to same position as middle line */
+  transform: rotate(-45deg);
 }
 
 #responsive-menu:checked ~ ul {
@@ -309,7 +317,7 @@ a {
 .column {
   margin-bottom: 3rem;
   box-sizing: border-box;
-  min-width: 0;        /* prevents flex children from overflowing */
+  min-width: 0;
 }
 
 .layout > .column.column--1of3 {
@@ -346,6 +354,11 @@ a {
     padding-left: 0;
     padding-right: 0;
   }
+
+  .column--2of3 .card {
+      margin-left: 0 !important;
+      width: 100% !important;
+  }
 }
 
 /*=======================
@@ -359,15 +372,15 @@ a {
   box-shadow: var(--generic-shadow);
   overflow: hidden;
   box-sizing: border-box;
-  width: 100%;           /* fill parent, never overflow */
-  min-width: 0; /* ← add this */
+  width: 100%;
+  min-width: 0;
 }
 
 /* cards inside right column get left indent */
 .column--2of3 .card {
   margin-top: 1.5rem;
   margin-left: 1.5rem;
-  width: calc(100% - 1.5rem);  /* compensate for left margin */
+  width: calc(100% - 1.5rem);
 }
 
 .card__body {
@@ -595,11 +608,18 @@ a {
 }
 
 .projects__grid .card.project {
-  flex: 0 1 calc(33% - 1rem);
-  max-width: calc(33% - 1rem);
-  width: calc(33% - 1rem);
+  flex: 1 1 240px;      /* min card width before wrapping */
+  max-width: calc(33.333% - 1rem);  /* still 3-col on wide screens */
+  min-width: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 700px) {
+  .projects__grid .card.project {
+    flex: 1 1 100%;     /* full width on mobile */
+    max-width: 100%;
+  }
 }
 
 /*=======================
@@ -631,7 +651,7 @@ a {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition: all 0.3s ease-in-out;
-  margin-right: 20px;
+  margin-right: 0px;
 }
 
 .btn:disabled,
@@ -814,6 +834,91 @@ button[disabled] {
 .account__thumbnail {
   width: 23%;
   min-width: 10rem;
+}
+
+/*=======================
+  ACCOUNT CARDS GRID
+========================*/
+
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.account-grid__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.account-grid__image {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.account-grid__title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--color-sub);
+  margin-bottom: 0.5rem;
+}
+
+.account-grid__desc {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.account-grid__actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .account-grid__desc {
+    -webkit-line-clamp: 2;  /* trim description more on mobile */
+  }
+}
+
+/*=======================
+  PATIENT ACCOUNT
+========================*/
+
+.appointment__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.patient__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.patient__actions .btn--lg {
+  padding: 1rem 1.2rem;
+  font-size: 1.4rem;
+  flex: 1;  /* both buttons share available space equally */
 }
 
 /*=======================
