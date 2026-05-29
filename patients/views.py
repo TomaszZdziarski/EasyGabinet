@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import PatientProfile,Document
+from appointments.models import Appointment
 from dentists.models import dentistProfile
 from dentists.models import Article
 from django.contrib.auth import authenticate,login,logout
@@ -9,8 +10,6 @@ from django.contrib.auth.models import User
 from patients.utils import searchArticles
 from .forms import DocumentUploadForm
 from django.http import HttpResponse
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 from appointments.utils import update_appointments_status
@@ -247,6 +246,26 @@ def export_treatment_history_pdf(request, patient_id):
     doc.build(story)
     return response
 
+@login_required(login_url='dentist-login')
+def patient_history(request, patient_id):
 
+    try:
+        # Get the patient profile and their appointments
+        profile = get_object_or_404(PatientProfile, id=patient_id)
+        is_patient_profile = True
+
+    except:        # If not found, attempt to retrieve the dentist profile
+        profile = get_object_or_404(dentistProfile, id=patient_id)
+        is_patient_profile = False
+
+    # Retrieve appointments based on the profile type
+    if is_patient_profile:
+        appointments = Appointment.objects.filter(patient=profile).order_by('-date')
+
+    else:        # If it's a dentist, you might want to show appointments where they are the dentist
+        appointments = Appointment.objects.filter(dentist=profile).order_by('-date')
+
+    context = {'profile': profile,'appointments': appointments,'is_patient_profile': is_patient_profile,}
+    return render(request, 'patient_history.html', context)
 
 

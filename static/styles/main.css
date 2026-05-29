@@ -777,21 +777,27 @@ button[disabled] {
 
 .account__table {
   width: 100%;
+  table-layout: fixed;  /* ← add this */
   border-collapse: collapse;
   margin-top: 3rem;
   margin-bottom: 5rem;
-  padding: 0 3rem;
   background: var(--color-white);
 }
 
-.account__table tr {
-  display: flex;
-  width: 100%;
+.account__table td {
+  padding: 0.75rem 1rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;  /* keeps all cells top-aligned when one wraps */
+  box-sizing: border-box;
 }
 
-.account__table tr > td {
-  padding: 1rem;
-  box-sizing: border-box;
+.account__table thead tr {
+  border-bottom: 2px solid var(--color-light);
+}
+
+.account__table tbody tr {
+  border-bottom: 1px solid var(--color-light);
 }
 
 .account__tableInfo {
@@ -835,6 +841,55 @@ button[disabled] {
   width: 23%;
   min-width: 10rem;
 }
+
+
+.account__table--empty {
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-gray);
+}
+
+/*=======================
+  colored badges for pat history
+========================*/
+
+.status-badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.4rem;
+    font-size: 1.1rem;
+    white-space: nowrap;  /* ← add this */
+}
+
+.status-badge--available {
+    background-color: var(--color-light);
+    color: var(--color-gray);
+}
+
+.status-badge--booked {
+    background-color: var(--color-main-light);
+    color: var(--color-main);
+}
+
+.status-badge--passed {
+    background-color: var(--color-light);
+    color: var(--color-gray);
+}
+
+.status-badge--completed {
+    background-color: var(--color-success-bg);
+    color: var(--color-success);
+}
+
+.status-badge--did_not_occur {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
+.status-badge--cancelled {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}
+
 
 /*=======================
   ACCOUNT CARDS GRID
@@ -1206,11 +1261,13 @@ button[disabled] {
 
 .auth .auth__actions {
   display: flex;
+  flex-direction: column;  /* ← add this */
   justify-content: center;
   align-items: center;
   margin: 2.5rem 0;
   width: 100%;
   box-sizing: border-box;
+  gap: 1rem;  /* ← optional, controls spacing between them */
 }
 .auth .auth__alternative {
     text-align: center;

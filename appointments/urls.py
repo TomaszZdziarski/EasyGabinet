@@ -15,18 +15,12 @@ urlpatterns = [
                path('update-appointment/<uuid:appointment_id>/', views.update_appointment_status, name='update_appointment_status'),
                path('export_schedule/', views.export_schedule_to_pdf, name='export_schedule'),
                path('access_denied/', views.access_denied_view, name='access-denied'),
-               path('patient/<uuid:patient_id>/history/', views.patient_history, name='patient-history'),
                path('get-available-times/', views.get_available_times, name='get_available_times'),
-
-                path('confirm/<uuid:pk>/', views.confirm_appointment, name='confirm-appointment'),
-                path('cancel/<uuid:pk>/', views.cancel_appointment, name='cancel-appointment'),
-                path('track/<uuid:pk>/', views.track_email_open, name='track-email-open'),
-                path('confirmed/', views.confirmed_page, name='confirmed-page'),
-                path('cancelled/', views.cancelled_page, name='cancelled-page'),
-
-
-
-
+               path('confirm/<uuid:pk>/', views.confirm_appointment, name='confirm-appointment'),
+               path('cancel/<uuid:pk>/', views.cancel_appointment, name='cancel-appointment'),
+               path('track/<uuid:pk>/', views.track_email_open, name='track-email-open'),
+               path('confirmed/', views.confirmed_page, name='confirmed-page'),
+               path('cancelled/', views.cancelled_page, name='cancelled-page'),
 
 
 

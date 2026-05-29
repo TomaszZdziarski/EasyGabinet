@@ -636,27 +636,7 @@ def export_schedule_to_pdf(request):
 def access_denied_view(request):
     return render(request, 'appointments/access_denied.html')
 
-@login_required(login_url='dentist-login')
-def patient_history(request, patient_id):
 
-    try:
-        # Get the patient profile and their appointments
-        profile = get_object_or_404(PatientProfile, id=patient_id)
-        is_patient_profile = True
-
-    except:        # If not found, attempt to retrieve the dentist profile
-        profile = get_object_or_404(dentistProfile, id=patient_id)
-        is_patient_profile = False
-
-    # Retrieve appointments based on the profile type
-    if is_patient_profile:
-        appointments = Appointment.objects.filter(patient=profile).order_by('-date')
-
-    else:        # If it's a dentist, you might want to show appointments where they are the dentist
-        appointments = Appointment.objects.filter(dentist=profile).order_by('-date')
-
-    context = {'profile': profile,'appointments': appointments,'is_patient_profile': is_patient_profile,}
-    return render(request, 'appointments/patient_history.html', context)
 
 
 # CRON ENGINE

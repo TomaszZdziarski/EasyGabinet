@@ -43,7 +43,6 @@ urlpatterns = [
     path('add-purposes/<uuid:dentist_id>/', views.add_appointment_purposes, name='add-purposes'),
     path('delete-appointment-purpose/<int:pk>/', views.delete_appointment_purpose, name='delete-appointment-purpose'),
 
-
     path('monthly-schedule/<uuid:dentist_id>/', views.monthly_schedule_view, name='monthly-schedule'),
     path('calendar/<uuid:dentist_id>/', views.generate_calendar, name='calendar'),
     path('calendar/', views.generate_calendar, name='calendar_no_dentist'),  # Use the same view when dentist is not chosen and you click calendar on navbar

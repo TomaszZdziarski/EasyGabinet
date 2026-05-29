@@ -42,6 +42,8 @@ urlpatterns = [
 
     path('document/<uuid:document_id>/delete/', views.delete_document, name='delete-document'),
 
+    path('patient/<uuid:patient_id>/history/', views.patient_history, name='patient-history'),
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
