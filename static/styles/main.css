@@ -557,7 +557,10 @@ a {
   width: 100%;
   box-sizing: border-box;
   overflow-wrap: break-word;
-  word-break: break-word;  /* replace word-wrap with this */
+  word-break: break-word;
+  display: block;           /* ← add */
+  -webkit-line-clamp: unset; /* ← add */
+  overflow: visible;         /* ← add */
 }
 
 .profileInfo .account__title {

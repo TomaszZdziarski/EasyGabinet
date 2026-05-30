@@ -51,13 +51,12 @@
 
             <!-- About me -->
             <div class="account">
-            <h3 class="account__title">About Me</h3>
-
+                <h3 class="account__title">About Me</h3>
             </div>
 
-            <div class="card" style="margin-bottom: 1rem; width: 100%;">
-                <div class="card__body">
-                    <p class="profileInfo__about">{{ profile.bio|slice:'360' }}</p>
+            <div class="card" style="margin-bottom: 1rem;">
+                <div class="card__body account-grid__card">
+                    <p class="account-grid__desc profileInfo__about">{{ profile.bio }}</p>
                 </div>
             </div>
 
