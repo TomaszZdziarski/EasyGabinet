@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
 
-<section style="padding: 3rem 0;">
-    <div class="container container--full" style="flex-direction: column; gap: 1.5rem;">
+<section class="clinic-history">
+    <div class="container container--full clinic-history__container">
 
         <!-- Header -->
         <div class="card">
@@ -20,11 +20,9 @@
 
         <!-- Table -->
         <div class="card">
-            <div class="card__body" style="overflow-x: auto;">
-                <table class="account__table" style="min-width: 700px;">
-
+            <div class="card__body clinic-history__table-wrapper">
+                <table class="account__table clinic-history__table">
                     <colgroup>
-
                         <col style="width: 10%;">
                         <col style="width: 10%;">
                         <col style="width: 13%;">
@@ -32,10 +30,7 @@
                         <col style="width: 15%;">
                         <col style="width: 25%;">
                         <col style="width: 14%;">
-
                     </colgroup>
-
-
                     <thead>
                     <tr>
                         <td><strong>Date</strong></td>
@@ -47,8 +42,6 @@
                         <td><strong>Status</strong></td>
                     </tr>
                     </thead>
-
-
                     <tbody>
                     {% for appointment in appointments %}
                     <tr>
@@ -75,7 +68,7 @@
         </div>
 
         <!-- Export -->
-        <div style="display: flex; justify-content: flex-end;">
+        <div class="clinic-history__export">
             <a href="{% url 'export_pdf' profile.id %}" class="btn btn--sub btn--md">Export to PDF</a>
         </div>
 

@@ -1,82 +1,130 @@
 {% load static %}
 
-<header class="header">
-    <div class="container container">
-        <a href="{% url 'main' %}" class="header__logo" style="margin-right: 20px;">
-            <img src="{% static 'images/logo.jpg' %}" alt="Dental Clinic Logo" />
+<header class="clinic-nav">
+    <div class="clinic-nav__container">
+
+        <!-- LEFT: Brand -->
+        <a href="{% url 'main' %}" class="clinic-nav__brand">
+            EasyGabinet
+            <span class="clinic-nav__brand-version">ver 1.0</span>
         </a>
-        <nav class="header__nav"  style="overflow:visible;">
+
+        <!-- CENTER: Main links -->
+        <nav class="clinic-nav__menu-wrapper" style="overflow:visible;">
             <input type="checkbox" id="responsive-menu" />
             <label for="responsive-menu" class="toggle-menu">
                 <span>Menu</span>
                 <div class="toggle-menu__lines"></div>
             </label>
-            <ul class="header__menu"  style="overflow:visible;">
-                <li class="header__menuItem"><a href="{% url 'profiles' %}">Doctors</a></li>
-                <li class="header__menuItem"><a href="{% url 'patient-site' %}">Patients</a></li>
-                <li class="header__menuItem"><a href="{% url 'projects' %}">Projects</a></li>
-                <li class="header__menuItem"><a href="{% if dentist %}{% url 'calendar' dentist.id %}{% else %}{% url 'calendar_no_dentist' %}{% endif %}">Calendar</a></li>
+
+            <ul class="clinic-nav__menu" style="overflow:visible;">
+                <li class="clinic-nav__item"><a href="{% url 'profiles' %}">Doctors</a></li>
+                <li class="clinic-nav__item"><a href="{% url 'patient-site' %}">Patients</a></li>
+                <li class="clinic-nav__item"><a href="{% url 'projects' %}">Projects</a></li>
+                <li class="clinic-nav__item"><a href="{% url 'main' %}">Skills</a></li>
+                <li class="clinic-nav__item">
+                    <a href="{% if dentist %}{% url 'calendar' dentist.id %}{% else %}{% url 'calendar_no_dentist' %}{% endif %}">Calendar</a>
+                </li>
 
                 {% if request.user.is_authenticated %}
-
                 {% if request.user.user_type == 'dentist' %}
-                <li class="header__menuItem" style="overflow:visible;">
-
-                    <a href="{% url 'inbox' %}" style="position:relative;">Inbox{% if unread_count > 0 %}
-                        <span style="position:absolute; top:-1.4rem; right:-1.8rem; background:white; border-radius:999px; padding:0.1rem; display:flex; align-items:center; justify-content:center;">
-                            <span style="background:red; color:white; border-radius:999px; font-size:1rem; font-weight:700; min-width:1.4rem; height:1.4rem; display:flex; align-items:center; justify-content:center; padding:0 0.4rem;">
-                                {{ unread_count }}
-                            </span>
+                <li class="clinic-nav__item clinic-nav__item--inbox">
+                    <a href="{% url 'inbox' %}" style="position:relative;">Inbox
+                        {% if unread_count > 0 %}
+                        <span class="clinic-nav__badge-wrap">
+                            <span class="clinic-nav__badge">{{ unread_count }}</span>
                         </span>
                         {% endif %}
                     </a>
-
                 </li>
-
-                <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
-                {% if matching_patients.exists %}
-                <li class="header__menuItem"><a href="{% url 'patient-account' patient.id %}">My Patient account</a></li>
-                {% endif %}
-                <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
-                <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">
-                    Welcome, {{ user }}
-                </li>
-
+                <li class="clinic-nav__item"><a href="{% url 'account' %}">My Account</a></li>
                 {% elif request.user.user_type == 'patient' %}
-                <li class="header__menuItem" style="overflow:visible;">
-
-                    <a href="{% url 'patient-inbox' %}" style="position:relative;">Inbox{% if unread_count > 0 %}
-                        <span style="position:absolute; top:-1.4rem; right:-1.8rem; background:white; border-radius:999px; padding:0.1rem; display:flex; align-items:center; justify-content:center;">
-                            <span style="background:red; color:white; border-radius:999px; font-size:1rem; font-weight:700; min-width:1.4rem; height:1.4rem; display:flex; align-items:center; justify-content:center; padding:0 0.4rem;">
-                                {{ unread_count }}
-                            </span>
+                <li class="clinic-nav__item clinic-nav__item--inbox">
+                    <a href="{% url 'patient-inbox' %}" style="position:relative;">Inbox
+                        {% if unread_count > 0 %}
+                        <span class="clinic-nav__badge-wrap">
+                            <span class="clinic-nav__badge">{{ unread_count }}</span>
                         </span>
                         {% endif %}
                     </a>
-
                 </li>
-                <li class="header__menuItem"><a href="{% url 'patient-account' patient.id %}">Patient's account</a></li>
-                <li class="header__menuItem"><a href="{% url 'patient-logout' %}">Logout</a></li>
-                <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">
-                    Welcome, {{ user }}
-                </li>
+                <li class="clinic-nav__item"><a href="{% url 'patient-account' patient.id %}">My Account</a></li>
+                {% endif %}
 
-                {% else %}
-                <li class="header__menuItem"><a href="">Inbox</a></li>
-                <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
-                <li class="header__menuItem"><a href="{% url 'logout' %}">Logout</a></li>
-                <li class="header__menuItem" style="color:var(--color-main); font-size:1.2rem; cursor:default;">
-                    Welcome, {{ user }}
+                <!-- MOBILE ONLY: greeting + logout -->
+                <li class="clinic-nav__item clinic-nav__item--mobile-only clinic-nav__item--greeting-mobile">
+                    <span>{{ user }}</span>
                 </li>
-
+                {% if request.user.user_type == 'dentist' %}
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'logout' %}">Log out</a>
+                </li>
+                {% elif request.user.user_type == 'patient' %}
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'patient-logout' %}">Log out</a>
+                </li>
                 {% endif %}
 
                 {% else %}
-                <li class="header__menuItem"><a href="{% url 'patient-register' %}">Register as patient</a></li>
-                <li class="header__menuItem"><a href="{% url 'register-user' %}">Login/Sign up for dentists</a></li>
-                {% endif %}
 
+                <!-- MOBILE ONLY: dropdowns for unauthenticated -->
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'login-dentist' %}">Log in (dentist)</a>
+                </li>
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'register-user' %}">Register (dentist)</a>
+                </li>
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'patient-login' %}">Log in (patient)</a>
+                </li>
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'patient-register' %}">Register (patient)</a>
+                </li>
+
+                {% endif %}
             </ul>
         </nav>
+
+        <!-- RIGHT: Auth (desktop only) -->
+        <div class="clinic-nav__right">
+            {% if request.user.is_authenticated %}
+
+            <span class="clinic-nav__greeting">Welcome {{ user }}</span>
+
+            {% if request.user.user_type == 'dentist' %}
+            <a href="{% url 'logout' %}" class="clinic-nav__logout">Log out</a>
+            {% elif request.user.user_type == 'patient' %}
+            <a href="{% url 'patient-logout' %}" class="clinic-nav__logout">Log out</a>
+            {% endif %}
+
+            {% else %}
+
+            <div class="clinic-nav__item--dropdown">
+                <input type="checkbox" id="dropdown-dentist" />
+                <label for="dropdown-dentist" class="clinic-nav__dropdown-toggle clinic-nav__dropdown-toggle--dentist">
+                    For dentists <span class="clinic-nav__chevron">▾</span>
+                </label>
+                <div class="clinic-nav__dropdown-menu">
+                    <span class="clinic-nav__dropdown-label">Dentists</span>
+                    <a href="{% url 'login-dentist' %}">Log in</a>
+                    <a href="{% url 'register-user' %}">Register</a>
+                </div>
+            </div>
+
+            <div class="clinic-nav__item--dropdown">
+                <input type="checkbox" id="dropdown-patient" />
+                <label for="dropdown-patient" class="clinic-nav__dropdown-toggle clinic-nav__dropdown-toggle--patient">
+                    For patients <span class="clinic-nav__chevron">▾</span>
+                </label>
+                <div class="clinic-nav__dropdown-menu">
+                    <span class="clinic-nav__dropdown-label">Patients</span>
+                    <a href="{% url 'patient-login' %}">Log in</a>
+                    <a href="{% url 'patient-register' %}">Register</a>
+                </div>
+            </div>
+
+            {% endif %}
+        </div>
+
     </div>
 </header>

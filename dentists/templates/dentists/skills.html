@@ -3,13 +3,13 @@
 
 {% block content %}
 
-<div class="main-section" style="height:auto; padding: 3rem 2rem;">
+<div class="main-section main-section--search">
     <div class="container container--narrow">
-        <div class="main-section__box" style="margin-bottom:0;">
+        <div class="main-section__box main-section__box--search">
             <h3>Search for a skill</h3>
             <div class="main-section__search">
                 <form class="form" action="{% url 'main' %}" method="get">
-                    <div class="form__field" style="padding-bottom:1rem;">
+                    <div class="form__field form__field--search">
                         <label for="formInput#search">Search by skill name, description, dentist name or tag</label>
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
@@ -22,14 +22,13 @@
     </div>
 </div>
 
-<section style="padding: 3rem 0;">
+<section class="clinic-skills">
     <div class="container">
-        <div class="layout" style="justify-content:center; gap:1rem;">
-
+        <div class="layout clinic-skills__grid">
             {% for skill in skills %}
-            <div class="column" style="flex: 0 1 280px; max-width: 280px; margin: 0.5rem; min-width: 0; box-sizing: border-box;">
-                <div class="card" style="height:100%;">
-                    <div class="card__body" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; width: 100%; box-sizing: border-box; overflow-wrap: break-word; word-break: break-word; min-width: 0;">
+            <div class="column clinic-skills__column">
+                <div class="card clinic-skills__card">
+                    <div class="card__body clinic-skills__body">
 
                         <a href="{% url 'single-skill' skill.id %}">
                             <img class="profile_image profile_image--md"
@@ -37,30 +36,22 @@
                                  alt="skill image" />
                         </a>
 
-                        <div>
-                            <a href="{% url 'single-skill' skill.id %}" style="text-decoration:none;">
-                                <h3 style="font-size:1.8rem; font-weight:700; color:var(--color-sub); margin:0.3rem 0;">
-                                    {{ skill.name }}
-                                </h3>
+                        <div class="clinic-skills__info">
+                            <a href="{% url 'single-skill' skill.id %}" class="clinic-skills__title-link">
+                                <h3 class="clinic-skills__title">{{ skill.name }}</h3>
                             </a>
-                            <p style="font-size:0.8rem; color:var(--color-gray); margin:0.2rem 0;">
-                                Created: {{ skill.created }}
-                            </p>
+                            <p class="clinic-skills__date">{{ skill.created|date:"d M Y" }}</p>
                         </div>
 
-                        <p class="card__clamp" style="font-size:1.2rem; color:var(--color-text); text-align:center;">
-                            {{ skill.description }}
-                        </p>
+                        <p class="card__clamp clinic-skills__desc">{{ skill.description }}</p>
 
-                        <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--link" style="font-size:1.2rem;">
+                        <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--link clinic-skills__more">
                             More →
                         </a>
 
-                        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem;">
+                        <div class="clinic-skills__tags">
                             {% for tag in skill.tags.all %}
-                            <span class="btn btn--sm btn--sub--outline" style="margin-right:0; cursor:default;">
-                {{ tag }}
-              </span>
+                            <span class="btn btn--sm btn--sub--outline clinic-skills__tag">{{ tag }}</span>
                             {% endfor %}
                         </div>
 
@@ -68,7 +59,6 @@
                 </div>
             </div>
             {% endfor %}
-
         </div>
     </div>
 </section>

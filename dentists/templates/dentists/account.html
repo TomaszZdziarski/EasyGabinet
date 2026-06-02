@@ -10,31 +10,35 @@
             <div class="card text-center">
                 <div class="card__body profile">
                     <a class="btn btn--main btn--sm" href="{% url 'edit-account' %}">Edit</a>
-                    <img class="profile_image profile_image--lg" src="{% if profile.photo %}{{profile.photo.url}}{% else %}{% static 'media/user-default.png' %}{% endif %}" />
+                    <img class="profile_image profile_image--lg"
+                         src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}" />
                     <h2 class="profile__name">{{ user.first_name }} {{ user.last_name }}</h2>
                     <p class="profile__title">{{ profile.short_intro }}</p>
                     <p class="profile__location">PESEL: {{ user.pesel }}</p>
                     <ul class="profile__social">
-                        {% if profile.social_github %}<li><a href="{{profile.social_github}}" target="_blank"><i class="im im-github"></i></a></li>{% endif %}
-                        {% if profile.social_twitter %}<li><a href="{{profile.social_twitter}}" target="_blank"><i class="im im-twitter"></i></a></li>{% endif %}
-                        {% if profile.social_linkedin %}<li><a href="{{profile.social_linkedin}}" target="_blank"><i class="im im-linkedin"></i></a></li>{% endif %}
-                        {% if profile.social_website %}<li><a href="{{profile.social_website}}" target="_blank"><i class="im im-globe"></i></a></li>{% endif %}
+                        {% if profile.social_github %}<li><a href="{{ profile.social_github }}" target="_blank"><i class="im im-github"></i></a></li>{% endif %}
+                        {% if profile.social_twitter %}<li><a href="{{ profile.social_twitter }}" target="_blank"><i class="im im-twitter"></i></a></li>{% endif %}
+                        {% if profile.social_linkedin %}<li><a href="{{ profile.social_linkedin }}" target="_blank"><i class="im im-linkedin"></i></a></li>{% endif %}
+                        {% if profile.social_website %}<li><a href="{{ profile.social_website }}" target="_blank"><i class="im im-globe"></i></a></li>{% endif %}
                     </ul>
-                    <a href="{% url 'inbox' %}" class="btn btn--sub btn--lg" style="position:relative;">Inbox{% if unread_count > 0 %}
-                        <span style="position:absolute; top:-1.2rem; right:-1.2rem; background:white; border-radius:999px; padding:0.2rem; display:flex; align-items:center; justify-content:center;">
-                            <span style="background:red; color:white; border-radius:999px; font-size:1rem; font-weight:700; min-width:1.8rem; height:1.8rem; display:flex; align-items:center; justify-content:center; padding:0 0.4rem;">
-                                {{ unread_count }}
-                            </span>
-                        </span>
-                        {% endif %} </a><br><br>
 
-                    <a href="{% url 'available-appointments' profile.id current_year current_month %}" class="btn btn--sub btn--lg">Schedule</a><br><br>
-                    <a href="{% url 'patient-list' %}" class="btn btn--sub btn--lg">Patients</a><br><br>
-                    {% if patient.id %}
-                    <a href="{% url 'patient-account' patient.id %}" class="btn btn--sub btn--lg">Me as patient</a>
-                    {% else %}
-                    <a href="" class="btn btn--disabled">No own patient account</a>
-                    {% endif %}
+                    <div class="clinic-account__nav-buttons">
+                        <a href="{% url 'inbox' %}" class="btn btn--sub btn--lg" style="position:relative;">Inbox
+                            {% if unread_count > 0 %}
+                            <span class="clinic-nav__badge-wrap">
+                                <span class="clinic-nav__badge">{{ unread_count }}</span>
+                            </span>
+                            {% endif %}
+                        </a>
+                        <a href="{% url 'available-appointments' profile.id current_year current_month %}" class="btn btn--sub btn--lg">Schedule</a>
+                        <a href="{% url 'patient-list' %}" class="btn btn--sub btn--lg">Patients</a>
+                        {% if patient.id %}
+                        <a href="{% url 'patient-account' patient.id %}" class="btn btn--sub btn--lg">Me as patient</a>
+                        {% else %}
+                        <a href="" class="btn btn--disabled">No own patient account</a>
+                        {% endif %}
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -42,24 +46,21 @@
         <!-- RIGHT COLUMN: Content -->
         <div class="column column--2of3">
 
-            <!-- About -->
+            <!-- Profile title -->
             <div class="profileInfo">
                 <h1 class="profileInfo__title">{{ profile.get_full_name }}</h1>
                 <p class="profileInfo__subtitle">dentist account</p>
-
             </div>
 
-            <!-- About me -->
+            <!-- About Me -->
             <div class="account">
                 <h3 class="account__title">About Me</h3>
             </div>
-
-            <div class="card" style="margin-bottom: 1rem;">
+            <div class="card clinic-account__about-card">
                 <div class="card__body account-grid__card">
                     <p class="account-grid__desc profileInfo__about">{{ profile.bio }}</p>
                 </div>
             </div>
-
 
             <!-- Skills -->
             <div class="account">
@@ -70,7 +71,8 @@
                 {% for skill in skills %}
                 <div class="card">
                     <div class="card__body account-grid__card">
-                        <img class="account-grid__image" src="{% if skill.skill_image %}{{skill.skill_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        <img class="account-grid__image"
+                             src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
                         <h4 class="account-grid__title">{{ skill.name }}</h4>
                         <p class="account-grid__desc">{{ skill.description }}</p>
                         <div class="account-grid__actions">
@@ -91,7 +93,8 @@
                 {% for project in projects %}
                 <div class="card">
                     <div class="card__body account-grid__card">
-                        <img class="account-grid__image" src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        <img class="account-grid__image"
+                             src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
                         <h4 class="account-grid__title">{{ project.name }}</h4>
                         <p class="account-grid__desc">{{ project.description }}</p>
                         <div class="account-grid__actions">
@@ -112,7 +115,8 @@
                 <div class="card">
                     <div class="card__body account-grid__card">
                         <a href="{% url 'single-project' project.id %}">
-                            <img class="account-grid__image" src="{% if project.project_image %}{{project.project_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                            <img class="account-grid__image"
+                                 src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
                         </a>
                         <h4 class="account-grid__title">
                             <a href="{% url 'single-project' project.id %}">{{ project.name }}</a>
@@ -132,7 +136,8 @@
                 {% for article in articles %}
                 <div class="card">
                     <div class="card__body account-grid__card">
-                        <img class="account-grid__image" src="{% if article.article_image %}{{article.article_image.url}}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
+                        <img class="account-grid__image"
+                             src="{% if article.article_image %}{{ article.article_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}" />
                         <h4 class="account-grid__title">{{ article.title }}</h4>
                         <p class="account-grid__desc">{{ article.content }}</p>
                         <div class="account-grid__actions">
@@ -147,6 +152,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}

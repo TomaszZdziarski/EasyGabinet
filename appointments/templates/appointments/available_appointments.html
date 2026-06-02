@@ -11,12 +11,14 @@
             <div class="card__header">
                 <h3 class="card__headerTitle">Manage my schedule</h3>
             </div>
-            <div class="card__body" style="display:flex; flex-direction:row; flex-wrap:wrap; gap:0.6rem; align-items:center; padding:0.8rem 1.5rem;">
+            <div class="card__body card__body--manage" style="display:flex; flex-direction:row; flex-wrap:wrap; gap:0.6rem; align-items:center; padding:0.8rem 1.5rem;">
+
                 <a href="{% url 'calendar' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">See calendar</a>
                 <a href="{% url 'add-purposes' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">Visit types & prices</a>
                 <a href="{% url 'manage-schedule' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">My schedule</a>
                 <a href="{% url 'monthly-schedule' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">Monthly schedule</a>
-                <form action="{% url 'export_schedule' %}" method="GET" style="display:flex; gap:0.6rem; align-items:center; margin:0; flex-shrink:0;">
+
+                <form action="{% url 'export_schedule' %}" method="GET" class="export-form">
                     <span style="font-size:1.1rem; color:var(--color-text);">Export agenda:</span>
                     <input type="date" name="date" required style="padding:0.5rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.1rem;">
                     <button type="submit" class="btn btn--sub--outline btn--md" style="margin-right:0;">Export PDF</button>
@@ -40,13 +42,15 @@
                 <h3 class="card__headerTitle">{{ date|date:"l, d F Y" }}</h3>
             </div>
             <div class="card__body" style="padding:1.5rem;">
-                <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+
+                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap:0.5rem;">
+
                     {% for time_range, details in schedule.items %}
+
                     <div style="
             display:flex; flex-direction:column; align-items:center;
             padding:0.4rem 0.6rem; border-radius:0.5rem;
             border:1.5px solid var(--color-light);
-            min-width:7rem; max-width:9rem;
             {% if details.status == 'available' %}background:var(--color-success-bg);
             {% elif details.status == 'booked' %}background:var(--color-main-light);
             {% elif details.status == 'completed' %}background:var(--color-sub-lighter);
@@ -63,22 +67,24 @@
 
                         {% if details.status == 'available' %}
                         <a href="{% url 'create-appointment' dentist.id date|date:'Y-m-d' %}?start_time={{ time_range|slice:':5' }}"
-                           style="font-size:0.9rem; color:var(--color-success); font-weight:500; margin-top:0.2rem;">Book</a>
+                           class="slot-link slot-link--success">Book</a>
 
                         {% elif details.status in 'completed booked' %}
                         {% if user.is_authenticated and user.dentistProfile == dentist %}
-                        <a href="{% url 'update_appointment_status' details.appointment_id %}?date={{ selected_date }}"
-                           style="font-size:0.8rem; color:var(--color-main); margin-top:0.2rem;">Change status</a>
-                        <a href="{% url 'update-appointment-dentist' details.appointment_id %}"
-                           style="font-size:0.8rem; color:var(--color-sub);">Add desc.</a>
-                        <a href="{% url 'patient-history' details.patient.id %}"
-                           style="font-size:0.8rem; color:var(--color-sub);">Pat's hist</a>
+                        <div style="display:flex; flex-direction:column; align-items:center; gap:0.15rem; margin-top:0.2rem;">
+                            <a href="{% url 'update_appointment_status' details.appointment_id %}?date={{ selected_date }}"
+                               class="slot-link slot-link--main">⚙ Status</a>
+                            <a href="{% url 'update-appointment-dentist' details.appointment_id %}"
+                               class="slot-link slot-link--sub">📝 Desc</a>
+                            <a href="{% url 'patient-history' details.patient.id %}"
+                               class="slot-link slot-link--sub">👤 Patient</a>
+                        </div>
                         {% endif %}
 
                         {% elif details.status in 'did_not_occur cancelled' %}
                         {% if user.is_authenticated and user.dentistProfile == dentist %}
                         <a href="{% url 'update_appointment_status' details.appointment_id %}?date={{ selected_date }}"
-                           style="font-size:0.8rem; color:var(--color-error); margin-top:0.2rem;">Change status</a>
+                           class="slot-link slot-link--error">⚙ Status</a>
                         {% endif %}
                         {% endif %}
 
@@ -138,4 +144,29 @@
 
     generateCalendar(currentMonth, currentYear);
 </script>
+
+<!-- style for calendar only,to make it look better on mobile-->
+<style>
+    .export-form {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+        .export-form {
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .export-form input[type="date"] {
+            width: 100%;
+        }
+        .card__body--manage {
+            padding: 0.8rem 1rem !important;
+        }
+    }
+</style>
+
 {% endblock %}

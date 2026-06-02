@@ -2,13 +2,13 @@
 {% load static %}
 {% block content %}
 
-<div class="main-section" style="height:auto; padding: 3rem 2rem;">
+<div class="main-section main-section--search">
     <div class="container container--narrow">
-        <div class="main-section__box" style="margin-bottom:0;">
+        <div class="main-section__box main-section__box--search">
             <h3>Search for a Project</h3>
             <div class="main-section__search">
                 <form class="form" action="{% url 'projects' %}" method="get">
-                    <div class="form__field" style="padding-bottom:1rem;">
+                    <div class="form__field form__field--search">
                         <label for="formInput#search">Search by name, description, author or tag</label>
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
@@ -21,49 +21,43 @@
     </div>
 </div>
 
-<section style="padding: 3rem 0;">
+<section class="clinic-projects">
     <div class="container">
-        <div class="layout" style="justify-content:center; gap:1rem;">
-
+        <div class="layout clinic-projects__grid">
             {% for project in projects %}
-            <div class="column" style="flex: 0 1 360px; max-width:360px; margin:0.5rem;">
-                <div class="card" style="height:100%;padding:0.8rem;">
+            <div class="column clinic-projects__column">
+                <div class="card clinic-projects__card">
 
-                    <img class="project__thumbnail"
+                    <img class="clinic-projects__thumbnail"
                          src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
-                         alt="project thumbnail"
-                         style="width:100%; height:200px; object-fit:cover; display:block;" />
+                         alt="project thumbnail" />
 
-                    <div class="card__body" style="display:flex; flex-direction:column; gap:0.8rem;">
+                    <div class="card__body clinic-projects__body">
 
-                        <a href="{% url 'single-project' project.id %}" style="text-decoration:none;">
-                            <h3 style="font-size:1.8rem; font-weight:700; color:var(--color-sub); margin:0;">
-                                {{ project.name }}
-                            </h3>
+                        <a href="{% url 'single-project' project.id %}" class="clinic-projects__title-link">
+                            <h3 class="clinic-projects__title">{{ project.name }}</h3>
                         </a>
 
-                        <p style="font-size:1.1rem; color:var(--color-gray); margin:0;">
-                            Author: <a href="{% url 'single-profile' project.owner.id %}" style="color:var(--color-main);">{{ project.owner.user.get_full_name }}</a>
+                        <p class="clinic-projects__meta">
+                            Author: <a href="{% url 'single-profile' project.owner.id %}" class="clinic-projects__author">{{ project.owner.user.get_full_name }}</a>
                         </p>
 
-                        <p style="font-size:1.1rem; color:var(--color-gray); margin:0;">
-                            <span style="font-weight:500;">{{ project.vote_ratio }}%</span> Positive
+                        <p class="clinic-projects__votes">
+                            <span class="clinic-projects__votes-ratio">{{ project.vote_ratio }}%</span> Positive
                             ({{ project.vote_total }} Vote{{ project.vote_total|pluralize }})
                         </p>
 
-                        <p class="card__clamp" style="font-size:1.2rem; color:var(--color-text);">
+                        <p class="card__clamp clinic-projects__desc">
                             {{ project.description|slice:'120' }}...
                         </p>
 
-                        <a href="{% url 'single-project' project.id %}" class="btn btn--main--link" style="font-size:1.2rem;">
+                        <a href="{% url 'single-project' project.id %}" class="btn btn--main--link clinic-projects__more">
                             Read more →
                         </a>
 
-                        <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+                        <div class="clinic-projects__tags">
                             {% for tag in project.tags.all %}
-                            <span class="btn btn--sm btn--sub--outline" style="margin-right:0; cursor:default;">
-                                {{ tag }}
-                            </span>
+                            <span class="btn btn--sm btn--sub--outline clinic-projects__tag">{{ tag }}</span>
                             {% endfor %}
                         </div>
 
@@ -71,7 +65,6 @@
                 </div>
             </div>
             {% endfor %}
-
         </div>
     </div>
 </section>

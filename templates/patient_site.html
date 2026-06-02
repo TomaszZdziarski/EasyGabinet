@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>New TITLE</title>
+<title>EasyGabinet — Patient Portal</title>
 {% endblock title %}
 
 {% block content %}
@@ -11,14 +11,15 @@
     <div class="container container--narrow">
         <div class="main-section__box main-section__box--search">
             {% if user.is_authenticated and user.patientProfile %}
-            <h3>Welcome {{ user.first_name }}</h3>
+            <h3 class="clinic-hero__heading">Welcome back, {{ user.first_name }}</h3>
             {% else %}
-            <h3>Welcome on our site, please login to see your medical file</h3>
-            <div class="home__auth-buttons">
+            <h3 class="clinic-hero__heading">Your dental care, all in one place</h3>
+            <p class="clinic-hero__tagline">Log in to access your appointments and medical file.</p>
+            <div class="clinic-hero__actions">
                 <a href="{% url 'patient-login' %}" class="btn btn--sub btn--lg">
                     Login <i class="fas fa-sign-in-alt"></i>
                 </a>
-                <a href="{% url 'patient-register' %}" class="btn btn--sub btn--lg">
+                <a href="{% url 'patient-register' %}" class="btn btn--sub--outline btn--lg">
                     Register as patient
                 </a>
             </div>
@@ -27,26 +28,26 @@
     </div>
 </div>
 
-<section class="articles-section">
+<section class="clinic-posts">
     <div class="container container--narrow">
-        <h4 class="articles-section__title">Our Articles</h4>
+        <h4 class="clinic-posts__heading">Our Articles</h4>
 
         {% for article in articles %}
-        <div class="card articles-card">
-            <div class="card__body articles-card__body">
-                <div class="articles-card__author">
-                    <img class="articles-card__author-img"
+        <div class="card clinic-post-card">
+            <div class="card__body clinic-post-card__layout">
+                <div class="clinic-post-card__author">
+                    <img class="clinic-post-card__author-photo"
                          src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
                          alt="author photo" />
-                    <p class="articles-card__author-name">{{ article.author }}</p>
-                    <p class="articles-card__author-date">{{ article.publication_date|date:"d M Y" }}</p>
+                    <p class="clinic-post-card__author-name">{{ article.author }}</p>
+                    <p class="clinic-post-card__publish-date">{{ article.publication_date|date:"d M Y" }}</p>
                 </div>
-                <div class="articles-card__content">
+                <div class="clinic-post-card__body">
                     <a href="{% url 'single-article' article.id %}">
                         <h5 class="project__title">{{ article.title }}</h5>
                     </a>
-                    <p class="articles-card__excerpt">{{ article.content|slice:'180' }}...</p>
-                    <a href="{% url 'single-article' article.id %}" class="btn btn--main--link articles-card__link">
+                    <p class="clinic-post-card__excerpt">{{ article.content|slice:'180' }}...</p>
+                    <a href="{% url 'single-article' article.id %}" class="btn btn--main--link clinic-post-card__read-more">
                         Read more →
                     </a>
                 </div>
