@@ -49,6 +49,8 @@
                     </a>
                 </li>
                 <li class="clinic-nav__item"><a href="{% url 'patient-account' patient.id %}">My Account</a></li>
+                {% elif request.user.is_staff %}
+                <li class="clinic-nav__item"><a href="/admin_gabinet/">Admin Panel</a></li>
                 {% endif %}
 
                 <!-- MOBILE ONLY: greeting + logout -->
@@ -62,6 +64,10 @@
                 {% elif request.user.user_type == 'patient' %}
                 <li class="clinic-nav__item clinic-nav__item--mobile-only">
                     <a href="{% url 'patient-logout' %}">Log out</a>
+                </li>
+                {% elif request.user.is_staff %}
+                <li class="clinic-nav__item clinic-nav__item--mobile-only">
+                    <a href="{% url 'logout' %}">Log out</a>
                 </li>
                 {% endif %}
 
@@ -95,6 +101,8 @@
             <a href="{% url 'logout' %}" class="clinic-nav__logout">Log out</a>
             {% elif request.user.user_type == 'patient' %}
             <a href="{% url 'patient-logout' %}" class="clinic-nav__logout">Log out</a>
+            {% elif request.user.is_staff %}
+            <a href="{% url 'logout' %}" class="clinic-nav__logout">Log out</a>
             {% endif %}
 
             {% else %}

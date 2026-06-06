@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<section style="padding: 3rem 0;">
+<section class="clinic-project">
     <div class="container">
         <div class="layout">
 
@@ -20,7 +20,7 @@
                             <p class="profile__data-label">Skills used</p>
                             <div class="clinic-projects__tags">
                                 {% for skill in project.skill_used.all %}
-                                <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--outline btn--sm">{{ skill.name }}</a>
+                                <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--outline btn--sm clinic-projects__tag">{{ skill.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                         {% if project.source_link or project.demo_link %}
                         <div>
                             <p class="profile__data-label">Links</p>
-                            <div class="clinic-project__resources">
+                            <div class="clinic-project__links">
                                 {% if project.source_link %}
                                 <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md">
                                     <i class="im im-external-link"></i> Examples
@@ -62,13 +62,13 @@
 
                         <h2 class="project__title">{{ project.name }}</h2>
 
-                        <h5 class="account__title" style="margin-bottom:1rem;">About the Project</h5>
-                        <p class="profileInfo__about" style="padding:0;">{{ project.description }}</p>
+                        <h5 class="account__title clinic-project__about-heading">About the Project</h5>
+                        <p class="profileInfo__about clinic-project__desc">{{ project.description }}</p>
                     </div>
 
                     <!-- Feedback -->
                     <div class="clinic-project__feedback-header">
-                        <h5 class="card__headerTitle" style="text-align:left;">Feedback</h5>
+                        <h5 class="clinic-project__feedback-title">Feedback</h5>
                         <p class="profile__data">
                             {{ project.vote_ratio }}% Positive ({{ project.vote_total }} Vote{{ project.vote_total|pluralize:"s" }})
                         </p>
@@ -105,7 +105,7 @@
                                 {% endfor %}
                             </div>
                             {% endfor %}
-                            <button class="btn btn--main btn--md" type="submit" style="margin-top:1rem;">
+                            <button class="btn btn--main btn--md clinic-project__review-submit" type="submit">
                                 Add Review
                             </button>
                         </form>
