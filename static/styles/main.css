@@ -457,6 +457,20 @@ button:disabled, button[disabled] {
   margin: 1rem 0;
 }
 
+.profile__social li {
+  font-size: 2rem;
+  color: var(--color-sub-light);
+}
+
+.profile__social li a {
+  font-size: 2rem;
+  color: var(--color-main);
+}
+
+.profile__social li a:hover {
+  color: var(--color-sub);
+}
+
 .profileInfo {
   margin-bottom: 3rem;
   margin-top: 4rem;
