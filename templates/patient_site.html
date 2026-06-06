@@ -13,7 +13,7 @@
             {% if user.is_authenticated and user.patientProfile %}
             <h3 class="clinic-hero__heading">Welcome back, {{ user.first_name }}</h3>
             {% else %}
-            <h3 class="clinic-hero__heading">Your dental care, all in one place ZZZ</h3>
+            <h3 class="clinic-hero__heading">Your dental care, all in one place</h3>
             <p class="clinic-hero__tagline">Log in to access your appointments and medical file.</p>
             <div class="clinic-hero__actions">
                 <a href="{% url 'patient-login' %}" class="btn btn--sub btn--lg">
