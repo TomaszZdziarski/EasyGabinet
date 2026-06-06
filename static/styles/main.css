@@ -909,7 +909,7 @@ button:disabled, button[disabled] {
 }
 
 .clinic-nav__right { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; }
-.clinic-nav__greeting { font-size: 1.4rem; color: var(--color-main); font-weight: 500; }
+.clinic-nav__greeting { font-size: 1.4rem; color: var(--color-main); font-weight: 500; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
 .clinic-nav__logout {
   font-size: 1.3rem;
