@@ -87,8 +87,8 @@
 
             <!-- Actions -->
             <div class="patient__actions">
-                <a class="btn btn--sub btn--lg" href="{% url 'export_pdf' patient.id %}"><i class="im im-file"></i> to PDF</a>
-                <a class="btn btn--sub btn--lg" href="{% url 'calendar' dentist.id %}"><i class="im im-plus"></i> Appointment</a>
+                <a class="btn btn--sub--outline btn--md" href="{% url 'export_pdf' patient.id %}"><i class="im im-file"></i> Export to PDF</a>
+                <a class="btn btn--main btn--md" href="{% url 'calendar' dentist.id %}"><i class="im im-plus"></i> Book Appointment</a>
             </div>
 
             <!-- My Documents -->
@@ -98,10 +98,18 @@
 
             <div class="card clinic-patient__doc-upload">
                 <div class="card__body">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST" enctype="multipart/form-data" class="clinic-patient__doc-form">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <button class="btn btn--main btn--md clinic-patient__doc-submit" type="submit">Add Document</button>
+                        {% for field in form %}
+                        <div class="form__field clinic-patient__doc-field">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% for error in field.errors %}
+                            <p class="form__error">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                        <button class="btn btn--main btn--md" type="submit">Add Document</button>
                     </form>
                 </div>
             </div>

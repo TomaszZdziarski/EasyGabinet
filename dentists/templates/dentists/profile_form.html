@@ -2,35 +2,32 @@
 
 {% block content %}
 
-
-
 <div class="container">
     <div class="auth">
-
         <div class="column card">
             <div class="card__body">
 
+                <a class="clinic-back-btn" href="{% url 'account' %}">
+                    <i class="im im-angle-left"></i>
+                </a>
 
-            <a class="backButton" href="{% url 'account' %}"><i class="im im-angle-left"></i></a>
-            <br>
+                <form class="form" method="POST" action="{% url 'edit-account' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form__field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p class="form__error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
 
-            <form class="form" method="POST" action="{% url 'edit-account' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% for field  in form %}
+                    <input class="btn btn--sub btn--lg" type="submit" value="Submit" />
+                </form>
 
-                <!-- Input:Text -->
-                <div class="form__field">
-                    {{ field.label_tag }}
-                    {{ field }}
-
-                </div>
-
-                {% endfor %}
-
-                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
-            </form>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 

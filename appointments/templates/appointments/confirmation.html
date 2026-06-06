@@ -7,18 +7,16 @@
         <div class="card">
             <div class="card__body">
 
-                <div class="auth__header text-center">
+                <div class="auth__header">
                     <a href="/">
                         <img src="{% static 'media/icon.svg' %}" alt="icon" />
                     </a>
-                    <h3>Appointment Confirmed!</h3>
-                    <p>Your appointment has been successfully booked. Thank you for using our service!</p>
+                    <h3 class="auth__title">Appointment Confirmed!</h3>
+                    <p class="auth__subtitle">Your appointment has been successfully booked. Thank you for using our service!</p>
                 </div>
 
-                <div class="auth__actions" style="flex-direction: column; gap: 0.75rem; margin-top: 1.5rem;">
-
-                    <a class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1.1rem; line-height:1;" href="{% url 'patient-account' patient.id %}">&larr; Go back</a>
-
+                <div class="auth__actions">
+                    <a class="btn btn--sub--outline btn--md" href="{% url 'patient-account' patient.id %}">&larr; Go back</a>
                 </div>
 
             </div>

@@ -2,35 +2,32 @@
 {% load static %}
 {% block content %}
 
-
 <div class="container">
     <div class="auth">
         <div class="card">
             <div class="card__body">
 
+                <a class="clinic-back-btn" href="{% url 'account' %}">
+                    <i class="im im-angle-left"></i> Back
+                </a>
 
-            <a class="backButton" href="{% url 'account' %}"><i class="im im-angle-left"></i>Back</a>
-            <br>
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form__field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p class="form__error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
 
-            <form class="form" method="POST" enctype="multipart/form-data"> <!-- wihout enctype, it won't send any file
-                                                              but will send only fileds from a form -->
-                {% csrf_token %}
+                    <input class="btn btn--sub btn--lg" type="submit" value="Submit" />
+                </form>
 
-                {% for field in form %}
-
-                <!-- Input:Text -->
-                <div class="form__field">
-                    {{ field.label_tag }}
-                    {{ field }}
-                </div>
-
-                {% endfor %}
-
-                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
-            </form>
+            </div>
         </div>
-    </div>
-
     </div>
 </div>
 

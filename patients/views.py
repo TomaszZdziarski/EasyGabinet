@@ -22,10 +22,7 @@ from django.contrib.auth import get_user_model
 import os
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
-
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.pagesizes import letter
+from unidecode import unidecode
 
 
 
@@ -227,21 +224,54 @@ def export_treatment_history_pdf(request, patient_id):
     patient = get_object_or_404(PatientProfile, id=patient_id)
     appointments = patient.appointments.all().order_by('-date')
 
+    full_name = patient.user.get_full_name()
+    normalized_name = unidecode(full_name)
+
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{patient.user.get_full_name()}_treatment_history.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="{normalized_name}_treatment_history.pdf"'
+
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.lib import colors
+    from reportlab.lib.pagesizes import letter
 
     doc = SimpleDocTemplate(response, pagesize=letter)
     styles = getSampleStyleSheet()
     story = []
 
-    story.append(Paragraph(f"Treatment History for {patient.user.get_full_name()}", styles['Title']))
+    story.append(Paragraph(f"Treatment History for {full_name}", styles['Title']))
     story.append(Spacer(1, 20))
 
-    for appointment in appointments:
-        story.append(Paragraph(f"<b>Appointment:</b> {appointment.date} at {appointment.start_time} with {appointment.dentist.user.get_full_name()}", styles['Normal']))
-        story.append(Paragraph(f"<b>Diagnosis:</b> {appointment.diagnosis}", styles['Normal']))
-        story.append(Paragraph(f"<b>Treatment:</b> {appointment.description}", styles['Normal']))
-        story.append(Spacer(1, 15))
+    if appointments.exists():
+        table_data = [['Nr', 'Date', 'Time', 'Dentist', 'Diagnosis', 'Treatment', 'Status']]
+
+        for i, appointment in enumerate(appointments, start=1):
+            table_data.append([
+                str(i),
+                str(appointment.date),
+                str(appointment.start_time),
+                Paragraph(appointment.dentist.user.get_full_name(), styles['Normal']),
+                Paragraph(appointment.diagnosis or '—', styles['Normal']),
+                Paragraph(appointment.description or '—', styles['Normal']),
+                appointment.status,
+            ])
+
+        table = Table(table_data, colWidths=[25, 65, 45, 100, 110, 110, 55])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, -1), 10),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.whitesmoke]),
+            ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ]))
+        story.append(table)
+        story.append(Spacer(1, 20))
+
+        story.append(Paragraph(f"Total appointments: {appointments.count()}", styles['Normal']))
+
+    else:
+        story.append(Paragraph("No treatment history found for this patient.", styles['Normal']))
 
     doc.build(story)
     return response

@@ -13,16 +13,14 @@
                     <div class="card__header">
                         <h5 class="card__headerTitle">Resources</h5>
                     </div>
-                    <div class="card__body" style="display:flex; flex-direction:column; gap:1.2rem;">
+                    <div class="card__body clinic-project__resources">
 
                         {% if project.skill_used.all %}
                         <div>
-                            <p style="font-size:0.85rem; font-weight:600; color:var(--color-gray); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">Skills used</p>
-                            <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+                            <p class="profile__data-label">Skills used</p>
+                            <div class="clinic-projects__tags">
                                 {% for skill in project.skill_used.all %}
-                                <a href="{% url 'single-skill' skill.id %}"
-                                   class="btn btn--main--outline btn--sm"
-                                   style="margin-right:0;">{{ skill.name }}</a>
+                                <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--outline btn--sm">{{ skill.name }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -30,15 +28,15 @@
 
                         {% if project.source_link or project.demo_link %}
                         <div>
-                            <p style="font-size:0.85rem; font-weight:600; color:var(--color-gray); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em;">Links</p>
-                            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                            <p class="profile__data-label">Links</p>
+                            <div class="clinic-project__resources">
                                 {% if project.source_link %}
-                                <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                                <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md">
                                     <i class="im im-external-link"></i> Examples
                                 </a>
                                 {% endif %}
                                 {% if project.demo_link %}
-                                <a href="{{ project.demo_link }}" target="_blank" class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                                <a href="{{ project.demo_link }}" target="_blank" class="btn btn--sub--outline btn--md">
                                     <i class="im im-external-link"></i> Literature
                                 </a>
                                 {% endif %}
@@ -59,24 +57,19 @@
                          alt="Project thumbnail" />
 
                     <div class="card__body">
+                        <p class="profile__data-label">Project creator:</p>
+                        <a href="{% url 'single-profile' project.owner.id %}">{{ project.owner.user.get_full_name }}</a>
 
-                        <p style="font-size:1.2rem; color:var(--color-gray); margin:0;">Project creator:</p>
-                        <a href="{% url 'single-profile' project.owner.id %}"
-                           style="font-size:1.4rem; font-weight:500;">{{ project.owner.name }}</a>
-
-                        <h2 style="font-size:2.4rem; font-weight:700; color:var(--color-sub); margin:1rem 0 0.5rem;">
-                            {{ project.name }}
-                        </h2>
+                        <h2 class="project__title">{{ project.name }}</h2>
 
                         <h5 class="account__title" style="margin-bottom:1rem;">About the Project</h5>
                         <p class="profileInfo__about" style="padding:0;">{{ project.description }}</p>
-
                     </div>
 
                     <!-- Feedback -->
-                    <div class="card__header" style="border-top:1.5px solid var(--color-light); border-bottom:none; padding:1rem 1.5rem;">
+                    <div class="clinic-project__feedback-header">
                         <h5 class="card__headerTitle" style="text-align:left;">Feedback</h5>
-                        <p style="font-size:1.2rem; margin:0.3rem 0;">
+                        <p class="profile__data">
                             {{ project.vote_ratio }}% Positive ({{ project.vote_total }} Vote{{ project.vote_total|pluralize:"s" }})
                         </p>
                     </div>
@@ -84,33 +77,32 @@
                     <div class="card__body">
 
                         {% if not request.user.is_authenticated %}
-                        <a href="{% url 'login-dentist' %}?next={{ request.path }}"
-                           class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                        <a href="{% url 'login-dentist' %}?next={{ request.path }}" class="btn btn--sub--outline btn--md">
                             Login as dentist to leave a review
                         </a>
 
                         {% elif request.user.user_type != 'dentist' %}
-                        <p style="color: var(--color-gray); font-size: 1.4rem;">
-                            Only dentists can leave reviews on projects.
-                        </p>
-                        <a href="{% url 'switch-to-dentist' request.path %}"
-                           class="btn btn--sub--outline btn--md" style="margin-right:0;">
+                        <p class="clinic-project__notice">Only dentists can leave reviews on projects.</p>
+                        <a href="{% url 'switch-to-dentist' request.path %}" class="btn btn--sub--outline btn--md">
                             Switch to dentist account
                         </a>
 
                         {% elif request.user.dentistProfile.id in project.reviewers %}
-                        <p>You have already submitted your review for this project.</p>
+                        <p class="clinic-project__notice">You have already submitted your review for this project.</p>
 
                         {% elif request.user.dentistProfile == project.owner %}
-                        <p>You cannot review your own work.</p>
+                        <p class="clinic-project__notice">You cannot review your own work.</p>
 
                         {% else %}
-                        <form action="{% url 'single-project' project.id %}" method="POST">
+                        <form action="{% url 'single-project' project.id %}" method="POST" class="form">
                             {% csrf_token %}
                             {% for field in form %}
                             <div class="form__field">
-                                <label>{{ field.label }}</label>
+                                {{ field.label_tag }}
                                 {{ field }}
+                                {% for error in field.errors %}
+                                <p class="form__error">{{ error }}</p>
+                                {% endfor %}
                             </div>
                             {% endfor %}
                             <button class="btn btn--main btn--md" type="submit" style="margin-top:1rem;">
@@ -120,21 +112,20 @@
                         {% endif %}
 
                         <!-- Comments -->
-                        <div style="margin-top:2rem; display:flex; flex-direction:column; gap:1rem;">
+                        <div class="clinic-project__reviews">
                             {% for review in project.review_set.all %}
                             {% if review.body %}
-                            <div style="display:flex; align-items:flex-start; gap:1rem; padding:1rem; border-radius:0.5rem; border:1.5px solid var(--color-light);">
-                                <a href="{% url 'single-profile' review.owner.id %}" style="flex-shrink:0;">
+                            <div class="clinic-project__review">
+                                <a href="{% url 'single-profile' review.owner.id %}">
                                     <img class="profile_image profile_image--sm"
                                          src="{% if review.owner.photo %}{{ review.owner.photo.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
                                          alt="{{ review.owner.name }}" />
                                 </a>
                                 <div>
-                                    <a href="{% url 'single-profile' review.owner.id %}"
-                                       style="font-size:1.3rem; font-weight:500; color:var(--color-sub);">
+                                    <a href="{% url 'single-profile' review.owner.id %}" class="profileSkill__title">
                                         {{ review.owner.name }}
                                     </a>
-                                    <p style="margin-top:0.3rem;">{{ review.body|linebreaksbr }}</p>
+                                    <p>{{ review.body|linebreaksbr }}</p>
                                 </div>
                             </div>
                             {% endif %}

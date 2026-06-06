@@ -1,14 +1,20 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div style="display:flex; justify-content:center; align-items:center; min-height:60vh;">
-    <div class="card" style="max-width:500px; width:100%; text-align:center; padding:3rem 2rem;">
-        <div style="font-size:4rem; margin-bottom:1rem;">❌</div>
-        <h2 style="color:var(--color-error); margin-bottom:1rem;">Appointment Cancelled</h2>
-        <p style="color:var(--color-gray); margin-bottom:2rem;">
-            Your appointment has been cancelled. If this was a mistake or you'd like to book again, use the button below.
-        </p>
-        <a href="{% url 'calendar_no_dentist' %}" class="btn btn--sub--outline">Book a New Appointment</a>
+<div class="container">
+    <div class="auth">
+        <div class="card">
+            <div class="card__body">
+                <div class="auth__header">
+                    <div class="clinic-status__icon">❌</div>
+                    <h3 class="auth__title">Appointment Cancelled</h3>
+                    <p class="auth__subtitle">Your appointment has been cancelled. If this was a mistake or you'd like to book again, use the button below.</p>
+                </div>
+                <div class="auth__actions">
+                    <a href="{% url 'calendar_no_dentist' %}" class="btn btn--sub--outline btn--md">Book a New Appointment</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

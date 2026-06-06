@@ -8,30 +8,30 @@
         <div class="card">
             <div class="card__body">
 
-                <div class="auth__header text-center">
+                <div class="auth__header">
                     <a href="/">
                         <img src="{% static 'media/icon.svg' %}" alt="icon" />
                     </a>
-                    <h3>Book Appointment</h3>
+                    <h3 class="auth__title">Book Appointment</h3>
                 </div>
 
-                <form method="post" action="{% url 'create-appointment' dentist.id date %}" class="auth__form">
+                <form method="post" action="{% url 'create-appointment' dentist.id date %}" class="form auth__form">
                     {% csrf_token %}
 
                     {% for field in form %}
                     <div class="form__field">
-                        <label>{{ field.label }}</label>
+                        {{ field.label_tag }}
                         {{ field }}
                         {% for error in field.errors %}
-                        <p style="color:red;">{{ error }}</p>
+                        <p class="form__error">{{ error }}</p>
                         {% endfor %}
                     </div>
                     {% endfor %}
 
                     <div class="form__field">
                         <label>Price</label>
-                        <p id="price-display" style="margin: 0; font-size: 1rem;">Not available</p>
-                        <p style="margin: 0.4rem 0 0; font-size: 0.875rem;">
+                        <p id="price-display" class="profile__data">Not available</p>
+                        <p class="clinic-book__currency-links">
                             <a href="#" id="convert-to-usd">PLN → USD</a> &nbsp;|&nbsp;
                             <a href="#" id="convert-to-eur">PLN → EUR</a> &nbsp;|&nbsp;
                             <a href="#" id="convert-to-uah">PLN → UAH</a>
@@ -41,11 +41,9 @@
                     <input type="hidden" name="converted_price" id="converted-price" />
                     <input type="hidden" name="currency" id="currency" />
 
-                    <div id="schedule-error" style="display:none; color:red; font-size:0.875rem; margin-top: 0.5rem;">
+                    <p id="schedule-error" class="form__error" style="display:none;">
                         An error occurred while fetching the schedule.
-                    </div>
-
-                    <br>
+                    </p>
 
                     <div class="auth__actions">
                         <input class="btn btn--sub btn--lg" type="submit" id="submit-button" value="Appointment" />
@@ -54,12 +52,10 @@
                 </form>
 
                 {% if form.errors %}
-                <div class="error" style="margin-top: 1rem;">
-                    {% for error in form.non_field_errors %}
-                    <p style="color:red;">{{ error }}</p>
-                    <p>If unsure, please call our clinic's reception: 42 22 222222.</p>
-                    {% endfor %}
-                </div>
+                {% for error in form.non_field_errors %}
+                <p class="form__error">{{ error }}</p>
+                <p class="clinic-book__reception-note">If unsure, please call our clinic's reception: 42 22 222222.</p>
+                {% endfor %}
                 {% endif %}
 
             </div>

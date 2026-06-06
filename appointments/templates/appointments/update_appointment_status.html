@@ -7,24 +7,24 @@
         <div class="card">
             <div class="card__body">
 
-                <div class="auth__header text-center" style="margin-bottom: 1.5rem;">
-                    <h3>Update Appointment Status</h3>
+                <div class="auth__header">
+                    <h3 class="auth__title">Update Appointment Status</h3>
                 </div>
 
-                <form method="POST" class="auth__form">
+                <form method="POST" class="form auth__form">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="form__field">
-                        <label>{{ field.label }}</label>
+                        {{ field.label_tag }}
                         {{ field }}
                         {% for error in field.errors %}
-                        <p style="color:red;">{{ error }}</p>
+                        <p class="form__error">{{ error }}</p>
                         {% endfor %}
                     </div>
                     {% endfor %}
 
-                    <div class="auth__actions" style="margin-top: 1.5rem;">
-                        <a href="javascript:history.back()" class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1rem;">Go Back</a>
+                    <div class="auth__actions">
+                        <a href="javascript:history.back()" class="btn btn--sub--outline btn--md">Go Back</a>
                         <input class="btn btn--main btn--md" type="submit" value="Update Status" />
                     </div>
                 </form>

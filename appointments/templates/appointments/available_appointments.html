@@ -3,25 +3,24 @@
 
 {% block content %}
 
-<section style="padding: 3rem 0;">
-    <div class="container container--full" style="flex-direction: column; gap: 1.5rem;">
+<section class="clinic-available">
+    <div class="container container--full clinic-available__container">
 
         {% if user.is_authenticated and user.dentistProfile == dentist %}
-        <div class="card" style="width:100%;">
+        <div class="card">
             <div class="card__header">
-                <h3 class="card__headerTitle">Manage my schedule</h3>
+                <h5 class="card__headerTitle">Manage my schedule</h5>
             </div>
-            <div class="card__body card__body--manage" style="display:flex; flex-direction:row; flex-wrap:wrap; gap:0.6rem; align-items:center; padding:0.8rem 1.5rem;">
+            <div class="card__body clinic-available__manage">
+                <a href="{% url 'calendar' dentist.id %}" class="btn btn--sub--outline btn--md">See calendar</a>
+                <a href="{% url 'add-purposes' dentist.id %}" class="btn btn--sub--outline btn--md">Visit types & prices</a>
+                <a href="{% url 'manage-schedule' dentist.id %}" class="btn btn--sub--outline btn--md">My schedule</a>
+                <a href="{% url 'monthly-schedule' dentist.id %}" class="btn btn--sub--outline btn--md">Monthly schedule</a>
 
-                <a href="{% url 'calendar' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">See calendar</a>
-                <a href="{% url 'add-purposes' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">Visit types & prices</a>
-                <a href="{% url 'manage-schedule' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">My schedule</a>
-                <a href="{% url 'monthly-schedule' dentist.id %}" class="btn btn--sub--outline btn--md" style="margin-right:0; white-space:nowrap; font-size:1.1rem;">Monthly schedule</a>
-
-                <form action="{% url 'export_schedule' %}" method="GET" class="export-form">
-                    <span style="font-size:1.1rem; color:var(--color-text);">Export agenda:</span>
-                    <input type="date" name="date" required style="padding:0.5rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.1rem;">
-                    <button type="submit" class="btn btn--sub--outline btn--md" style="margin-right:0;">Export PDF</button>
+                <form action="{% url 'export_schedule' %}" method="GET" class="clinic-available__export-form">
+                    <span class="clinic-available__export-label">Export agenda:</span>
+                    <input type="date" name="date" required class="clinic-available__date-input">
+                    <button type="submit" class="btn btn--sub--outline btn--md">Export PDF</button>
                 </form>
             </div>
         </div>
@@ -29,41 +28,24 @@
         <a href="{% url 'calendar' dentist.id %}" class="btn btn--main">See whole calendar</a>
         {% endif %}
 
-        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-            <a href="{% url 'available-appointments' dentist.id previous_month.year previous_month.month %}" class="btn btn--sub--outline" style="margin-right:0;">← Previous month</a>
-            <a href="{% url 'available-appointments' dentist.id current_year current_month %}" class="btn btn--main" style="margin-right:0;">Current month</a>
-            <a href="{% url 'available-appointments' dentist.id next_month.year next_month.month %}" class="btn btn--sub--outline" style="margin-right:0;">Next month →</a>
+        <div class="clinic-available__nav">
+            <a href="{% url 'available-appointments' dentist.id previous_month.year previous_month.month %}" class="btn btn--sub--outline">← Previous month</a>
+            <a href="{% url 'available-appointments' dentist.id current_year current_month %}" class="btn btn--main">Current month</a>
+            <a href="{% url 'available-appointments' dentist.id next_month.year next_month.month %}" class="btn btn--sub--outline">Next month →</a>
         </div>
 
         {% for date, schedule in monthly_schedule.items %}
         {% if schedule %}
-        <div class="card" style="width:100%;">
+        <div class="card">
             <div class="card__header">
-                <h3 class="card__headerTitle">{{ date|date:"l, d F Y" }}</h3>
+                <h5 class="card__headerTitle">{{ date|date:"l, d F Y" }}</h5>
             </div>
-            <div class="card__body" style="padding:1.5rem;">
-
-                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); gap:0.5rem;">
-
+            <div class="card__body">
+                <div class="clinic-available__slots">
                     {% for time_range, details in schedule.items %}
-
-                    <div style="
-            display:flex; flex-direction:column; align-items:center;
-            padding:0.4rem 0.6rem; border-radius:0.5rem;
-            border:1.5px solid var(--color-light);
-            {% if details.status == 'available' %}background:var(--color-success-bg);
-            {% elif details.status == 'booked' %}background:var(--color-main-light);
-            {% elif details.status == 'completed' %}background:var(--color-sub-lighter);
-            {% else %}background:var(--color-error-bg);{% endif %}">
-
-                        <span style="font-size:1.1rem; font-weight:500; color:var(--color-sub);">{{ time_range|slice:':5' }}</span>
-                        <span style="font-size:0.9rem;
-              {% if details.status == 'available' %}color:var(--color-success);
-              {% elif details.status == 'booked' %}color:var(--color-main);
-              {% elif details.status == 'completed' %}color:var(--color-sub);
-              {% else %}color:var(--color-error);{% endif %}">
-              {{ details.status }}
-            </span>
+                    <div class="clinic-available__slot clinic-available__slot--{{ details.status }}">
+                        <span class="clinic-available__slot-time">{{ time_range|slice:':5' }}</span>
+                        <span class="clinic-available__slot-status">{{ details.status }}</span>
 
                         {% if details.status == 'available' %}
                         <a href="{% url 'create-appointment' dentist.id date|date:'Y-m-d' %}?start_time={{ time_range|slice:':5' }}"
@@ -71,7 +53,7 @@
 
                         {% elif details.status in 'completed booked' %}
                         {% if user.is_authenticated and user.dentistProfile == dentist %}
-                        <div style="display:flex; flex-direction:column; align-items:center; gap:0.15rem; margin-top:0.2rem;">
+                        <div class="clinic-available__slot-actions">
                             <a href="{% url 'update_appointment_status' details.appointment_id %}?date={{ selected_date }}"
                                class="slot-link slot-link--main">⚙ Status</a>
                             <a href="{% url 'update-appointment-dentist' details.appointment_id %}"
@@ -87,7 +69,6 @@
                            class="slot-link slot-link--error">⚙ Status</a>
                         {% endif %}
                         {% endif %}
-
                     </div>
                     {% endfor %}
                 </div>
@@ -96,77 +77,13 @@
         {% endif %}
         {% endfor %}
 
-        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
-            <a href="{% url 'available-appointments' dentist.id previous_month.year previous_month.month %}" class="btn btn--sub--outline" style="margin-right:0;">← Previous month</a>
-            <a href="{% url 'available-appointments' dentist.id current_year current_month %}" class="btn btn--main" style="margin-right:0;">Current month</a>
-            <a href="{% url 'available-appointments' dentist.id next_month.year next_month.month %}" class="btn btn--sub--outline" style="margin-right:0;">Next month →</a>
+        <div class="clinic-available__nav">
+            <a href="{% url 'available-appointments' dentist.id previous_month.year previous_month.month %}" class="btn btn--sub--outline">← Previous month</a>
+            <a href="{% url 'available-appointments' dentist.id current_year current_month %}" class="btn btn--main">Current month</a>
+            <a href="{% url 'available-appointments' dentist.id next_month.year next_month.month %}" class="btn btn--sub--outline">Next month →</a>
         </div>
 
     </div>
 </section>
-
-{% endblock %}
-
-{% block extra_scripts %}
-<script>
-    const date = new Date();
-    let currentMonth = date.getMonth();
-    let currentYear = date.getFullYear();
-
-    function generateCalendar(month, year) {
-      const calendarGrid = document.getElementById('calendarGrid');
-      calendarGrid.innerHTML = '';
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      document.getElementById('monthName').textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
-      for (let i = 0; i < firstDay; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.classList.add('day');
-        calendarGrid.appendChild(emptyCell);
-      }
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dayCell = document.createElement('div');
-        dayCell.classList.add('day');
-        dayCell.textContent = day;
-        dayCell.classList.add(Math.random() > 0.5 ? 'available' : 'booked');
-        calendarGrid.appendChild(dayCell);
-      }
-    }
-
-    document.getElementById('prevMonth')?.addEventListener('click', function() {
-      if (--currentMonth < 0) { currentMonth = 11; currentYear--; }
-      generateCalendar(currentMonth, currentYear);
-    });
-    document.getElementById('nextMonth')?.addEventListener('click', function() {
-      if (++currentMonth > 11) { currentMonth = 0; currentYear++; }
-      generateCalendar(currentMonth, currentYear);
-    });
-
-    generateCalendar(currentMonth, currentYear);
-</script>
-
-<!-- style for calendar only,to make it look better on mobile-->
-<style>
-    .export-form {
-        display: flex;
-        gap: 0.6rem;
-        align-items: center;
-        margin: 0;
-        flex-shrink: 0;
-    }
-
-    @media (max-width: 768px) {
-        .export-form {
-            flex-wrap: wrap;
-            width: 100%;
-        }
-        .export-form input[type="date"] {
-            width: 100%;
-        }
-        .card__body--manage {
-            padding: 0.8rem 1rem !important;
-        }
-    }
-</style>
 
 {% endblock %}

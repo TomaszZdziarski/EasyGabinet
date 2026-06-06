@@ -7,10 +7,9 @@
         <div class="column card">
             <div class="card__body">
 
-                <a class="backButton" href="{% url 'patient-account' patient_id=patient.id %}">
+                <a class="clinic-back-btn" href="{% url 'patient-account' patient_id=patient.id %}">
                     <i class="im im-angle-left"></i>
                 </a>
-                <br>
 
                 <form class="form" method="POST" action="{% url 'patient-account-edit' patient_id=patient.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -19,7 +18,7 @@
                         {{ field.label_tag }}
                         {{ field }}
                         {% for error in field.errors %}
-                        <p style="color: var(--color-error);">{{ error }}</p>
+                        <p class="form__error">{{ error }}</p>
                         {% endfor %}
                     </div>
                     {% endfor %}

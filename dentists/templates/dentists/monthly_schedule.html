@@ -2,39 +2,39 @@
 {% load static %}
 {% block content %}
 
-<section style="padding: 3rem 0;">
-    <div class="container" style="flex-direction:column; align-items:center; gap:1.5rem;">
+<section class="clinic-purposes">
+    <div class="container clinic-purposes__container">
 
-        <div class="card" style="width:100%; max-width:700px;">
+        <div class="card clinic-purposes__card">
             <div class="card__header">
                 <h5 class="card__headerTitle">Monthly Schedule</h5>
             </div>
-            <div class="card__body" style="display:flex; flex-direction:column; gap:1rem;">
+            <div class="card__body clinic-purposes__list">
 
                 {% for schedule, days in monthly_schedule.items %}
-                <div style="border:1.5px solid var(--color-light); border-radius:0.5rem; overflow:hidden;">
-                    <div style="background:var(--color-sub-lighter); padding:0.8rem 1.2rem;">
-                        <p style="font-weight:500; color:var(--color-sub); margin:0;">
+                <div class="clinic-schedule__block">
+                    <div class="clinic-schedule__block-header">
+                        <p class="clinic-purposes__item-name">
                             {{ schedule.get_day_of_week_display }}:
                             {{ schedule.start_time|time:"g:i a" }} — {{ schedule.end_time|time:"g:i a" }}
                         </p>
                     </div>
-                    <div style="padding:0.8rem 1.2rem; display:flex; flex-wrap:wrap; gap:0.5rem;">
+                    <div class="clinic-schedule__block-days">
                         {% for day, start, end in days %}
-                        <span style="font-size:1.2rem; color:var(--color-text); background:var(--color-bg); border:1.5px solid var(--color-light); border-radius:0.5rem; padding:0.3rem 0.8rem;">
-              {{ day|date:"l, d F Y" }}: {{ start|time:"g:i a" }} — {{ end|time:"g:i a" }}
-            </span>
+                        <span class="clinic-schedule__day-badge">
+                            {{ day|date:"l, d F Y" }}: {{ start|time:"g:i a" }} — {{ end|time:"g:i a" }}
+                        </span>
                         {% endfor %}
                     </div>
                 </div>
                 {% empty %}
-                <p style="text-align:center; color:var(--color-gray);">No schedules available for this month.</p>
+                <p class="clinic-patient-list__empty">No schedules available for this month.</p>
                 {% endfor %}
 
             </div>
         </div>
 
-        <a href="{% url 'account' %}" class="btn btn--sub--outline" style="margin-right:0;">← Back to account</a>
+        <a href="{% url 'account' %}" class="btn btn--sub--outline">← Back to account</a>
 
     </div>
 </section>

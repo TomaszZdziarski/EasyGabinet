@@ -2,14 +2,14 @@
 {% load static %}
 {% block content %}
 
-<section style="padding: 3rem 0;">
+<section class="clinic-skills">
     <div class="container">
-        <div class="layout" style="align-items:flex-start; gap:2rem;">
+        <div class="layout">
 
             <!-- LEFT COLUMN: Image -->
-            <div class="column column--1of3" style="padding-top:0;">
+            <div class="column column--1of3">
                 <div class="card">
-                    <img style="width:100%; height:20rem; object-fit:cover; display:block;"
+                    <img class="project__thumbnail"
                          src="{% if single_skill.skill_image %}{{ single_skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
                          alt="skill thumbnail" />
                 </div>
@@ -22,12 +22,8 @@
                         <h5 class="card__headerTitle">{{ single_skill.name }}</h5>
                     </div>
                     <div class="card__body">
-                        <h3 style="font-size:1.6rem; color:var(--color-sub-light); margin-bottom:1rem;">
-                            What is the {{ single_skill.name }} skill all about?
-                        </h3>
-                        <p style="font-size:1.4rem; color:var(--color-text); line-height:1.8; margin-top:0.5rem;">
-                            {{ single_skill.description }}
-                        </p>
+                        <h6 class="profileSkill__title">What is the {{ single_skill.name }} skill all about?</h6>
+                        <p class="profileSkill__info">{{ single_skill.description }}</p>
                     </div>
                 </div>
             </div>

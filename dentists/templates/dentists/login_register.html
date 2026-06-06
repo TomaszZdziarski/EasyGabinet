@@ -9,34 +9,33 @@
         <div class="column card">
             <div class="card__body">
 
-                <div class="auth__header text-center" style="margin-bottom: 1.5rem;">
+                <div class="auth__header">
                     <a href="/">
                         <img src="{% static 'media/icon.svg' %}" alt="icon" />
                     </a>
-                    <h3>New dentist account</h3>
+                    <h3 class="auth__title">New dentist account</h3>
                 </div>
 
-                <form method="POST" action="{% url 'register-user' %}" class="auth__form">
+                <form method="POST" action="{% url 'register-user' %}" class="form auth__form">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="form__field">
-                        <label for="formInput#text">{{ field.label }}</label>
+                        {{ field.label_tag }}
                         {{ field }}
                         {% for error in field.errors %}
-                        <p style="color:red;">{{ error }}</p>
+                        <p class="form__error">{{ error }}</p>
                         {% endfor %}
                     </div>
                     {% endfor %}
-
 
                     <div class="auth__actions">
                         <input class="btn btn--sub btn--lg" type="submit" value="Sign In" />
                     </div>
                 </form>
 
-                <div class="auth__alternative" style="margin-top: 2rem; text-align: center; padding-bottom: 1rem;">
-                    <p style="color: var(--color-gray); font-size: 1rem; margin-bottom: 0.5rem;">Already have an Account?</p>
-                    <a href="{% url 'login-dentist' %}" class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1rem;">Log In as Dentist/Manager</a>
+                <div class="auth__alternative">
+                    <p class="auth__alternative-text">Already have an Account?</p>
+                    <a href="{% url 'login-dentist' %}" class="btn btn--sub--outline btn--md">Log In as Dentist/Manager</a>
                 </div>
 
             </div>
@@ -51,17 +50,16 @@
         <div class="card">
             <div class="card__body">
 
-                <div class="auth__header text-center" style="margin-bottom: 1.5rem;">
+                <div class="auth__header">
                     <a href="/">
                         <img src="{% static 'media/icon.svg' %}" alt="icon" />
                     </a>
-                    <h3>Dentist's Login</h3>
-
+                    <h3 class="auth__title">Dentist's Login</h3>
                 </div>
 
                 <form action="{% url 'login-dentist' %}" method="POST" class="form auth__form">
                     {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.GET.next }}">  {# ADD THIS #}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
 
                     <div class="form__field">
                         <label for="formInput#text">E-mail:</label>
@@ -81,9 +79,9 @@
                     </div>
                 </form>
 
-                <div class="auth__alternative" style="margin-top: 2rem; text-align: center; padding-bottom: 1rem;">
-                    <p style="color: var(--color-gray); font-size: 1rem; margin-bottom: 0.5rem;">Don't have an Account?</p>
-                    <a href="{% url 'register-user' %}" class="btn btn--sub--outline btn--md" style="margin-right:0; font-size:1rem;">Sign Up</a>
+                <div class="auth__alternative">
+                    <p class="auth__alternative-text">Don't have an Account?</p>
+                    <a href="{% url 'register-user' %}" class="btn btn--sub--outline btn--md">Sign Up</a>
                 </div>
 
             </div>

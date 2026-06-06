@@ -2,18 +2,38 @@
 {% load static %}
 {% block content %}
 
+<div class="container">
+    <div class="auth">
+        <div class="card">
+            <div class="card__body">
 
-<div class="auth">
-    <div class="card">
-        <div class="auth__header text-center">
-<form method="POST" action="{% url 'add-document' patient.id %}">
-    {% csrf_token %}
-    {{ form.as_p }}  <!-- Render the form fields -->
-    <button type="submit">Add Documents</button>
+                <div class="auth__header">
+                    <a href="/">
+                        <img src="{% static 'media/icon.svg' %}" alt="icon" />
+                    </a>
+                    <h3 class="auth__title">Add Document</h3>
+                </div>
 
-</form>
+                <form method="POST" action="{% url 'add-document' patient.id %}" class="form auth__form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form__field">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p class="form__error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
 
-        </div></div></div>
+                    <div class="auth__actions">
+                        <button type="submit" class="btn btn--sub btn--lg">Add Document</button>
+                    </div>
+                </form>
 
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

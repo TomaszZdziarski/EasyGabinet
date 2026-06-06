@@ -1,22 +1,26 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-<div class="error-page">
-    <div class="card text-center">
-        <div class="card-header">
-            <h2>Access Denied</h2>
+
+<div class="container">
+    <div class="auth">
+        <div class="card">
+            <div class="card__body">
+                <div class="auth__header">
+                    <div class="clinic-status__icon">🚫</div>
+                    <h3 class="auth__title">Access Denied</h3>
+                    <p class="auth__subtitle">You do not have permission to view this page or perform this action.</p>
+                </div>
+                <div class="auth__actions">
+                    {% if request.user == patient %}
+                    <a href="{% url 'patient-account' %}" class="btn btn--sub--outline btn--md">Return to Account</a>
+                    {% else %}
+                    <a href="{% url 'account' %}" class="btn btn--sub--outline btn--md">Return to Account</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-        <p>You do not have permission to view this page or perform this action.</p>
-
-        {% if request.user == patient %}
-        <a href="{% url 'patient-account' %}" class="btn btn-primary">Return to Homepage</a>
-        {% else%}
-        <a href="{% url 'account' %}" class="btn btn-primary">Return to Homepage</a>
-        {% endif %}
-
     </div>
-</div>
 </div>
 
 {% endblock %}

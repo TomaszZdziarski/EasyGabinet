@@ -2,53 +2,50 @@
 {% load static %}
 {% block content %}
 
-<section style="padding: 3rem 0;">
-    <div class="container" style="flex-direction:column; align-items:center; gap:1.5rem;">
+<section class="clinic-purposes">
+    <div class="container clinic-purposes__container">
 
-        <div class="card" style="width:100%; max-width:700px;">
+        <div class="card clinic-purposes__card">
             <div class="card__header">
                 <h5 class="card__headerTitle">Add Appointment Purpose</h5>
             </div>
             <div class="card__body">
-                <form method="post" action="{% url 'add-purposes' dentist.id %}">
+                <form method="post" action="{% url 'add-purposes' dentist.id %}" class="form">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="form__field">
-                        <label>{{ field.label }}</label>
+                        {{ field.label_tag }}
                         {{ field }}
+                        {% for error in field.errors %}
+                        <p class="form__error">{{ error }}</p>
+                        {% endfor %}
                     </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn--main btn--md" style="margin-top:1rem; margin-right:0;">
-                        Add Purpose
-                    </button>
+                    <button type="submit" class="btn btn--main btn--md clinic-purposes__submit">Add Purpose</button>
                 </form>
             </div>
         </div>
 
-        <div class="card" style="width:100%; max-width:700px;">
+        <div class="card clinic-purposes__card">
             <div class="card__header">
                 <h5 class="card__headerTitle">Existing Appointment Purposes</h5>
             </div>
-            <div class="card__body" style="display:flex; flex-direction:column; gap:0.8rem;">
+            <div class="card__body clinic-purposes__list">
                 {% for purpose in dentist.purposes.all %}
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:0.8rem 1rem; border:1.5px solid var(--color-light); border-radius:0.5rem;">
+                <div class="clinic-purposes__item">
                     <div>
-                        <p style="margin:0; font-weight:500; color:var(--color-sub);">{{ purpose.purpose }}</p>
-                        <p style="margin:0; font-size:1.2rem; color:var(--color-gray);">{{ purpose.price_PLN }} PLN</p>
+                        <p class="clinic-purposes__item-name">{{ purpose.purpose }}</p>
+                        <p class="clinic-purposes__item-price">{{ purpose.price_PLN }} PLN</p>
                     </div>
-                    <a href="{% url 'delete-appointment-purpose' purpose.pk %}"
-                       class="btn btn--sm"
-                       style="color:var(--color-error); border:2px solid var(--color-error); margin-right:0;">
-                        Delete
-                    </a>
+                    <a href="{% url 'delete-appointment-purpose' purpose.pk %}" class="btn btn--sm btn--delete">Delete</a>
                 </div>
                 {% empty %}
-                <p style="text-align:center; color:var(--color-gray);">No purposes added yet.</p>
+                <p class="clinic-patient-list__empty">No purposes added yet.</p>
                 {% endfor %}
             </div>
         </div>
 
-        <a href="{% url 'account' %}" class="btn btn--sub--outline" style="margin-right:0;">← Back to account</a>
+        <a href="{% url 'account' %}" class="btn btn--sub--outline">← Back to account</a>
 
     </div>
 </section>
