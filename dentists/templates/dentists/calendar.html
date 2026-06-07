@@ -10,7 +10,7 @@
             <div class="card__header">
                 <h5 class="card__headerTitle">
                     {% if dentist %}
-                    Calendar — Dr. {{ dentist.user.first_name }} {{ dentist.user.last_name }} — {{ month }}/{{ year }}
+                    Dr. {{ dentist.user.first_name }} {{ dentist.user.last_name }}
                     {% else %}
                     Please select a dentist.
                     {% endif %}

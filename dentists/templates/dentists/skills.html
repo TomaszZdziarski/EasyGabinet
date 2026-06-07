@@ -3,64 +3,66 @@
 
 {% block content %}
 
-<div class="main-section main-section--search">
-    <div class="container container--narrow">
-        <div class="main-section__box main-section__box--search">
+<div class="clinic-skills__wrapper">
+
+    <div class="main-section main-section--search">
+        <div class="clinic-skills__container">
             <h3>Search for a skill</h3>
+            <label class="main-section__search-label" for="formInput#search">Search by skill name, description, dentist name or tag</label>
             <div class="main-section__search">
                 <form class="form" action="{% url 'main' %}" method="get">
-                    <div class="form__field form__field--search">
-                        <label for="formInput#search">Search by skill name, description, dentist name or tag</label>
+                    <div class="main-section__search-bar">
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
                                placeholder="e.g. orthodontics, implants, John Smith..." />
+                        <input class="btn btn--sub" type="submit" value="Search" />
                     </div>
-                    <input class="btn btn--sub btn--md" type="submit" value="Search" />
                 </form>
             </div>
         </div>
     </div>
-</div>
 
-<section class="clinic-skills">
-    <div class="container">
-        <div class="layout clinic-skills__grid">
-            {% for skill in skills %}
-            <div class="column clinic-skills__column">
-                <div class="card clinic-skills__card">
-                    <div class="card__body clinic-skills__body">
+    <section class="clinic-skills">
+        <div class="clinic-skills__container">
+            <div class="layout clinic-skills__grid">
+                {% for skill in skills %}
+                <div class="column clinic-skills__column">
+                    <div class="card clinic-skills__card">
+                        <div class="card__body clinic-skills__body">
 
-                        <a href="{% url 'single-skill' skill.id %}">
-                            <img class="profile_image profile_image--md"
-                                 src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
-                                 alt="skill image" />
-                        </a>
-
-                        <div class="clinic-skills__info">
-                            <a href="{% url 'single-skill' skill.id %}" class="clinic-skills__title-link">
-                                <h3 class="clinic-skills__title">{{ skill.name }}</h3>
+                            <a href="{% url 'single-skill' skill.id %}">
+                                <img class="profile_image profile_image--md"
+                                     src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                                     alt="skill image" />
                             </a>
-                            <p class="clinic-skills__date">{{ skill.created|date:"d M Y" }}</p>
+
+                            <div class="clinic-skills__info">
+                                <a href="{% url 'single-skill' skill.id %}" class="clinic-skills__title-link">
+                                    <h3 class="clinic-skills__title">{{ skill.name }}</h3>
+                                </a>
+                                <p class="clinic-skills__date">{{ skill.created|date:"d M Y" }}</p>
+                            </div>
+
+                            <p class="card__clamp clinic-skills__desc">{{ skill.description }}</p>
+
+                            <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--link clinic-skills__more">
+                                More →
+                            </a>
+
+                            <div class="clinic-skills__tags">
+                                {% for tag in skill.tags.all %}
+                                <span class="btn btn--sm btn--sub--outline clinic-skills__tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+
                         </div>
-
-                        <p class="card__clamp clinic-skills__desc">{{ skill.description }}</p>
-
-                        <a href="{% url 'single-skill' skill.id %}" class="btn btn--main--link clinic-skills__more">
-                            More →
-                        </a>
-
-                        <div class="clinic-skills__tags">
-                            {% for tag in skill.tags.all %}
-                            <span class="btn btn--sm btn--sub--outline clinic-skills__tag">{{ tag }}</span>
-                            {% endfor %}
-                        </div>
-
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
+    </section>
+
+</div>
 
 {% endblock content %}

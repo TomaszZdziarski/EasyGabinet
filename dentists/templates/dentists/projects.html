@@ -2,71 +2,73 @@
 {% load static %}
 {% block content %}
 
-<div class="main-section main-section--search">
-    <div class="container container--narrow">
-        <div class="main-section__box main-section__box--search">
+<div class="clinic-projects__wrapper">
+
+    <div class="main-section main-section--search">
+        <div class="clinic-projects__container">
             <h3>Search for a Project</h3>
+            <label class="main-section__search-label" for="formInput#search">Search by name, description, author or tag</label>
             <div class="main-section__search">
                 <form class="form" action="{% url 'projects' %}" method="get">
-                    <div class="form__field form__field--search">
-                        <label for="formInput#search">Search by name, description, author or tag</label>
+                    <div class="main-section__search-bar">
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
                                placeholder="e.g. clinic app, John Smith..." />
+                        <input class="btn btn--sub" type="submit" value="Search" />
                     </div>
-                    <input class="btn btn--sub btn--md" type="submit" value="Search" />
                 </form>
             </div>
         </div>
     </div>
-</div>
 
-<section class="clinic-projects">
-    <div class="container">
-        <div class="layout clinic-projects__grid">
-            {% for project in projects %}
-            <div class="column clinic-projects__column">
-                <div class="card clinic-projects__card">
+    <section class="clinic-projects">
+        <div class="clinic-projects__container">
+            <div class="layout clinic-projects__grid">
+                {% for project in projects %}
+                <div class="column clinic-projects__column">
+                    <div class="card clinic-projects__card">
 
-                    <img class="clinic-projects__thumbnail"
-                         src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
-                         alt="project thumbnail" />
+                        <img class="clinic-projects__thumbnail"
+                             src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                             alt="project thumbnail" />
 
-                    <div class="card__body clinic-projects__body">
+                        <div class="card__body clinic-projects__body">
 
-                        <a href="{% url 'single-project' project.id %}" class="clinic-projects__title-link">
-                            <h3 class="clinic-projects__title">{{ project.name }}</h3>
-                        </a>
+                            <a href="{% url 'single-project' project.id %}" class="clinic-projects__title-link">
+                                <h3 class="clinic-projects__title">{{ project.name }}</h3>
+                            </a>
 
-                        <p class="clinic-projects__meta">
-                            Author: <a href="{% url 'single-profile' project.owner.id %}" class="clinic-projects__author">{{ project.owner.user.get_full_name }}</a>
-                        </p>
+                            <p class="clinic-projects__meta">
+                                Author: <a href="{% url 'single-profile' project.owner.id %}" class="clinic-projects__author">{{ project.owner.user.get_full_name }}</a>
+                            </p>
 
-                        <p class="clinic-projects__votes">
-                            <span class="clinic-projects__votes-ratio">{{ project.vote_ratio }}%</span> Positive
-                            ({{ project.vote_total }} Vote{{ project.vote_total|pluralize }})
-                        </p>
+                            <p class="clinic-projects__votes">
+                                <span class="clinic-projects__votes-ratio">{{ project.vote_ratio }}%</span> Positive
+                                ({{ project.vote_total }} Vote{{ project.vote_total|pluralize }})
+                            </p>
 
-                        <p class="card__clamp clinic-projects__desc">
-                            {{ project.description|slice:'120' }}...
-                        </p>
+                            <p class="card__clamp clinic-projects__desc">
+                                {{ project.description|slice:'120' }}...
+                            </p>
 
-                        <a href="{% url 'single-project' project.id %}" class="btn btn--main--link clinic-projects__more">
-                            Read more →
-                        </a>
+                            <a href="{% url 'single-project' project.id %}" class="btn btn--main--link clinic-projects__more">
+                                Read more →
+                            </a>
 
-                        <div class="clinic-projects__tags">
-                            {% for tag in project.tags.all %}
-                            <span class="btn btn--sm btn--sub--outline clinic-projects__tag">{{ tag }}</span>
-                            {% endfor %}
+                            <div class="clinic-projects__tags">
+                                {% for tag in project.tags.all %}
+                                <span class="btn btn--sm btn--sub--outline clinic-projects__tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+
                         </div>
-
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
+    </section>
+
+</div>
 
 {% endblock %}

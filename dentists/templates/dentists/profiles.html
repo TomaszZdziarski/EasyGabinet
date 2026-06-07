@@ -3,64 +3,66 @@
 
 {% block content %}
 
-<div class="main-section main-section--search">
-    <div class="container container--narrow">
-        <div class="main-section__box main-section__box--search">
+<div class="profiles__wrapper">
+
+    <div class="main-section main-section--search">
+        <div class="profiles__container">
             <h3>Search for a Dentist</h3>
+            <label class="main-section__search-label" for="formInput#search">Search by dentist name, skill, project name or description</label>
             <div class="main-section__search">
                 <form class="form" action="{% url 'profiles' %}" method="get">
-                    <div class="form__field form__field--search">
-                        <label for="formInput#search">Search by dentist name, skill, project name or description</label>
+                    <div class="main-section__search-bar">
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
                                placeholder="e.g. orthodontics, implants, John Smith..." />
+                        <input class="btn btn--sub" type="submit" value="Search" />
                     </div>
-                    <input class="btn btn--sub btn--md" type="submit" value="Search" />
                 </form>
             </div>
         </div>
     </div>
-</div>
 
-<section class="profiles-section">
-    <div class="container">
-        <div class="layout profiles-grid">
-            {% for profile in profiles %}
-            <div class="column profiles-grid__column">
-                <div class="card profiles-grid__card">
-                    <div class="card__body profiles-grid__body">
+    <section class="profiles-section">
+        <div class="profiles__container">
+            <div class="layout profiles-grid">
+                {% for profile in profiles %}
+                <div class="column profiles-grid__column">
+                    <div class="card profiles-grid__card">
+                        <div class="card__body profiles-grid__body">
 
-                        <a href="{% url 'single-profile' profile.id %}">
-                            <img class="profile_image profile_image--md"
-                                 src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
-                                 alt="profile image" />
-                        </a>
+                            <a href="{% url 'single-profile' profile.id %}">
+                                <img class="profile_image profile_image--md"
+                                     src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                                     alt="profile image" />
+                            </a>
 
-                        <div class="profiles-grid__info">
-                            <h3 class="profiles-grid__name">
-                                {{ profile.user.first_name }} {{ profile.user.last_name }}
-                            </h3>
-                            <p class="profiles-grid__function">{{ profile.function }}</p>
-                            <p class="profiles-grid__intro">{{ profile.short_intro }}</p>
-                        </div>
-
-                        <p class="profiles-grid__bio">{{ profile.bio|slice:'190' }}...</p>
-
-                        <div class="profiles-grid__skills">
-                            <p class="profiles-grid__skills-label">My skills:</p>
-                            <div class="profiles-grid__skills-list">
-                                {% for skill in profile.skill_set.all|slice:"5" %}
-                                <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm btn--skill">{{ skill.name }}</a>
-                                {% endfor %}
+                            <div class="profiles-grid__info">
+                                <h3 class="profiles-grid__name">
+                                    {{ profile.user.first_name }} {{ profile.user.last_name }}
+                                </h3>
+                                <p class="profiles-grid__function">{{ profile.function }}</p>
+                                <p class="profiles-grid__intro">{{ profile.short_intro }}</p>
                             </div>
-                        </div>
 
+                            <p class="profiles-grid__bio">{{ profile.bio|slice:'190' }}...</p>
+
+                            <div class="profiles-grid__skills">
+                                <p class="profiles-grid__skills-label">My skills:</p>
+                                <div class="profiles-grid__skills-list">
+                                    {% for skill in profile.skill_set.all|slice:"5" %}
+                                    <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm btn--skill">{{ skill.name }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
+    </section>
+
+</div>
 
 {% endblock content %}

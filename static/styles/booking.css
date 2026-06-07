@@ -78,7 +78,7 @@
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
-  font-size: 1.2rem;
+  font-size: var(--text-sm); /* 12px */
 }
 
 .calendar-item th,
@@ -86,9 +86,15 @@
   width: calc(100% / 7);
   padding: 0.25rem;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: var(--text-sm); /* 12px */
   overflow: hidden;
   border: 1px solid var(--color-light);
+}
+
+.calendar-item td.today {
+  outline: 2px solid var(--color-main);
+  outline-offset: -2px;
+  font-weight: var(--fw-bold);
 }
 
 .calendar-item th {
@@ -115,7 +121,7 @@
   border: 1px solid var(--color-light);
   padding: 0.6rem;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: var(--text-sm); /* 12px */
 }
 
 .calendar-table th {
@@ -128,35 +134,12 @@
   background-color: var(--color-bg);
 }
 
-.calendar-table td.available {
-  background-color: var(--color-success-bg);
-  color: var(--color-success);
-}
-
-.calendar-table td.passed {
-  background-color: var(--color-white-light);
-  color: var(--color-gray);
-}
-
-.calendar-table td.booked {
-  background-color: var(--color-main-light);
-  color: var(--color-main);
-}
-
-.calendar-table td.completed {
-  background-color: var(--color-sub-lighter);
-  color: var(--color-sub);
-}
-
-.calendar-table td.cancelled {
-  background-color: var(--color-error-bg);
-  color: var(--color-error);
-}
-
-.calendar-table td.did_not_occur {
-  background-color: var(--color-sub);
-  color: var(--color-white);
-}
+.calendar-table td.available   { background-color: var(--color-success-bg);  color: var(--color-success); }
+.calendar-table td.passed      { background-color: var(--color-white-light);  color: var(--color-gray); }
+.calendar-table td.booked      { background-color: var(--color-main-light);   color: var(--color-main); }
+.calendar-table td.completed   { background-color: var(--color-sub-lighter);  color: var(--color-sub); }
+.calendar-table td.cancelled   { background-color: var(--color-error-bg);     color: var(--color-error); }
+.calendar-table td.did_not_occur { background-color: var(--color-sub);        color: var(--color-white); }
 
 /*=======================
   CLINIC CALENDAR PAGE
@@ -189,7 +172,7 @@
 }
 
 .clinic-calendar__label {
-  font-size: 1.4rem;
+  font-size: var(--text-md); /* 14px */
   color: var(--color-sub);
   font-weight: 500;
 }
@@ -198,7 +181,8 @@
   padding: 0.6rem 1rem;
   border: 1.5px solid var(--color-light);
   border-radius: 0.5rem;
-  font-size: 1.4rem;
+  font-size: var(--text-md); /* 14px */
   color: var(--color-sub);
   background: var(--color-white);
 }
+

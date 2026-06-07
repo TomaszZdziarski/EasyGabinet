@@ -609,7 +609,7 @@ def generate_calendar(request, dentist_id=None, year=None, month=None, num_month
         html_calendar = cal.formatmonth(year_offset, month_offset)
         # Modify the HTML calendar based on appointment and schedule data
 
-        html_calendar = mark_appointments(html_calendar, day_status,dentist.id, year_offset, month_offset)
+        html_calendar = mark_appointments(html_calendar, day_status,dentist.id, year_offset, month_offset,today)
         html_calendars.append((year_offset, month_offset, html_calendar))
 
 
@@ -617,7 +617,9 @@ def generate_calendar(request, dentist_id=None, year=None, month=None, num_month
     return render(request, 'dentists/calendar.html', context)
 
 # marks appointments with css colors depending on status
-def mark_appointments(html_calendar, day_status,dentist_id, year, month):
+def mark_appointments(html_calendar, day_status, dentist_id, year, month, today=None):
+
+    print(f"today={today}, year={year}, month={month}")
 
     soup = BeautifulSoup(html_calendar, 'html.parser')
     table = soup.find('table') # creates the table
@@ -633,6 +635,10 @@ def mark_appointments(html_calendar, day_status,dentist_id, year, month):
         try:
             day = int(td.text)
             status = day_status[day]
+
+            if today and datetime(year, month, day).date() == today:
+                td['class'] = td.get('class', []) + ['today']
+
             if status == 'available':
                 # create link for booking
                 # Create link for booking
