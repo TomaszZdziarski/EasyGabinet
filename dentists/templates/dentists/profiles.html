@@ -51,6 +51,8 @@
                                 <div class="profiles-grid__skills-list">
                                     {% for skill in profile.skill_set.all|slice:"5" %}
                                     <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm btn--skill">{{ skill.name }}</a>
+                                    {% empty %}
+                                    <span class="profiles-grid__skills-empty">not filled yet</span>
                                     {% endfor %}
                                 </div>
                             </div>

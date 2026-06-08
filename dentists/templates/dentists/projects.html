@@ -22,8 +22,9 @@
     </div>
 
     <section class="clinic-projects">
-        <div class="clinic-projects__container">
+        <div class="clinic-projects__grid-container">
             <div class="layout clinic-projects__grid">
+
                 {% for project in projects %}
                 <div class="column clinic-projects__column">
                     <div class="card clinic-projects__card">
@@ -47,17 +48,17 @@
                                 ({{ project.vote_total }} Vote{{ project.vote_total|pluralize }})
                             </p>
 
-                            <p class="card__clamp clinic-projects__desc">
-                                {{ project.description|slice:'120' }}...
-                            </p>
+                            <p class="card__clamp clinic-projects__desc">{{ project.description }}</p>
 
                             <a href="{% url 'single-project' project.id %}" class="btn btn--main--link clinic-projects__more">
                                 Read more →
                             </a>
 
                             <div class="clinic-projects__tags">
-                                {% for tag in project.tags.all %}
-                                <span class="btn btn--sm btn--sub--outline clinic-projects__tag">{{ tag }}</span>
+                                {% for tag in project.tags.all|slice:"3" %}
+                                <span class="btn btn--sm clinic-projects__tag">{{ tag.name|slice:":10" }}</span>
+                                {% empty %}
+                                <span class="clinic-projects__tags-empty">no tags yet</span>
                                 {% endfor %}
                             </div>
 
