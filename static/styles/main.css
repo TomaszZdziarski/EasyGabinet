@@ -2,8 +2,9 @@
   CSS VARIABLES
 ========================*/
 
+
+/* BACKUP — original colors 2026-06-13
 :root {
-  /* Colors */
   --color-main: #5aa5b9;
   --color-main-light: #e6faff;
   --color-sub: #3f4156;
@@ -15,54 +16,71 @@
   --color-bg: #f8fafd;
   --color-white: #fffefd;
   --color-white-light: #f3f3f3;
+}
+*/
+
+
+:root {
+  /* Colors */
+  --color-main: #3392FF;
+  --color-main-light: #F0F7FF;
+  --color-sub: #495563;
+  --color-sub-light: #5F6A77;
+  --color-sub-lighter: #E1E5EA;
+  --color-text: #9098A2;
+  --color-gray: #A8B2BD;
+  --color-light: #C3CBD5;
+  --color-bg: #F1F3F5;
+  --color-white: #FFFFFF;
+  --color-white-light: #FAFBFB;
   --color-success: #359e64;
   --color-success-bg: #def8e8;
   --color-error: #fc4b0b;
   --color-error-bg: #fff2ee;
+  --color-nav-bg: #004799;
 
   /* Fonts */
   --font-base: 'Poppins', arial, helvetica, 'Segoe UI', roboto, ubuntu, sans-serif;
-  --font-monospace: 'Fira Code', 'Courier New', courier, monospace;
 
-  /* Font weights */
-  --fw-regular: 400;
-  --fw-medium:  500;
-  --fw-bold:    700;
 
-  /* Legacy aliases — zachowane dla kompatybilności wstecznej */
-  --font-regular: 400;
-  --font-medium:  500;
-  --font-bold:    700;
-
-  /* ================================================
+/* ================================================
      TYPOGRAPHY SCALE — design system v1.0
      Base: 16px (browser default, 1rem = 16px)
      Line heights: headings 125%, body 150%
      ================================================ */
 
-  /* Heading sizes */
-  --heading-6xl: 3rem;      /* 48px */
-  --heading-5xl: 2.5rem;    /* 40px */
-  --heading-4xl: 2rem;      /* 32px */
-  --heading-3xl: 1.5rem;    /* 24px */
-  --heading-2xl: 1.25rem;   /* 20px */
-  --heading-xl:  1.125rem;  /* 18px */
+  /* Font weights */
+    --fw-regular: 400;
+    --fw-medium:  500;
+    --fw-bold:    700;
 
-  /* Body text sizes */
-  --text-lg:   1.125rem;  /* 18px */
-  --text-base: 1rem;      /* 16px */
-  --text-md:   0.875rem;  /* 14px */
-  --text-sm:   0.75rem;   /* 12px */
-  --text-xs:   0.6875rem; /* 11px */
+    /* Legacy aliases */
+    --font-regular: 400;
+    --font-medium:  500;
+    --font-bold:    700;
 
-  /* Line heights */
-  --lh-heading: 1.25;
-  --lh-body:    1.5;
+    /* Heading sizes */
+    --heading-6xl: 3rem;
+    --heading-5xl: 2.5rem;
+    --heading-4xl: 2rem;
+    --heading-3xl: 1.5rem;
+    --heading-2xl: 1.25rem;
+    --heading-xl:  1.125rem;
 
-  /* Other */
-  --generic-shadow: 0 2px 6px 1px rgba(100, 100, 100, 0.15);
-  --generic-transition: all 0.3s ease-in-out;
-}
+    /* Body text sizes */
+    --text-lg:   1.125rem;
+    --text-base: 1rem;
+    --text-md:   0.875rem;
+    --text-sm:   0.75rem;
+    --text-xs:   0.6875rem;
+
+    /* Line heights */
+    --lh-heading: 1.25;
+    --lh-body:    1.5;
+
+    /* Other */
+    --generic-shadow: 0 2px 6px 1px rgba(100, 100, 100, 0.15);
+    --generic-transition: all 0.3s ease-in-out;
 
 /*=======================
   BASE / RESET
@@ -1117,7 +1135,7 @@ button:disabled, button[disabled] {
 .clinic-nav {
   position: sticky;
   z-index: 111;
-  background-color: var(--color-sub);
+  background-color: var(--color-nav-bg);
   padding: 1.5rem 0;
   border-bottom: 2px solid #2e3047;
 }
