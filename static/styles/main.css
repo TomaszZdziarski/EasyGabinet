@@ -343,7 +343,19 @@ a {
 .btn i { pointer-events: none !important; }
 
 .btn--main { background-color: var(--color-main); color: var(--color-white); }
-.btn--sub  { background-color: var(--color-sub);  color: var(--color-white); }
+/* In main.css */
+
+.btn--main--soft {
+    background-color: #84BCFB; /* Blue 300 */
+    color: #004799;            /* Blue 700 — dark for contrast */
+}
+
+.btn--main--soft:hover {
+    background-color: #DBECFF; /* Blue 200 — lightens on hover */
+    opacity: 1;
+}
+
+.btn--sub { background-color: var(--color-main); color: var(--color-white); }
 
 .btn.btn--main--outline {
   background-color: transparent;
