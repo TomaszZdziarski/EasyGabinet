@@ -1763,7 +1763,7 @@ button:disabled, button[disabled] {
   CLINIC PROJECT (single)
 ========================*/
 
-.clinic-project__resources { display: flex; flex-direction: column; gap: 1.2rem; }
+.clinic-project__resources { display: flex; flex-direction: column; gap: 1.8rem; }
 .clinic-project__feedback-header { border-top: 1.5px solid var(--color-light); padding: 1rem 1.5rem; }
 
 .clinic-project__notice {
@@ -1788,6 +1788,12 @@ button:disabled, button[disabled] {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
+  width: auto;
+}
+
+.clinic-project__links .btn {
+    width: auto;
+    flex-shrink: 0;
 }
 
 .clinic-project__about-heading { margin-bottom: 1rem; }
@@ -1800,6 +1806,8 @@ button:disabled, button[disabled] {
   color: var(--color-sub);
   margin-bottom: 0.3rem;
 }
+.clinic-project__resources .profile__data-label { margin-bottom: 0.5rem; }
+
 
 /*=======================
   CLINIC PROFILE (public dentist)

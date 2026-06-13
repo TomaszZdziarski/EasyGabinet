@@ -26,21 +26,44 @@
                         </div>
                         {% endif %}
 
+
+                        {% if project.tags.all %}
+                        <div>
+                            <p class="profile__data-label">Tags</p>
+                            <div class="clinic-projects__tags">
+                                {% for tag in project.tags.all %}
+                                <span class="btn btn--sm clinic-projects__tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
                         {% if project.source_link or project.demo_link %}
                         <div>
-                            <p class="profile__data-label">Links</p>
+
+
+
                             <div class="clinic-project__links">
                                 {% if project.source_link %}
-                                <a href="{{ project.source_link }}" target="_blank" class="btn btn--sub--outline btn--md">
-                                    <i class="im im-external-link"></i> Examples
-                                </a>
+                                <div>
+                                    <p class="profile__data-label">Examples</p>
+                                    <a href="{{ project.source_link }}" target="_blank" class="btn btn--main--outline btn--md">
+                                        <i class="im im-external-link"></i> Link 1
+                                    </a>
+                                </div>
                                 {% endif %}
+
                                 {% if project.demo_link %}
-                                <a href="{{ project.demo_link }}" target="_blank" class="btn btn--sub--outline btn--md">
-                                    <i class="im im-external-link"></i> Literature
-                                </a>
+                                <div>
+                                    <p class="profile__data-label">Literature</p>
+                                    <a href="{{ project.demo_link }}" target="_blank" class="btn btn--main--outline btn--md">
+                                        <i class="im im-external-link"></i> Show
+                                    </a>
+                                </div>
                                 {% endif %}
                             </div>
+
+
                         </div>
                         {% endif %}
 

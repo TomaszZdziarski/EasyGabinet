@@ -15,7 +15,7 @@
                         <input class="input input--text" id="formInput#search" type="text" name="search_query"
                                value="{{ search_query }}"
                                placeholder="e.g. orthodontics, implants, John Smith..." />
-                        <input class="btn btn--sub" type="submit" value="Search" />
+                        <input class="btn btn--main" type="submit" value="Search" />
                     </div>
                 </form>
             </div>
@@ -47,10 +47,10 @@
                             <p class="profiles-grid__bio">{{ profile.bio|slice:'190' }}...</p>
 
                             <div class="profiles-grid__skills">
-                                <p class="profiles-grid__skills-label">My skills:</p>
+                                <p class="profile__data-label">My skills:</p>
                                 <div class="profiles-grid__skills-list">
                                     {% for skill in profile.skill_set.all|slice:"5" %}
-                                    <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm btn--skill">{{ skill.name }}</a>
+                                    <a href="{% url 'single-skill' skill.id %}" class="btn btn--sm btn--main--outline btn--skill">{{ skill.name }}</a>
                                     {% empty %}
                                     <span class="profiles-grid__skills-empty">not filled yet</span>
                                     {% endfor %}
