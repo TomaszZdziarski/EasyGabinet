@@ -71,7 +71,7 @@ class dentistProfile(models.Model):
     phone_number = models.CharField(max_length=12, null=True, blank=True,default=str)
     password = models.CharField(max_length=20, null=True, blank=True,default=str)
     photo = models.ImageField(upload_to='photos/', null=True, blank=True,default=str)
-    short_intro = models.CharField(max_length=200, blank=True, null=True, default="This is a default bio. User has not added a bio yet.")
+    short_intro = models.CharField(max_length=200, blank=True, null=True, default="Dentist")
     bio = models.TextField(blank=True, null=True)
     university = models.CharField(max_length=64, null=True, blank=True,default=str)
     docs = models.FileField(upload_to='documents/', null=True, blank=True,default=str)

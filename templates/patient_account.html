@@ -7,23 +7,25 @@
 
         <!-- LEFT COLUMN: Profile -->
         <div class="column column--1of3">
-            <div class="card appointment__card">
+            <div class="card">
                 <div class="card__body profile clinic-patient__profile-card">
                     <a class="btn btn--main btn--sm" href="{% url 'patient-account-edit' patient_id=patient.id %}">Edit</a>
                     <img class="profile_image profile_image--lg"
                          src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
                          alt="Profile image" />
-                    <p class="profile__data-label">Name</p>
-                    <p class="profile__data">{{ patient.user.first_name }}</p>
-                    <p class="profile__data-label">Surname</p>
-                    <p class="profile__data">{{ patient.user.last_name }}</p>
+
+                    <p class="profile__data-label">Full name</p>
+                    <p class="profile__name">{{ patient.user.first_name }} {{ patient.user.last_name }}</p>
+
                     <p class="profile__data-label">DOB</p>
                     <p class="profile__data">{{ profile.date_of_birth }}</p>
                     <p class="profile__data-label">PESEL</p>
                     <p class="profile__data">{{ user.pesel }}</p>
 
                     <div class="clinic-account__nav-buttons">
-                        <a href="{% url 'patient-inbox' %}" class="btn btn--sub btn--lg" style="position:relative;">Inbox
+
+                        <a href="{% url 'patient-inbox' %}" class="btn btn--sub btn--lg clinic-account__btn--badge">Inbox
+
                             {% if unread_count > 0 %}
                             <span class="clinic-nav__badge-wrap">
                                 <span class="clinic-nav__badge">{{ unread_count }}</span>
@@ -39,8 +41,10 @@
         <div class="column column--2of3">
 
             <!-- Patient info heading -->
-            <div class="profileInfo">
-                <h3 class="profileInfo__title">My patient's information</h3>
+            <!-- AFTER -->
+            <div class="clinic-account__header">
+                <h2 class="clinic-account__page-title">My Account</h2>
+                <p class="clinic-account__page-subtitle">{{ patient.user.first_name }} {{ patient.user.last_name }} · patient</p>
             </div>
 
             <!-- Treatment History -->
@@ -50,7 +54,7 @@
 
             {% if appointments %}
             {% for appointment in appointments %}
-            <div class="card appointment__card clinic-patient__appointment">
+            <div class="card clinic-patient__appointment">
                 <div class="card__body">
                     <h5 class="clinic-patient__appointment-title">
                         Dr <a href="{% url 'single-profile' appointment.dentist.id %}">{{ appointment.dentist }}</a>
