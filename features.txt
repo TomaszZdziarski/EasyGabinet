@@ -4,16 +4,19 @@ I. REGISTER USER/PATIENT
  - separate registration form for a patient and dentist users (credentials are blocked when filled in crossed login forms)
  - created user gets a profile via signals
  - patient is obligated to fill DOB and PESEL (pesel number must have 11 digits)
- - PESEL and e-mail are unique in DB
+ - PESEL and e-mail are unique in DB for both sites - patients and dentists to protect
  - phone number can be redundant in DB to let a parent register a child
  - submit pdf/image files
  - edit an account,add profile photo
- - appointment view: editable/deletable when a booking's status = completed,cancelled,booked.
-                     when status did_not_occur a booking is not editable/deletable and it counts as 1 of 3 possible bookings,
-                     patient can cancel a booking before time of the booking.
- - treatment history (bookings with a status completed land in this section)
- - exporting treatment to pdf (excluding bookings with the status 'booked' - they are still to happen)
+ - 3 possible bookings at the same time
+ - patient can cancel a booking before time of the booking.
+ - appointment view: editable/deletable when a booking's status = completed or booked.
+                     when status is did_not_occur or cancelled a booking is not editable/deletable and it counts as one of 3 possible bookings
+ - treatment history
+ - exporting treatment to pdf
  - checking inbox - messages/emails from a dentist/practice
+ - password retrieval
+ - uploading own medical files
 
 
 II. REGISTER USER/DENTIST
@@ -21,13 +24,12 @@ II. REGISTER USER/DENTIST
  - login/logout system
  - edit an account,add profile photo
  - created user gets a profile via signals
- - skills panel (adding new skills,editing,deletion)
- - projects panel (adding new skills,editing,deletion), adding participation in other projects,
-   feedback system(counting votes,positive votes)
- - articles panel (adding new skills,editing,deletion)
- - fields: bio,description, University and social media
+ - dentist can fill in participation in other dentists projects
+ - projects panel has got feedback system for logged dentists - up or down vote plus commentary
  - schedule
- - messages/email system
+ - all practice's patients list
+ - inbox, inbox link badge
+ - password retrieval
 
 III. APPOINTMENTS
 
@@ -39,7 +41,6 @@ A) bookings
  - a user cannot book a visit in the past
  - during booking overlapping is being checked to avoid double bookings for same day/hour,also crosschecking
    between patient users and dentist users
- - bookings can be made only during clinic's working time,between: 8:00 and 20:30
  - a user can cancel a booking, it gets "cancelled" status and patient user cannot further delete/edit this booking
  - booking is editable for a patient only before booking's start (time,date,reason and chosen dentist can be modified)
 
@@ -48,7 +49,6 @@ B) booking's status
  - Only dentists can change booking's status (function to change statuses) but only in own schedule(status "passed" is excluded from status options)
  - all possible time slots become "available" as default and get green color
  - when time of slot passes by and booking is not made, it becomes "passed" and it's greyed out of schedule
- - when booking is made(by patient or by dentist) a slot gets "booked" status and yellow color
  - patient can make up to 3 appointments(we count booking's statuses: "booked","did_not_occur","cancelled" as one used appointment)
  - when time of the booking passes, status of booking changes to "completed",gets blue color (this booking is considered
    to be successfully, so it doesn't count for max.3 bookings per patient)
@@ -59,15 +59,37 @@ IV. CHECKING SCHEDULE (dentist site)
 
  - view availability for bookings using date/time widget,with special attention to time zones
  - exporting schedule to pdf
- - logged dentist has link ""
 
-V. EXPORT SCHEDULE TO PDF
 
- - exporting: date,time,patient's name and surname,reason of the booking and status
- - showing information about count of visits and time of work ending
-
-VI. PROJECTS,SKILLS,ARTICLES
+V. PROJECTS,SKILLS,ARTICLES
 
  - showing projects of our dentists,dentist skills (to make choosing of a specialist easier),
    articles written by our dentists
+ - dentist when logged can add/delete/edit skills,projects and articles
+
+VI. SEARCH BARS
+
+ - searching profiles,skills,projects matching keywords given in a tooltip
+ - quering skills,projects that have owners
+
+VII. CALENDAR VIEW
+
+ - all months view on 1 page
+ - dentist picker
+ - current day is marked
+ - passed days marked as grey
+ - making appointment require patient's account
+
+VIII. NOTIFICATION/MESSAGING SYSTEM
+
+ - green colored success messages, x closes the message
+ - red colored error/failure messages, x closes the message
+ - both closes automatically after 4s
+
+IX. ADMIN PANEL
+
+ - accessible for op users and users marked by ops as op
+ - CRUD system for all data in db
+ - additional link to panel on navbar when op is logged
+ - adding tags for skills/projects
 
