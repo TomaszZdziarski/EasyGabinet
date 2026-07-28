@@ -2,7 +2,7 @@
 
 A Django web application for managing a dental clinic — appointment booking, patient records, and communication between dentists and patients.
 
-🔗 **Live demo:** _add your Railway URL here_
+🔗 **Live demo:** [web-production-38e35.up.railway.app](https://web-production-38e35.up.railway.app/)
 👤 **Author:** [Tomasz Zdziarski](https://github.com/TomaszZdziarski)
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
