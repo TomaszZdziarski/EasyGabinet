@@ -67,6 +67,7 @@ EasyGabinet lets dental patients book, manage, and track their appointments onli
 
 ### Notifications
 - Auto-dismissing success/error messages (green/red, closable, 4s timeout)
+- Automated appointment reminder emails sent via SendGrid 24 hours before a scheduled visit, checked every 15 minutes by a dedicated cron service running on Railway
 
 ### Admin
 - Custom admin panel for staff/operator accounts, with full CRUD over the app's data
@@ -78,9 +79,9 @@ EasyGabinet lets dental patients book, manage, and track their appointments onli
 | Backend | Python, Django 5.2 |
 | Database | PostgreSQL (production), SQLite (local) |
 | File storage | AWS S3 (`django-storages`, `boto3`) |
-| Email | SendGrid (`django-sendgrid-v5`) |
+| Email | SendGrid (`django-sendgrid-v5`) — transactional emails and automated 24h appointment reminders |
 | PDF generation | ReportLab, WeasyPrint |
-| Deployment | Railway — Gunicorn, Whitenoise, `dj-database-url` |
+| Deployment | Railway — Gunicorn, Whitenoise, `dj-database-url`, separate cron service for reminder emails |
 | Frontend | HTML, CSS (custom design system), Bootstrap |
 
 ## Getting Started
@@ -108,6 +109,14 @@ python manage.py runserver
 ```
 
 The app will be available at `http://127.0.0.1:8000/`.
+
+## Architecture Notes
+
+**Appointment reminder cron job**
+- Runs as a separate Railway service (independent from the main web process), scheduled `*/15 * * * *`
+- Queries upcoming appointments falling within the 24h reminder window and sends the SendGrid email
+- A `reminder_sent_at` timestamp on the appointment record prevents duplicate sends across overlapping runs
+- Requires `DEBUG=False` in the environment — with `DEBUG=True`, SendGrid runs in sandbox mode and emails are accepted but never actually delivered
 
 ## License
 
