@@ -26,3 +26,5 @@ env/
 # Other
 .vs/
 Django-Course/
+
+staticfiles/
