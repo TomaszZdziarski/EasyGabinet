@@ -9,6 +9,7 @@
         </div>
 
         <div class="card__body" style="display:flex; flex-direction:column; gap:1.5rem; max-height:60vh; overflow-y:auto;">
+
             {% for message in thread %}
             <div style="display:flex; flex-direction:column; align-items:{% if message.sender == 'patient' %}flex-start{% else %}flex-end{% endif %};">
                 <div style="
@@ -27,7 +28,7 @@
             {% endfor %}
         </div>
 
-        <div style="padding:1.5rem 2rem; border-top:1.5px solid var(--color-light);">
+
             <form method="POST">
                 {% csrf_token %}
                 <div class="form__field" style="margin-bottom:1rem;">
@@ -37,6 +38,7 @@
                             placeholder="Write a reply..."
                             style="width:100%; padding:1rem; border:1.5px solid var(--color-light); border-radius:0.5rem; font-size:1.4rem; color:var(--color-text); resize:vertical; outline:none; box-sizing:border-box;"
                     ></textarea>
+
                 </div>
 
 
@@ -47,7 +49,7 @@
 
 
             </form>
-        </div>
+
 
     </div>
 </div>
