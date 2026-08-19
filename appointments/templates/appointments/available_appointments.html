@@ -18,7 +18,7 @@
                 <a href="{% url 'monthly-schedule' dentist.id %}" class="btn btn--sub--outline btn--md">Monthly schedule</a>
 
                 <form action="{% url 'export_schedule' %}" method="GET" class="clinic-available__export-form">
-                    <span class="clinic-available__export-label">Export agenda:</span>
+                    <span class="clinic-available__export-label">agenda:</span>
                     <input type="date" name="date" required class="clinic-available__date-input">
                     <button type="submit" class="btn btn--sub--outline btn--md">Export PDF</button>
                 </form>
