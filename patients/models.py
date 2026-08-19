@@ -29,7 +29,7 @@ class Document(models.Model):
         return os.path.basename(self.file.name)
 
     def __str__(self):
-        return f"{self.file.name} for {self.patient.user.username}"
+        return self.patient.user.get_full_name()
 
     def icon(self):
         ext = os.path.splitext(self.file.name)[1].lower()

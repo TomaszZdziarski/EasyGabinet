@@ -120,6 +120,8 @@ class Skill(models.Model):
 
 
 class Project(models.Model):
+    class Meta:
+        ordering = ['-created']
 
     owner = models.ForeignKey(dentistProfile, null=True, blank=True,on_delete=models.CASCADE)
     skill_used = models.ManyToManyField(Skill, blank=True)
