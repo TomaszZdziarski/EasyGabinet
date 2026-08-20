@@ -14,7 +14,7 @@
                          src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
                          alt="Profile image" />
 
-                    <p class="profile__data-label">Full name</p>
+
                     <p class="profile__name">{{ patient.user.first_name }} {{ patient.user.last_name }}</p>
 
                     <p class="profile__data-label">DOB</p>
@@ -63,7 +63,7 @@
                     <p class="clinic-patient__appointment-row">
                         <strong>Status:</strong>
                         {% if not appointment.is_cancelled %}
-                        {{ appointment.status }}
+                        {{ appointment.get_status_display }}
                         {% else %}
                         <span class="clinic-patient__cancelled">Cancelled — did not show up</span>
                         {% endif %}

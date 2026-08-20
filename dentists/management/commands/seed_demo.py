@@ -42,7 +42,7 @@ User = get_user_model()
 
 DENTIST_EMAIL = "demo.dentist@easygabinet.pl"
 PATIENT_EMAIL = "demo.patient@easygabinet.pl"
-DEMO_PASSWORD = "Demo2026!"
+DEMO_PASSWORD = "demo1234"
 
 BRAND_BLUE = (240, 247, 255)
 BRAND_NAVY = (240, 247, 255)
@@ -209,8 +209,8 @@ class Command(BaseCommand):
     # --- schedule and price list ------------------------------------------
 
     def create_schedule(self, dentist):
-        """Working hours Mon-Fri, 9:00-17:00."""
-        for day in range(5):
+        """Working hours Mon-Wed, 9:00-17:00."""
+        for day in range(3):
             DentistSchedule.objects.get_or_create(
                 dentist=dentist,
                 day_of_week=day,

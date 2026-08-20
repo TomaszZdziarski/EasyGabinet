@@ -31,7 +31,7 @@ class Appointment(models.Model):
                       ('booked', 'Booked'),
                       ('passed', 'Passed'),
                       ('completed', 'Completed'),
-                      ('did_not_occur', "Didn't Occur"),
+                      ('did_not_occur', "Didn't show up, no notification"),
                       ('cancelled', 'Cancelled')
                 ]
     #CURRENCY_CHOICES = [('PLN','Polski złoty'),('USD','American Dollars'),('EUR','Euro'),('UAH','Hrywna'),('JMD','Jamaican Dollars')]
