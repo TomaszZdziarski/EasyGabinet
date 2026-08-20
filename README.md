@@ -16,24 +16,33 @@ EasyGabinet lets dental patients book, manage, and track their appointments onli
 
 ## Screenshots
 
-**Home page**
-![Home page (logged out)](docs/screenshots/main_logged_out.png)
+
+**Home page (logged in)**
 ![Home page (logged in)](docs/screenshots/main.png)
 
-**Login**
-![Dentist login](docs/screenshots/login_page.png)
+**Patient area**
+![Home page (logged out)](docs/screenshots/patient_site.png)
+
+**Registration**
+![New patient registration](docs/screenshots/register.png)
 
 **Calendar**
-![Calendar view](docs/screenshots/calendar.png)
+![Live calendar availability](docs/screenshots/calendar.png)
 
 **Patient account**
-![Patient account and treatment history](docs/screenshots/patients_account.png)
+![Patient account and treatment history](docs/screenshots/patient_account.png)
+
+**Dentist account**
+![Dentist account, skills and projects](docs/screenshots/dentist.png)
 
 **Messaging**
-![Inbox](docs/screenshots/messages.png)
+![Direct patient–dentist messaging](docs/screenshots/inbox.png)
+
+**Schedule management**
+![Dentist schedule management](docs/screenshots/manage_schedule.png)
 
 **Dentist project page**
-![Project page](docs/screenshots/project_page.png)
+![Project page](docs/screenshots/projects.png)
 
 ## Features
 
