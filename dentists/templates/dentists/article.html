@@ -34,7 +34,7 @@
             <div class="card">
 
                 <div class="card__header clinic-article__author-header">
-                    <img src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                    <img src="{{ article.author.photo_url }}"
                          alt="{{ article.author }}"
                          class="profile_image profile_image--sm" />
                     <div class="clinic-article__author-info">

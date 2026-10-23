@@ -37,7 +37,7 @@
             <div class="card__body clinic-post-card__layout">
                 <div class="clinic-post-card__author">
                     <img class="clinic-post-card__author-photo"
-                         src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                         src="{{ article.author.photo_url }}"
                          alt="author photo" />
                     <p class="clinic-post-card__author-name">{{ article.author }}</p>
                     <p class="clinic-post-card__publish-date">{{ article.publication_date|date:"d M Y" }}</p>

@@ -277,13 +277,7 @@ class Command(BaseCommand):
                 tag, _ = Tag.objects.get_or_create(name=tag_name)
                 skill.tags.add(tag)
 
-            # the guard matters: without it every run would upload a new file
-            if not skill.skill_image:
-                skill.skill_image.save(
-                    f"demo_skill_{name.lower().replace(' ', '_')}.jpg",
-                    ContentFile(self.make_icon(icon, color)),
-                    save=True,
-                )
+
 
             new += int(created)
 
@@ -327,12 +321,7 @@ class Command(BaseCommand):
                 tag, _ = Tag.objects.get_or_create(name=tag_name)
                 project.tags.add(tag)
 
-            if not project.project_image:
-                project.project_image.save(
-                    f"demo_project_{name.lower().replace(' ', '_')}.jpg",
-                    ContentFile(self.make_icon(icon,color)),
-                    save=True,
-                )
+
 
             dentist.particip_project.add(project)
             new += int(created)
@@ -468,10 +457,11 @@ class Command(BaseCommand):
             "Current medication: none\n"
             "Allergies: none known\n"
         )
-        document = Document(patient=patient)
-        document.file.save(
-            "medical_history_demo.txt",
-            ContentFile(content.encode("utf-8")),
-            save=True,
-        )
-        self.stdout.write("documents: 1 sample file")
+        # document = Document(patient=patient)
+        # document.file.save(
+        #     "medical_history_demo.txt",
+        #     ContentFile(content.encode("utf-8")),
+        #     save=True,
+        # )
+        # self.stdout.write("documents: 1 sample file")
+        self.stdout.write("documents: skipped (no file storage)")

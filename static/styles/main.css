@@ -2049,3 +2049,9 @@ button:disabled, button[disabled] {
 }
 
 .clinic-pagination__link { min-width: 4rem; }
+
+img[src*="/static/demo/project"] {
+    object-fit: scale-down;
+    padding: 2rem;
+    background-color: var(--color-nav-bg);
+}

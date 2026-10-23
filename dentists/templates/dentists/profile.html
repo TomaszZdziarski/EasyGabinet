@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card__body profile clinic-patient__profile-card">
                     <img class="profile_image profile_image--lg"
-                         src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                         src="{{ profile.photo_url }}"
                          alt="{{ profile.user.get_full_name }}" />
                     <h2 class="profile__name">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
                     <p class="profile__title">{{ profile.function }}</p>
@@ -67,7 +67,7 @@
                 <div class="card clinic-profile__skill-card">
                     <div class="card__body clinic-profile__skill-body">
                         <img class="clinic-profile__skill-image"
-                             src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                             src="{{ skill.image_url }}"
                              alt="{{ skill.name }}" />
                         <div class="clinic-profile__skill-info">
                             <h5 class="project__title">{{ skill.name }}</h5>
@@ -83,7 +83,7 @@
                 <div class="card clinic-profile__skill-card">
                     <div class="card__body clinic-profile__skill-body">
                         <img class="clinic-profile__skill-image"
-                             src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                             src="{{ skill.image_url }}"
                              alt="{{ skill.name }}" />
                         <div class="clinic-profile__skill-info">
                             <h5 class="project__title">{{ skill.name }}</h5>
@@ -103,7 +103,7 @@
                     {% for project in projects %}
                     <div class="card project">
                         <img class="project__thumbnail"
-                             src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                             src="{{ project.image_url }}"
                              alt="{{ project.name }}" />
                         <div class="card__body">
                             <a href="{% url 'single-project' project.id %}" class="clinic-projects__title-link">
@@ -138,7 +138,7 @@
                     <div class="card__body clinic-post-card__layout">
                         <div class="clinic-post-card__author">
                             <img class="clinic-post-card__author-photo"
-                                 src="{% if article.author.photo %}{{ article.author.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                                 src="{{ article.author.photo_url }}"
                                  alt="{{ article.author }}" />
                             <p class="clinic-post-card__author-name">{{ article.author }}</p>
                             <p class="clinic-post-card__publish-date">{{ article.publication_date|date:"d M Y" }}</p>

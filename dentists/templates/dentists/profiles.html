@@ -32,7 +32,7 @@
 
                             <a href="{% url 'single-profile' profile.id %}">
                                 <img class="profile_image profile_image--md"
-                                     src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                                     src="{{ profile.photo_url }}"
                                      alt="profile image" />
                             </a>
 

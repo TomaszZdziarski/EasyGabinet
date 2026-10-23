@@ -32,7 +32,7 @@
 
                             <a href="{% url 'single-skill' skill.id %}">
                                 <img class="profile_image profile_image--md"
-                                     src="{% if skill.skill_image %}{{ skill.skill_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                                     src="{{ skill.image_url }}"
                                      alt="skill image" />
                             </a>
 

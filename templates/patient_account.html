@@ -11,7 +11,7 @@
                 <div class="card__body profile clinic-patient__profile-card">
                     <a class="btn btn--main btn--sm" href="{% url 'patient-account-edit' patient_id=patient.id %}">Edit</a>
                     <img class="profile_image profile_image--lg"
-                         src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'media/user-default.png' %}{% endif %}"
+                         src="{{ profile.photo_url }}"
                          alt="Profile image" />
 
 

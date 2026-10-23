@@ -76,7 +76,7 @@
                 <div class="card">
 
                     <img class="project__thumbnail"
-                         src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                         src="{{ project.image_url }}"
                          alt="Project thumbnail" />
 
                     <div class="card__body">
@@ -141,7 +141,7 @@
                             <div class="clinic-project__review">
                                 <a href="{% url 'single-profile' review.owner.id %}">
                                     <img class="profile_image profile_image--sm"
-                                         src="{% if review.owner.photo %}{{ review.owner.photo.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                                         src="{{ review.owner.photo_url }}"
                                          alt="{{ review.owner.name }}" />
                                 </a>
                                 <div>

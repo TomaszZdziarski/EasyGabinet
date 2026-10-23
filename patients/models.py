@@ -3,6 +3,7 @@ from django.conf import settings
 import os
 from uuid import uuid4
 from dentists.models import dentistProfile
+from django.templatetags.static import static
 
 
 
@@ -60,6 +61,12 @@ class PatientProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}".strip()
+
+    @property
+    def photo_url(self):
+        if self.photo:
+            return self.photo.url
+        return static('media/user-default.png')
 
 class Something(models.Model):
     owner = models.ForeignKey(PatientProfile, null=True, blank=True,on_delete=models.CASCADE)

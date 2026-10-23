@@ -3,7 +3,7 @@ import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
 from django.contrib.auth import get_user_model
-
+from django.templatetags.static import static
 
 
 class CustomUserManager(BaseUserManager):
@@ -71,6 +71,7 @@ class dentistProfile(models.Model):
     phone_number = models.CharField(max_length=12, null=True, blank=True,default=str)
     password = models.CharField(max_length=20, null=True, blank=True,default=str)
     photo = models.ImageField(upload_to='photos/', null=True, blank=True,default=str)
+
     short_intro = models.CharField(max_length=200, blank=True, null=True, default="Dentist")
     bio = models.TextField(blank=True, null=True)
     university = models.CharField(max_length=64, null=True, blank=True,default=str)
@@ -87,6 +88,12 @@ class dentistProfile(models.Model):
 
     def __str__(self):
         return self.get_full_name()
+
+    @property
+    def photo_url(self):
+        if self.photo:
+            return self.photo.url
+        return static('media/user-default.png')
 
 class DentistSchedule(models.Model):
 
@@ -117,6 +124,17 @@ class Skill(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    DEMO_ICONS = {'endodontics', 'prosthodontics', 'restorative', 'preventive'}
+
+    @property
+    def image_url(self):
+        if self.skill_image:
+            return self.skill_image.url
+        key = self.name.split()[0].lower() if self.name else ''
+        if key in self.DEMO_ICONS:
+            return static(f'demo/{key}.png')
+        return static('media/default.jpg')
 
 
 class Project(models.Model):
@@ -151,6 +169,13 @@ class Project(models.Model):
     @property
     def reviewers(self):
         return self.review_set.all().values_list('owner__id', flat=True)
+
+    @property
+    def image_url(self):
+        if self.project_image:
+            return self.project_image.url
+        number = sum(map(ord, self.name or '')) % 2 + 1
+        return static(f'demo/project{number}.png')
 
     def __str__(self):
         return str(self.name)

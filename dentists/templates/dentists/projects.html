@@ -30,7 +30,7 @@
                     <div class="card clinic-projects__card">
 
                         <img class="clinic-projects__thumbnail"
-                             src="{% if project.project_image %}{{ project.project_image.url }}{% else %}{% static 'media/default.jpg' %}{% endif %}"
+                             src="{{ project.image_url }}"
                              alt="project thumbnail" />
 
                         <div class="card__body clinic-projects__body">
