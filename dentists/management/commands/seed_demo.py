@@ -355,10 +355,12 @@ class Command(BaseCommand):
              "Calculus build-up", "Scaling and air polishing done."),
         ]
 
-        # one no-show - shows the did_not_occur status without blocking the account
+        # one cancelled visit - together with the upcoming booked one, brings the
+        # patient to 2 of 3 toward the booking limit, so a recruiter can book one
+        # more before hitting the block
         history.append(
-            (today - timedelta(days=14), time(15, 0), consultation, "did_not_occur",
-             "None", "Patient did not attend the appointment.")
+            (today - timedelta(days=14), time(15, 0), consultation, "cancelled",
+             "None", "Patient cancelled the appointment.")
         )
 
         for day, hour, purpose, status, diagnosis, description in history:
