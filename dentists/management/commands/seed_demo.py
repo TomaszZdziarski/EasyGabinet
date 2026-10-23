@@ -31,6 +31,7 @@ from django.utils import timezone
 from dentists.models import dentistProfile, DentistSchedule, Skill, Project, Tag
 from patients.models import PatientProfile, Document
 from appointments.models import Appointment, AppointmentPurpose
+from dentists.models import Skill, Project, Tag, Article
 
 # NOTE: replace 'messages_app' with the app that actually holds the Message model
 from messaging.models import Message
@@ -72,6 +73,7 @@ class Command(BaseCommand):
         purposes = self.create_purposes(dentist)
         self.create_skills(dentist)          # must run before create_projects
         self.create_projects(dentist)
+        self.create_articles(dentist)
         self.create_appointments(dentist, patient, purposes)
         self.create_messages(dentist, patient)
         self.create_document(patient)
@@ -327,6 +329,37 @@ class Command(BaseCommand):
             new += int(created)
 
         self.stdout.write(f"projects: {len(data)} total, {new} new")
+
+    def create_articles(self, dentist):
+        """A few posts, so the patient landing page and the dentist profile are not empty."""
+        data = [
+            ("How often should you really see a dentist?",
+             "For most adults a check-up every six months is a good default. "
+             "Patients with gum disease, many fillings or a history of decay "
+             "may need shorter intervals. The visit takes about 30 minutes and "
+             "catches small problems before they become painful and expensive."),
+            ("Root canal treatment: what to expect",
+             "Modern endodontic treatment is done under local anaesthesia and "
+             "usually feels no different from a filling. The tooth is cleaned, "
+             "shaped and sealed, often in one or two visits. Afterwards most "
+             "teeth need a crown to protect them from fracture."),
+            ("Sensitive teeth: causes and simple fixes",
+             "Sharp pain with cold drinks often comes from exposed dentine, "
+             "caused by receding gums or aggressive brushing. A soft brush, "
+             "desensitising toothpaste and less acidic food help in most cases. "
+             "If the pain lasts longer than a few seconds, book a visit."),
+        ]
+
+        created_count = 0
+        for title, content in data:
+            _, created = Article.objects.get_or_create(
+                author=dentist,
+                title=title,
+                defaults={"user": dentist.user, "content": content},
+            )
+            created_count += int(created)
+
+        self.stdout.write(f"articles: {len(data)} total, {created_count} new")
 
     # --- appointments -----------------------------------------------------
 
